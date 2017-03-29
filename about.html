@@ -6,15 +6,17 @@ header-img: "img/about-bg.png"
 ---
 
 <!-- Language Selector -->
-<select onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
+<select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
     <option value="0" selected> 中文 Chinese </option>
-    <option value="1"> 英语 English </option>
+    <option value="1"> 英文 English </option>
 </select>
 
 <!-- Chinese Version -->
 <div class="zh post-container">
+
+    <!--copied from markdown -->
     <blockquote>
-        >>> Python之禅<br>
+    	>>> Python之禅<br>
     </blockquote>
 
     <p>
@@ -38,16 +40,16 @@ header-img: "img/about-bg.png"
 	命名	空间是一种绝妙的理念，我们应当多加利用<br>
 	</p>
 
-    <p style="text-align:right;">
+	<p style="text-align:right;">
     -- Tim Peters<br>
     </p>
-
 </div>
+
 
 <!-- English Version -->
 <div class="en post-container">
     <blockquote>
-        >>> The Zen of Python<br>
+    	>>> The Zen of Python<br>
     </blockquote>
 
     <p>
@@ -81,21 +83,40 @@ header-img: "img/about-bg.png"
     <p style="text-align:right;">
     -- Tim Peters<br>
     </p>
-
 </div>
 
 <!-- Handle Language Change -->
 <script type="text/javascript">
+    // get nodes
     var $zh = document.querySelector(".zh");
     var $en = document.querySelector(".en");
-    function onLanChange(index){
-        if(index == 0){
-            $zh.style.display = "block";
-            $en.style.display = "none";
-        }else{
+    var $select = document.querySelector("select");
+    // bind hashchange event
+    window.addEventListener('hashchange', _render);
+    // handle render
+    function _render(){
+        var _hash = window.location.hash;
+        // en
+        if(_hash == "#en"){
+            $select.selectedIndex = 1;
             $en.style.display = "block";
             $zh.style.display = "none";
+        // zh by default
+        }else{
+            // not trigger onChange, otherwise cause a loop call.
+            $select.selectedIndex = 0;
+            $zh.style.display = "block";
+            $en.style.display = "none";
         }
     }
-    onLanChange(0);
+    // handle select change
+    function onLanChange(index){
+        if(index == 0){
+            window.location.hash = "#zh"
+        }else{
+            window.location.hash = "#en"
+        }
+    }
+    // init
+    _render();
 </script>
