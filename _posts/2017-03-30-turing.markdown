@@ -1,0 +1,183 @@
+---
+layout:     post
+title:      "用Python3实现聊天机器人"
+subtitle:   "Implementing chat robot with Python3"
+date:       2017-03-30
+author:     "fgksgf"
+header-img: "img/articles/ai.jpeg"
+tags:
+    - Python
+---
+
+
+## 前言
+在一个很偶然的机会，点进了 [图灵机器人](http://www.tuling123.com) 的官网，发现在里面注册登录后，可以免费创建五个图灵机器人。当时正好在学习Python强大的requests库，于是学以致用，通过使用requests库和官方提供的API实现了一个**代码简单、功能强大**的聊天机器人。
+
+在这里我们使用创建的**自定义类型**机器人，
+
+---
+
+## 主函数及程序流程
+```
+def main():
+    if API_KEY == '' or USER_ID == '':
+        print('Please fill the APIKEY and username into tuling.py firstly.')
+        return
+
+    while True:
+	info = input("I: ")
+	result = fetch_text(make_json(info))
+	response = json.loads(result)
+	print_response(response)
+	print()
+```
+
+首先需要判断APIKEY和用户名是否为空，若为空则程序无法运行，若不为空，则进入一个死循环，反复执行以下操作：
+1.输入信息
+2.生成请求数据发送后获得返回数据
+3.解析返回数据并打印
+
+---
+
+## 生成请求数据
+请求参数的格式为json
+请求示例:
+```
+{
+    "key": "APIKEY",
+    "info": "今天天气怎么样",
+    "loc":"北京市中关村",
+    "userid":"123456"
+}
+```
+ 
+#### 其中：
+- key在注册登录后的机器人接入页面获得，一个key对应一个机器人，**必须填写**
+- info为请求内容，**必须填写**
+- loc为当前位置，**非必须填写的内容**
+- userid为注册的用户名，**必须填写**
+
+根据上述内容写出**生成请求函数**：
+```
+# info为请求内容，由用户输入
+# key和userid为全局常量，需要在运行前写入源代码中并保存
+def make_json(info):
+    return {
+        'key': API_KEY,
+        'info': info,
+        'userid': USER_ID} 
+```
+
+---
+
+## 发送并获得返回数据
+
+```
+def fetch_text(j):
+    result = requests.post(API, json=j)
+    return result.text
+```
+
+---
+
+## 解析返回数据
+
+机器人返回的数据类型也是json格式，共有四种，分为文本类、链接类、新闻类和菜谱类。
+
+#### 文本类数据示例
+```
+{
+    "code":100000;
+    "text":"你也好";
+}
+```
+
+#### 链接类数据示例
+```
+{
+    "code":200000;
+    "text":"亲，已帮您找到照片。";
+    "url": "http://m.image.so.com/i?q=%E5%B0%8F%E7%8B%97"
+}
+```
+
+#### 新闻类数据示例
+```
+{
+    "code": 302000,
+    "text": "亲,已帮您找到相关新闻",
+    "list": 
+        [{"article": "工信部:今年将大幅提网速降手机流量费",
+        "source": "网易新闻",
+        "icon": "",
+        "detailurl":"http://news.163.com/15/0416/03/AN9SORGH0001124J.html"
+        },
+        {
+        "article": "北京最强沙尘暴午后袭沪 当地叫停广场舞",
+        "source": "网易新闻",
+        "icon": "",
+        "detailurl":
+        "http://news.163.com/15/0416/14/ANB2VKVC00011229.html"
+       }]
+}
+```
+
+#### 菜谱类数据示例
+```
+{
+    "code": 308000,
+    "text": "亲,已帮您找到菜谱信息",
+    "list": 
+    [{
+    "name": "鱼香肉丝",
+    "icon":
+    "http://i4.xiachufang.com/image/280/cb1cb7c49ee011e38844b8ca3aeed2d7.jpg",
+    "info": "猪肉、鱼香肉丝调料 | 香菇、木耳、红萝卜、黄酒、玉米淀粉、
+盐",
+    "detailurl": "http://m.xiachufang.com/recipe/264781/"
+    }]
+}
+```
+
+基于上述实例，写出**解析并打印数据的函数**：
+```
+# NAME为自定义的机器人名字
+def print_response(response):
+    print(NAME + ': ', response['text'])
+
+    # 文本类回复
+    if response['code'] == 100000:
+        pass
+
+    # 链接类回复
+    elif response['code'] == 200000:
+        # 浏览器自动打开链接
+        webbrowser.open(response['url'])
+
+    # 新闻类回复，美化输出格式
+    elif response['code'] == 302000:
+        i = 1
+        for news in response['list']:
+            print(i, '.', news['article'])
+            print(news['detailurl'])
+            print()
+            i += 1
+
+    # 菜谱类回复，美化输出格式
+    elif response['code'] == 308000:
+        j = 1
+        for recipe in response['list']:
+            print(j, '.', recipe['name'])
+            print(recipe['info'])
+            print(recipe['detailurl'])
+            print()
+            j += 1
+```
+
+对于每一类回复，我们直接打印info中的信息;若包含链接则使用Python自带的webbrowser库，使用浏览器自动打开链接;对于新闻类回复，提取出数据中的新闻标题和链接，逐行输出;菜谱类也是类似，即尽量使输出的内容整齐美观。
+
+---
+
+## 尾声
+
+到这里，一个聊天机器人就做出来了。在后续版本里，我还将不断完善其功能，比如清除聊天内容，运行系统命令，增加图形界面等，让它不断向PC端的智能助手靠近。
