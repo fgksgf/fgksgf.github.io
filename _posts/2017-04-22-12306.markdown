@@ -1,0 +1,293 @@
+---
+layout:     post
+title:      "用Python3实现火车票信息查询工具"
+subtitle:   "Implementing Train ticket information query tool"
+date:       2017-04-22
+author:     "fgksgf"
+header-img: "img/articles/train.jpg"
+tags:
+    - Python
+---
+
+
+## 一、简介
+这是一个使用Pythong3实现的、基于12306网站的火车余票及价格信息查询工具。
+
+
+## 二、库依赖
++ requests 库: 使用Python访问HTTP资源的必备库
++ prettytable 库: 格式化信息打印工具，能让你像 MySQL 那样打印数据。
+
+
+## 三、效果截图
+![](http://i2.muimg.com/567571/aee63e341a70ae78.png)
+
+
+## 四、实现过程
+
+### 1、分析网站
+使用Chrome或Firefox浏览器打开 [12306官网](https://kyfw.12306.cn/otn/leftTicket/init)，进入余票查询页面。
+![](http://i2.muimg.com/567571/d0623f0fd530f690.png)
+
+按下 F12 打开开发者工具，选中 Network 一栏，在查询框中随便查询一次，在调试工具观察下请求和响应。根据测试得出，请求的URL格式为：
+
+> https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date={}&leftTicketDTO.from_station={}&leftTicketDTO.to_station={}&purpose_codes=ADULT
+
+其中{}表示需要填入的参数，分别表示：
+```
+leftTicketDTO.train_date:2017-05-10  # 日期
+leftTicketDTO.from_station:BJP  # 出发车站编码
+leftTicketDTO.to_station:SHH  # 到达车站编码
+purpose_codes:ADULT  # 查询的类型(成人/学生）
+```
+
+再看响应数据：
+![](http://i4.buimg.com/567571/0b744073f7de3134.png)
+
+返回的是JSON格式的数据，将其复制粘贴到文本编辑器中仔细分析：
+```
+"queryLeftNewDTO":
+{
+"station_train_code":"T145",  # 车次
+"from_station_name":"长沙",   # 出发站
+"to_station_name":"南昌",     # 到达站
+"start_time":"05:37",    # 出发时间
+"arrive_time":"10:30",   # 到达时间
+"lishi":"04:53",    # 历时
+
+"rw_num":"无",	    # 软卧
+"rz_num":"--",      # 软座
+"tz_num":"--",      # 特等座
+"wz_num":"无",      # 无座
+"yw_num":"1",		# 硬卧
+"yz_num":"无",		# 硬座
+"ze_num":"--",		# 二等座
+"zy_num":"--",		# 一等座
+"swz_num":"--"		# 商务座
+
+"train_no":"240000T1451B",
+"seat_types":"1413",
+"from_station_no":"12",
+"to_station_no":"20",
+} 
+```
+发现"queryLeftNewDTO"包含了一趟车次除价格外的所有信息。
+
+**获得票价的方法与上述方法类似，故不再赘述。**
+
+接下来我们只需要利用这个接口， 构建请求URL然后解析返回的JSON数据就可以了。但是URL里面参数 from_station 和 to_station 并不是汉字，而是一个字母编号，而我们想要输入的是汉字，我们要如何获取代号呢？我们打开网页源码看看有没有什么发现。
+![](http://i1.piimg.com/567571/52ea89760689765b.png)
+
+打开链接发现里面包含了所有车站的中文名，拼音，简写和代号等信息。
+于是我们写个小脚本使用正则表达式来匹配提取出想要的信息，将其以python字典的形式保存在stations.py中：
+![](http://i4.buimg.com/567571/4527f401c561a7d3.png)
+
+
+### 2、代码实现
+分析了网站之后，编程的思路已大致明确了。
+**首先用户输入查询日期、出发车站和到达车站，程序根据输入生成请求url，获得返回数据进行解析，最后格式化输出。**
+
+#### 解析数据
+封装了一个类用于解析数据，self.__row为列表，存储了打印时一趟车次的信息，包括车次、车站、时间、历时、各座位余票数量以及其价格。
+
+在get_price_info()函数里通过相似的方法获得票价信息并更新到变量self.__row中。
+```
+class TrainInfo:
+    date = ''
+
+    def __init__(self, info, date):
+        """
+        初始化相应信息,并将车次相关信息转换为列表，便于使用prettytable打印输出
+        """
+        self.date = date
+        self.__no = info["train_no"]
+        self.__types = info["seat_types"]
+        self.__from_no = info["from_station_no"]
+        self.__to_no = info["to_station_no"]
+
+        self.__code = info['station_train_code']
+        self.__from_station = info['from_station_name']
+        self.__to_station = info['to_station_name']
+        self.__start = info['start_time']
+        self.__arrive = info['arrive_time']
+        self.__period = info['lishi']
+        self.__seats = [info["swz_num"], info["tz_num"], info["zy_num"],
+                        info["ze_num"], info["rw_num"], info["yw_num"],
+                        info["rz_num"], info["yz_num"], info["wz_num"]]
+
+        self.__row = [self.__code,
+                      '\n'.join([self.__from_station, self.__to_station]),
+                      '\n'.join([self.__start, self.__arrive]),
+                      self.__period]
+        self.__row.extend(self.__seats)
+
+    def get_price_info(self):
+        """
+        获得每种座位的价格信息
+        """
+        url = PRICE_URL.format(self.__no, self.__from_no,
+                               self.__to_no, self.__types, self.date)
+        prices = get_response(url)
+        l = ['A9', 'P', 'M', 'O', 'A4', 'A3', 'A2', 'A1', 'WZ']
+        for tag in l:
+            if prices.get(tag):
+                self.__row[l.index(tag)+4] = \
+                    '\n'.join([self.__row[l.index(tag)+4], prices.get(tag)])
+
+    def get_row(self):
+        return self.__row
+```
+
+#### 打印数据
+使用PrettyTable库打印信息，先将头部信息传入，再将每趟列车的__row变量传入，最后打印出表格。
+```
+HEADER = '车次 车站 时间 历时 商务座 特等 一等 二等 软卧 硬卧 软座 硬座 无座'.split()
+
+def pretty_print(infos, date):
+    """
+    输出车次信息
+    """
+    pt = PrettyTable(HEADER)
+    for info in infos:
+        if info['queryLeftNewDTO']['canWebBuy'] != 'N':  # 过滤掉不能预订的车次信息
+            train = TrainInfo(info['queryLeftNewDTO'], date)
+            train.get_price_info()
+            pt.add_row(train.get_row())
+    print(pt)
+```
+
+
+#### 完整代码
+```
+import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+from prettytable import PrettyTable
+from stations import stations
+
+INFO_URL = 'https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date={}' \
+           '&leftTicketDTO.from_station={}&leftTicketDTO.to_station={}&purpose_codes=ADULT'
+
+PRICE_URL = 'https://kyfw.12306.cn/otn/leftTicket/queryTicketPrice?train_no={}' \
+            '&from_station_no={}&to_station_no={}&seat_types={}&train_date={}'
+
+HEADER = '车次 车站 时间 历时 商务座 特等 一等 二等 软卧 硬卧 软座 硬座 无座'.split()
+
+
+class TrainInfo:
+    date = ''
+
+    def __init__(self, info, date):
+        """
+        初始化相应信息,并将车次相关信息转换为列表，便于使用prettytable打印输出
+        """
+        self.date = date
+        self.__no = info["train_no"]
+        self.__types = info["seat_types"]
+        self.__from_no = info["from_station_no"]
+        self.__to_no = info["to_station_no"]
+
+        self.__code = info['station_train_code']
+        self.__from_station = info['from_station_name']
+        self.__to_station = info['to_station_name']
+        self.__start = info['start_time']
+        self.__arrive = info['arrive_time']
+        self.__period = info['lishi']
+        self.__seats = [info["swz_num"], info["tz_num"], info["zy_num"],
+                        info["ze_num"], info["rw_num"], info["yw_num"],
+                        info["rz_num"], info["yz_num"], info["wz_num"]]
+
+        self.__row = [self.__code,
+                      '\n'.join([self.__from_station, self.__to_station]),
+                      '\n'.join([self.__start, self.__arrive]),
+                      self.__period]
+        self.__row.extend(self.__seats)
+
+    def get_price_info(self):
+        """
+        获得每种座位的价格信息
+        """
+        url = PRICE_URL.format(self.__no, self.__from_no,
+                               self.__to_no, self.__types, self.date)
+        prices = get_response(url)
+        l = ['A9', 'P', 'M', 'O', 'A4', 'A3', 'A2', 'A1', 'WZ']
+        for tag in l:
+            if prices.get(tag):
+                self.__row[l.index(tag)+4] = \
+                    '\n'.join([self.__row[l.index(tag)+4], prices.get(tag)])
+
+    def get_row(self):
+        return self.__row
+
+
+def get_response(url):
+    """
+    使用get方法从url获得字典格式的回复
+    :param url: 目标url
+    :return: 字典格式数据
+    """
+    try:
+        requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+        r = requests.get(url, verify=False)
+        r.raise_for_status()
+        info = r.json()['data']
+        return info
+    except Exception:
+        return ''
+
+
+def make_info_url(date, from_station, to_station):
+    """
+    根据输入的日期和车站信息生成请求车次信息的url
+    :param date: 要查询的日期
+    :param from_station: 出发站
+    :param to_station: 目的站
+    :return: 要请求车次信息的url
+    """
+    return INFO_URL.format(date, stations.get(from_station), stations.get(to_station))
+
+
+def pretty_print(infos, date):
+    """
+    输出车次信息
+    """
+    pt = PrettyTable(HEADER)
+    for info in infos:
+        if info['queryLeftNewDTO']['canWebBuy'] != 'N':  # 过滤掉不能预订的车次信息
+            train = TrainInfo(info['queryLeftNewDTO'], date)
+            train.get_price_info()
+            pt.add_row(train.get_row())
+    print(pt)
+
+
+def main():
+    while True:
+        date = input('Date (eg.2017-05-01): ')
+        from_station = input('From_station: ')
+        to_station = input('To_station: ')
+        url = make_info_url(date, from_station, to_station)
+        infos = get_response(url)
+        pretty_print(infos, date)
+        print('\n\n\n\n\n')
+
+
+main()
+
+```
+
+
+
+## 五、总结
++ 由于 12306 的接口经常变化，本程序代码随时可能会失效，所以关键还是要掌握这种分析思路和方法。
++ 在实现时不要急于写代码，而应该一边理清过程，一边思考设计如何实现具体细节。
++ **Website is API ！** 只要你敢想，利用强大的Python和类似的思路，就能在互联网上获得各种你需要的信息。
+
+
+
+## 六、参考资料
+1. [Python - Python3 实现火车票查询工具](https://www.shiyanlou.com/courses/623) 
+**（注：原文的代码已失效，但思路方法是一样的）**
+
+2. 本项目的完整代码可以从下面链接获取：
+https://github.com/fgksgf/12306-QueryTool
+
+---
