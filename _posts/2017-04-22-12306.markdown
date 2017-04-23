@@ -5,6 +5,7 @@ subtitle:   "Implementing Train ticket information query tool"
 date:       2017-04-22
 author:     "fgksgf"
 header-img: "img/articles/train.jpg"
+catalog: true
 tags:
     - Python
 ---
