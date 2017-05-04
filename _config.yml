@@ -13,7 +13,7 @@ baseurl: ""
 # SNS settings
 RSS: false
 #weibo_username:     fgksgf
-#zhihu_username:     fgksgf
+zhihu_username:     fgksgf
 github_username:    fgksgf
 
 
@@ -55,7 +55,7 @@ kramdown:
 
 # Sidebar settings
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "丰神俊秀<br>智商溢出<br>想写小说的极客<br>最擅长写的程序是HelloWorld.<br>fgksgf@yahoo.com"
+sidebar-about-description: "智商溢出<br>想写小说的极客<br>最擅长写的程序是HelloWorld.<br>fgksgf@yahoo.com"
 sidebar-avatar: /img/avatar.jpeg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
 
