@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "<Effective Java>笔记(1)"
-subtitle:   "Reading notes of <Effective Java> (1)"
+title:      "《Effective Java》笔记(1)"
+subtitle:   "Reading notes of Effective Java(1)"
 date:       2017-11-03
 author:     "fgksgf"
 header-img: "img/articles/lib.jpg"
