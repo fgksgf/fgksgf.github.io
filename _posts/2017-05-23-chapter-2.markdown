@@ -5,10 +5,9 @@ subtitle:   "Unnamed Hacker Fiction --- Chapter 2"
 date:       2017-05-23
 author:     "fgksgf"
 header-img: "img/articles/ch2.jpg"
-catalog: true
+catalog: false
 tags:
     - Fiction
-    - Hacker
 ---
 
 

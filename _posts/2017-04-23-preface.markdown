@@ -5,10 +5,9 @@ subtitle:   "Unnamed Hacker Fiction's Preface"
 date:       2017-04-22
 author:     "fgksgf"
 header-img: "img/articles/preface.jpg"
-catalog: true
+catalog: false
 tags:
     - Fiction
-    - Hacker
 ---
 
 > 如果世界真的不喜欢你，那世界就是我的敌人了。

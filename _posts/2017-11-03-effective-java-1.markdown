@@ -5,7 +5,7 @@ subtitle:   "Reading notes of Effective Java(1)"
 date:       2017-11-03
 author:     "fgksgf"
 header-img: "img/articles/lib.jpg"
-catalog: true
+catalog: false
 tags:
     - ReadingNotes
 ---
