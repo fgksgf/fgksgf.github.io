@@ -1,128 +1,61 @@
---- 
-layout: default 
-title: "About" 
-description: "Life is short, use Python." 
-header-img: "img/about-bg.png" 
 ---
-<!-- Language Selector -->
-<select class="sel-lang" onchange="onLanChange(this.options[this.options.selectedIndex].value)">
-    <option value="0" selected> 中文 Chinese </option>
-    <option value="1"> 英文 English </option>
-</select>
+title: About
+layout: default
+description: I am what I am
+header-img: "img/about-bg.png"
+---
 
-<!-- Chinese Version -->
-<div class="zh post-container">
-    <!--copied from markdown -->
-    <blockquote>
-        智商溢出&nbsp;&nbsp;|&nbsp;&nbsp;栈高130&nbsp;&nbsp;|&nbsp;&nbsp;会写小说的极客&nbsp;&nbsp;|&nbsp;&nbsp;爱折腾的少数派
-        <br>
-    </blockquote>
-
-    <div class="card-group" style="width: 100%;margin: 30px auto;">
-        <div class="card card-l" style="width: 50%;height: 240px;padding: 40px 40px 40px 10px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;-ms-box-sizing: border-box;-o-box-sizing: border-box;box-sizing: border-box;float: left;">
-            <h3 class="animated pulse infinite" style="font-size: 28px;padding: 5px;"><i class="fa fa-html5"></i>&nbsp;精通HTML5</h3>
-            <p style=" margin-top: 15px;padding: 10px;font-size: 18px;letter-spacing: 1px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt aperiam obcaecati architecto necessitatibus sequi saepe non eveniet neque quidem odit</p>
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading" id="tag-heading">
+                    <h1>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</h1>
+                    <span class="subheading">{{ page.description }}</span>
+                </div>
+            </div>
         </div>
+    </div>
+</header>
 
-        <div class="card card-r" style="width: 50%;height: 240px;padding: 40px 40px 40px 10px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;-ms-box-sizing: border-box;-o-box-sizing: border-box;box-sizing: border-box;float: right;">
-            <h3 class="animated pulse infinite" style="font-size: 28px;padding: 5px;"><i class="fa fa-css3"></i>&nbsp;精通CSS3</h3>
-            <p style=" margin-top: 15px;padding: 10px;font-size: 18px;letter-spacing: 1px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt aperiam obcaecati architecto necessitatibus sequi saepe non eveniet neque quidem odit</p>
+<!-- Main Content -->
+<div id="about-content">
+    <div class="content-wrapper">
+        <div class="head-wrapper">
+            <h2>Self introduction</h2>
+            <div class="hr"></div>
+            <div class="sub-head">
+                <p>智商溢出&nbsp;&nbsp;|&nbsp;&nbsp;栈高130&nbsp;&nbsp;|&nbsp;&nbsp;会写小说的极客&nbsp;&nbsp;|&nbsp;&nbsp;爱折腾的少数派</p>
+                <br/>
+                <a href="mailto:fgksgf@yahoo.com">Email&nbsp;:&nbsp;fgksgf@yahoo.com</a>
+            </div>
         </div>
-
-        <div class="card card-l" style="width: 50%;height: 240px;padding: 40px 40px 40px 10px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;-ms-box-sizing: border-box;-o-box-sizing: border-box;box-sizing: border-box;float: left;">
-            <h3 class="animated pulse infinite" style="font-size: 28px;padding: 5px;"><i class="fa fa-git-square"></i>&nbsp;熟练使用git</h3>
-            <p style=" margin-top: 15px;padding: 10px;font-size: 18px;letter-spacing: 1px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt aperiam obcaecati architecto necessitatibus sequi saepe non eveniet neque quidem odit</p>
-        </div>
-
-        <div class="card card-r" style="width: 50%;height: 240px;padding: 40px 40px 40px 10px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;-ms-box-sizing: border-box;-o-box-sizing: border-box;box-sizing: border-box;float: right;">
-            <h3 class="animated pulse infinite" style="font-size: 28px;padding: 5px;"><i class="fa fa-linux"></i>&nbsp;熟练使用Linux</h3>
-            <p style=" margin-top: 15px;padding: 10px;font-size: 18px;letter-spacing: 1px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt aperiam obcaecati architecto necessitatibus sequi saepe non eveniet neque quidem odi</p>
-        </div>
-
-        <div class="card card-l" style="width: 50%;height: 240px;padding: 40px 40px 40px 10px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;-ms-box-sizing: border-box;-o-box-sizing: border-box;box-sizing: border-box;float: left;">
-            <h3 class="animated pulse infinite" style="font-size: 28px;padding: 5px;"><i class="fa fa-gitlab"></i>&nbsp;精通Java&nbsp;&amp;&nbsp;Python</h3>
-            <p style=" margin-top: 15px;padding: 10px;font-size: 18px;letter-spacing: 1px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt aperiam obcaecati architecto necessitatibus sequi saepe non eveniet neque quidem odit</p>
-        </div>
-
-        <div class="card card-r" style="width: 50%;height: 240px;padding: 40px 40px 40px 10px;-webkit-box-sizing: border-box;-moz-box-sizing: border-box;-ms-box-sizing: border-box;-o-box-sizing: border-box;box-sizing: border-box;float: right;">
-            <h3 class="animated pulse infinite" style="font-size: 28px;padding: 5px;"><i class="fa fa-paper-plane"></i>&nbsp;精通C/C++</h3>
-            <p style=" margin-top: 15px;padding: 10px;font-size: 18px;letter-spacing: 1px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt aperiam obcaecati architecto necessitatibus sequi saepe non eveniet neque quidem odit</p>
+        <div class="card-group clearfix">
+            <div class="card card-l">
+                <h3 class="animated pulse infinite"><i class="fa fa-html5"></i>&nbsp;精通HTML5</h3>
+                <p>Proficient in HTML5.</p>
+            </div>
+            <div class="card card-r">
+                <h3 class="animated pulse infinite"><i class="fa fa-css3"></i>&nbsp;精通CSS3</h3>
+                <p>Proficient in CSS3.</p>
+            </div>
+            <div class="card card-l">
+                <h3 class="animated pulse infinite"><i class="fa fa-git-square"></i>&nbsp;熟练使用git</h3>
+                <p>Proficient with git.</p>
+            </div>
+            <div class="card card-r">
+                <h3 class="animated pulse infinite"><i class="fa fa-linux"></i>&nbsp;熟练使用Linux</h3>
+                <p>Proficient with Linux.</p>
+            </div>
+            <div class="card card-l">
+                <h3 class="animated pulse infinite"><i class="fa fa-gitlab"></i>&nbsp;精通Java&nbsp;&amp;&nbsp;Python</h3>
+                <p>Proficient in Java and Python.</p>
+            </div>
+            <div class="card card-r">
+                <h3 class="animated pulse infinite"><i class="fa fa-paper-plane"></i>&nbsp;精通C/C++</h3>
+                <p>Proficient in C/C++.</p>
+            </div>
         </div>
     </div>
 </div>
-
-
-<!-- English Version -->
-<div class="en post-container">
-    <blockquote>
-        >>> The Zen of Python
-        <br>
-    </blockquote>
-    <p>
-        Beautiful is better than ugly.
-        <br> Explicit is better than implicit.
-        <br> Simple is better than complex.
-        <br> Complex is better than complicated.
-        <br> Flat is better than nested.
-        <br> Sparse is better than dense.
-        <br>
-    </p>
-    <p>
-        Readability counts.
-        <br> Special cases aren't special enough to break the rules.
-        <br> Although practicality beats purity.
-        <br> Errors should never pass silently.
-        <br> Unless explicitly silenced.
-        <br> In the face of ambiguity, refuse the temptation to guess.
-        <br> There should be one-- and preferably only one --obvious way to do it.
-        <br> Although that way may not be obvious at first unless you're Dutch.
-        <br>
-    </p>
-    <p>
-        Now is better than never.
-        <br> Although never is often better than right now.
-        <br> If the implementation is hard to explain, it's a bad idea.
-        <br> If the implementation is easy to explain, it may be a good idea.
-        <br> Namespaces are one honking great idea -- let's do more of those!
-        <br>
-    </p>
-    <p style="text-align:right;">
-        -- Tim Peters
-        <br>
-    </p>
-</div>
-<!-- Handle Language Change -->
-<script type="text/javascript">
-// get nodes
-var $zh = document.querySelector(".zh");
-var $en = document.querySelector(".en");
-var $select = document.querySelector("select");
-// bind hashchange event
-window.addEventListener('hashchange', _render);
-// handle render
-function _render() {
-    var _hash = window.location.hash;
-    // en
-    if (_hash == "#en") {
-        $select.selectedIndex = 1;
-        $en.style.display = "block";
-        $zh.style.display = "none";
-        // zh by default
-    } else {
-        // not trigger onChange, otherwise cause a loop call.
-        $select.selectedIndex = 0;
-        $zh.style.display = "block";
-        $en.style.display = "none";
-    }
-}
-// handle select change
-function onLanChange(index) {
-    if (index == 0) {
-        window.location.hash = "#zh"
-    } else {
-        window.location.hash = "#en"
-    }
-}
-// init
-_render();
-</script>
