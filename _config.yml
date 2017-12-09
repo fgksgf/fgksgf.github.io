@@ -1,6 +1,6 @@
 # Site settings
-title: JHX Blog
-SEOTitle: JHX Blog
+title: JHX BlOG
+SEOTitle: JHX BlOG
 header-img: img/home-bg.jpg
 email: fgksgf@yahoo.com
 description: ""
@@ -22,7 +22,7 @@ github_username:    fgksgf
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
 highlighter: rouge
 permalink: pretty
-paginate: 5
+paginate: 10
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
 anchorjs: false                          # if you want to customize anchor. check out line:181 of `post.html`
 
