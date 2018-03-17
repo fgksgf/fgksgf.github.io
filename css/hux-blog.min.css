@@ -17,12 +17,12 @@
 }
 
 .sidebar-container h5 {
-    color: gray;
+    color: #ccc;
     padding-bottom: 1em
 }
 
 .sidebar-container h5 a {
-    color: gray!important;
+    color: #ccc!important;
     text-decoration: none
 }
 
@@ -60,8 +60,281 @@
     padding-left: 0
 }
 
+.catalog-container {
+    padding: 0
+}
+
+.side-catalog {
+    display: block;
+    overflow: auto;
+    height: 100%;
+    padding-bottom: 40px;
+    width: 195px
+}
+
+.side-catalog.fixed {
+    position: fixed;
+    top: -21px
+}
+
+.side-catalog.fold .catalog-toggle::before {
+    content: "+"
+}
+
+.side-catalog.fold .catalog-body {
+    display: none
+}
+
+.side-catalog .catalog-toggle::before {
+    content: "−";
+    position: relative;
+    margin-right: 5px;
+    bottom: 1px
+}
+
+.side-catalog .catalog-body {
+    position: relative;
+    list-style: none;
+    height: auto;
+    overflow: hidden;
+    padding-left: 0;
+    padding-right: 5px;
+    text-indent: 0
+}
+
+.side-catalog .catalog-body li {
+    position: relative;
+    list-style: none
+}
+
+.side-catalog .catalog-body li a {
+    padding-left: 10px;
+    max-width: 180px;
+    display: inline-block;
+    vertical-align: middle;
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    text-decoration: none;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.side-catalog .catalog-body .h1_nav {
+	margin-left: 0;
+    font-size: 13px;
+    font-weight: 700
+}
+
+.side-catalog .catalog-body .h2_nav {
+	margin-left: 3;
+    font-size: 12px;
+    font-weight: 600
+}
+
+.side-catalog .catalog-body .h3_nav {
+    margin-left: 5;
+    font-size: 11px;
+    font-weight: 500
+}
+
+.side-catalog .catalog-body .h4_nav,
+.side-catalog .catalog-body .h5_nav,
+.side-catalog .catalog-body .h6_nav {
+    margin-left: 10px;
+    font-size: 10px
+}
+
+.side-catalog .catalog-body .h4_nav a,
+.side-catalog .catalog-body .h5_nav a,
+.side-catalog .catalog-body .h6_nav a {
+    max-width: 170px
+}
+
+.side-catalog .catalog-body .active {
+    border-radius: 4px;
+    background-color: #F5F5F5
+}
+
+.side-catalog .catalog-body .active a {
+    color: #0085a1!important
+}
+
+@media (max-width:1200px) {
+    .side-catalog {
+        display: none
+    }
+}
+
+.paper-snackbar {
+    transition-property: opacity, bottom, left, right, width, margin, border-radius;
+    transition-duration: .5s;
+    transition-timing-function: ease;
+    font-size: 14px;
+    min-height: 14px;
+    background-color: #323232;
+    background-color: #0085a1;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    line-height: 22px;
+    padding: 18px 24px;
+    bottom: 0;
+    opacity: 0
+}
+
+@media (min-width:640px) {
+    .paper-snackbar {
+        min-width: 288px;
+        max-width: 568px;
+        display: inline-flex;
+        border-radius: 2px;
+        margin: 24px;
+        bottom: -100px
+    }
+}
+
+@media (max-width:640px) {
+    .paper-snackbar {
+        left: 0;
+        right: 0
+    }
+}
+
+.paper-snackbar .action {
+    background: inherit;
+    display: inline-block;
+    border: none;
+    font-size: inherit;
+    text-transform: uppercase;
+    color: #ffeb3b;
+    margin: 0 0 0 24px;
+    padding: 0;
+    min-width: min-content;
+    outline: 0
+}
+
+.paper-button {
+    position: relative;
+    padding: 4px 0;
+    margin: 1em;
+    width: 160px;
+    overflow: hidden;
+    user-select: none;
+    color: #000;
+    text-transform: uppercase;
+    border-radius: 3px;
+    outline-color: #ccc
+}
+
+.paper-button:hover {
+    cursor: pointer
+}
+
+.paper-button button,
+.paper-button input[type=submit] {
+    background: inherit;
+    border: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 1em;
+    color: #000;
+    text-transform: uppercase
+}
+
+.paper-button.colored,
+.paper-button.colored button {
+    color: #4285f4
+}
+
+.paper-button.raised-button.colored {
+    background-color: #4285f4
+}
+
+.paper-button .raised-button {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26)
+}
+
+.paper-button.raised-button.colored {
+    background: #4285f4;
+    color: #fff
+}
+
+.paper-button[disabled] {
+    background-color: #EAEAEA!important;
+    color: #A8A8A8!important;
+    cursor: auto
+}
+
+.paper-button:hover {
+    background-color: #EAEAEA
+}
+
+.paper-button.raised-button.colored:hover {
+    background-color: #3367d6
+}
+
+button.paper-button {
+    border: 0;
+    font-size: 1em;
+    line-height: 25px;
+    background-color: #fff
+}
+
+.paper-button input[type=submit] {
+    outline-color: #ccc
+}
+
+.paper-button.colored.raised-button input[type=submit] {
+    color: #fff
+}
+
+.paper-shadow-animated.paper-shadow {
+    transition: box-shadow .28s cubic-bezier(0.4, 0, .2, 1)
+}
+
+.paper-shadow-top-z-1 {
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, .16)
+}
+
+.paper-shadow-bottom-z-1 {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .26)
+}
+
+.paper-shadow-top-z-2 {
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, .19)
+}
+
+.paper-shadow-bottom-z-2 {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, .2)
+}
+
+.paper-shadow-top-z-3 {
+    box-shadow: 0 17px 50px 0 rgba(0, 0, 0, .19)
+}
+
+.paper-shadow-bottom-z-3 {
+    box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24)
+}
+
+.paper-shadow-top-z-4 {
+    box-shadow: 0 25px 55px 0 rgba(0, 0, 0, .21)
+}
+
+.card {
+    background: #fff;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 16px;
+    border-radius: 2px
+}
+
 body {
-    font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
     line-height: 1.7;
     font-size: 16px;
     color: #404040;
@@ -78,7 +351,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
     line-height: 1.7;
     line-height: 1.1;
     font-weight: 700
@@ -131,15 +404,18 @@ img.shadow {
     box-shadow: rgba(0, 0, 0, .258824) 0 2px 5px 0
 }
 
-@media screen and (max-width:768px) {
-    select {
-        -webkit-appearance: none;
-        margin-top: 15px;
-        color: #337ab7;
-        border-color: #337ab7;
-        padding: 0 .4em;
-        background: #fff
-    }
+select {
+    -webkit-appearance: none;
+    margin-top: 15px;
+    color: #337ab7;
+    border-color: #337ab7;
+    padding: 0 .4em;
+    background: #fff
+}
+
+select.sel-lang {
+    min-height: 28px;
+    font-size: 14px
 }
 
 .table th,
@@ -164,6 +440,10 @@ pre code {
     width: auto;
     white-space: pre;
     word-wrap: normal
+}
+
+.postlist-container {
+    margin-bottom: 15px
 }
 
 .post-container a {
@@ -245,25 +525,47 @@ pre code {
     margin-top: 20px
 }
 
+.post-container .pager li {
+    width: 48%
+}
+
+.post-container .pager li.next {
+    float: right
+}
+
+.post-container .pager li.previous {
+    float: left
+}
+
+.post-container .pager li>a {
+    width: 100%
+}
+
+.post-container .pager li>a>span {
+    color: #ccc;
+    font-weight: 400;
+    letter-spacing: .5px
+}
+
 @media only screen and (max-width:767px) {
     .navbar-default .navbar-collapse {
+        position: absolute;
+        right: 0;
         border: none;
         background: #fff;
         box-shadow: 0 5px 10px 2px rgba(0, 0, 0, .2);
         box-shadow: rgba(0, 0, 0, .117647) 0 1px 6px, rgba(0, 0, 0, .239216) 0 1px 4px;
         border-radius: 2px;
-        width: 170px;
-        float: right;
-        margin: 0
+        width: 170px
     }
     #huxblog_navbar {
         opacity: 0;
         transform: scaleX(0);
         transform-origin: top right;
-        transition: all .25s cubic-bezier(0.23, 1, .32, 1);
+        transition: all 200ms cubic-bezier(0.47, 0, .4, .99) 0ms;
         -webkit-transform: scaleX(0);
         -webkit-transform-origin: top right;
-        -webkit-transition: all .25s cubic-bezier(0.23, 1, .32, 1)
+        -webkit-transition: all 200ms cubic-bezier(0.47, 0, .4, .99) 0ms
     }
     #huxblog_navbar a {
         font-size: 13px;
@@ -273,27 +575,33 @@ pre code {
         height: 0;
         transform: scaleY(0);
         transform-origin: top right;
-        transition: transform 500ms cubic-bezier(0.23, 1, .32, 1);
+        transition: transform 400ms cubic-bezier(0.32, 1, .23, 1) 0ms;
         -webkit-transform: scaleY(0);
         -webkit-transform-origin: top right;
-        -webkit-transition: -webkit-transform 500ms cubic-bezier(0.23, 1, .32, 1)
+        -webkit-transition: -webkit-transform 400ms cubic-bezier(0.32, 1, .23, 1) 0ms
     }
     #huxblog_navbar li {
         opacity: 0;
-        transition: opacity 450ms cubic-bezier(0.23, 1, .32, 1) 205ms;
-        -webkit-transition: opacity 450ms cubic-bezier(0.23, 1, .32, 1) 205ms
+        transition: opacity 100ms cubic-bezier(0.23, 1, .32, 1) 0ms;
+        -webkit-transition: opacity 100ms cubic-bezier(0.23, 1, .32, 1) 0ms
     }
     #huxblog_navbar.in {
         transform: scaleX(1);
         -webkit-transform: scaleX(1);
-        opacity: 1
+        opacity: 1;
+        transition: all 250ms cubic-bezier(0.23, 1, .32, 1) 0ms;
+        -webkit-transition: all 250ms cubic-bezier(0.23, 1, .32, 1) 0ms
     }
     #huxblog_navbar.in .navbar-collapse {
         transform: scaleY(1);
-        -webkit-transform: scaleY(1)
+        -webkit-transform: scaleY(1);
+        transition: transform 500ms cubic-bezier(0.23, 1, .32, 1);
+        -webkit-transition: -webkit-transform 500ms cubic-bezier(0.23, 1, .32, 1)
     }
     #huxblog_navbar.in li {
-        opacity: 1
+        opacity: 1;
+        transition: opacity 450ms cubic-bezier(0.23, 1, .32, 1) 205ms;
+        -webkit-transition: opacity 450ms cubic-bezier(0.23, 1, .32, 1) 205ms
     }
 }
 
@@ -305,7 +613,7 @@ pre code {
     left: 0;
     width: 100%;
     z-index: 3;
-    font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
     line-height: 1.7
 }
 
@@ -409,7 +717,7 @@ pre code {
 
 .intro-header {
     background: no-repeat center center;
-    background-color: gray;
+    background-color: #ccc;
     background-attachment: scroll;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -462,7 +770,7 @@ pre code {
 
 .intro-header .site-heading .subheading,
 .intro-header .page-heading .subheading {
-    font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
     line-height: 1.7;
     font-size: 18px;
     line-height: 1.1;
@@ -490,7 +798,7 @@ pre code {
 }
 
 .intro-header .post-heading .subheading {
-    font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
     line-height: 1.7;
     font-size: 17px;
     line-height: 1.4;
@@ -549,7 +857,7 @@ pre code {
 
 .post-preview>.post-meta {
     font-family: Lora, 'Times New Roman', serif;
-    color: gray;
+    color: #ccc;
     font-size: 16px;
     font-style: italic;
     margin-top: 0
@@ -696,7 +1004,7 @@ form .row:first-child .floating-label-form-group {
 }
 
 .btn {
-    font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
     line-height: 1.7;
     text-transform: uppercase;
     font-size: 14px;
@@ -725,7 +1033,7 @@ form .row:first-child .floating-label-form-group {
 
 .pager li>a,
 .pager li>span {
-    font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
     line-height: 1.7;
     text-transform: uppercase;
     font-size: 13px;
@@ -755,11 +1063,16 @@ form .row:first-child .floating-label-form-group {
     border: 1px solid #0085a1
 }
 
+.pager li>a:hover>span,
+.pager li>a:focus>span {
+    color: #fff
+}
+
 .pager .disabled>a,
 .pager .disabled>a:hover,
 .pager .disabled>a:focus,
 .pager .disabled>span {
-    color: gray;
+    color: #ccc;
     background-color: #404040;
     cursor: not-allowed
 }
@@ -784,10 +1097,6 @@ img::selection {
 img::-moz-selection {
     color: #fff;
     background: 0 0
-}
-
-body {
-    webkit-tap-highlight-color: #0085a1
 }
 
 .tags {
@@ -894,7 +1203,7 @@ body {
 
 .one-tag-list .tag-text {
     font-weight: 200;
-    font-family: -apple-system, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", STHeiti, "Microsoft YaHei", "Microsoft JhengHei", "Source Han Sans SC", "Noto Sans CJK SC", "Source Han Sans CN", "Noto Sans SC", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", SimSun, sans-serif;
     line-height: 1.7
 }
 
@@ -1000,6 +1309,23 @@ body {
     background: 0 0
 }
 
+.comment #ds-thread #ds-reset .ds-post-options {
+    border-bottom: 1px solid #ccc
+}
+
+.comment #ds-thread #ds-reset .ds-post-button {
+    border-bottom: 1px solid #ccc
+}
+
+.comment #ds-thread #ds-reset .ds-post-button {
+    background: #fff;
+    box-shadow: none
+}
+
+.comment #ds-thread #ds-reset .ds-post-button:hover {
+    background: #eee
+}
+
 #ds-smilies-tooltip ul.ds-smilies-tabs li a {
     background: #fff!important
 }
@@ -1053,7 +1379,6 @@ body {
 .page-fullscreen footer .copyright a:hover {
     color: #ddd
 }
-
 
 /* about.html */
 
