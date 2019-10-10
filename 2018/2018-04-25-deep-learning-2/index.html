@@ -1,0 +1,654 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>TensorFlow #02 -- Transfer Learning | Zerone&#39;s Blog</title>
+    <meta name="author" content="Zerone">
+    
+    <meta name="description" content="通过迁移学习在CIRAR-10数据集上进行图像分类">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="TensorFlow #02 -- Transfer Learning"/>
+    <meta property="og:site_name" content="Zerone&#39;s Blog"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Zerone&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?eec689fda5ac2ac70a1936c42dfe7f44";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    
+        <link rel="stylesheet" href="/css/lib/tranquil-heart.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Zerone&#39;s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/avatar1.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">幻谲</p>
+                        <p class="desc">fgksgf@yahoo.com</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Novel/">
+                    Novel <span class="right">4 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Novel/Unnamed/">
+                    Unnamed <span class="right">4 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Notes/">
+                    Notes <span class="right">9 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Notes/Java/">
+                    Java <span class="right">5 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Notes/Contest/">
+                    Contest <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Notes/Compilers/">
+                    Compilers <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Notes/BigData/">
+                    BigData <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Life/">
+                    Life <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Tutorial/">
+                    Tutorial <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Tutorial/DeepLearning/">
+                    DeepLearning <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Tutorial/">Tutorial</a><a class="breadcrumb" href="/categories/Tutorial/DeepLearning/">DeepLearning</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>TensorFlow #02 -- Transfer Learning</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2018-04-16T16:00:00.000Z"><a href="/2018/2018-04-25-deep-learning-2/">2018-04-17</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Tensorflow/" class="chip pink lighten-1">Tensorflow</a>
+        
+            <a href="/tags/TransferLearning/" class="chip pink lighten-1">TransferLearning</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Introduction"><span class="section table-of-contents-text">Introduction</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Dataset"><span class="section table-of-contents-text">Dataset</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Process"><span class="section table-of-contents-text">Process</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Code"><span class="section table-of-contents-text">Code</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Result"><span class="section table-of-contents-text">Result</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#References"><span class="section table-of-contents-text">References</span></a></li></ol>
+</div>
+
+            
+            <div class="entry pink-link-context">
+
+                <p>通过迁移学习在CIRAR-10数据集上进行图像分类<br><a id="more"></a></p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><hr>
+<ul>
+<li><p><strong>Inceptio-v3</strong> 是Google以2012年<a href="http://image-net.org/" target="_blank" rel="noopener">ImageNet</a>的数据为训练集，在一台配有8个Tesla K40 GPU，大概价值$30,000的野兽级计算机上训练了几个星期的图像分类模型。它大约有2500万个参数，分类一张图像就用了50亿的乘加指令。它在2012年的验证数据集上，前5位错误率达到3.46％，已经超越了人类在该数据集上的表现。在一台没有GPU的现代PC上，使用Inception模型分类一张图像仅需几秒钟。Inception-v3，这是计算机视觉中的一项标准任务，模型试图将整个图像分为1000个类</p>
+</li>
+<li><p>迁移学习，就是一种让我们站在巨人肩膀上进行深度学习的方法。它通过采用一个已经在相关任务上接受培训的模型并在新模型中重新使用模型来实现新的分类任务。我们不需要也几乎不太可能在一台普通的PC上训练出一个这样的模型，但是我们可以下载预训练好的Inception模型，通过对它进行再训练，便能利用它在<a href="http://image-net.org/" target="_blank" rel="noopener">ImageNet</a>上训练的功能强大的图像特征提取功能来做图像分类。</p>
+</li>
+<li><p><a href="https://www.cs.toronto.edu/~kriz/cifar.html" target="_blank" rel="noopener">CIFAR-10数据集</a>是一个用户识别普适物体的小型数据集，一共包含10个类别的RGB彩色图片：飞机(airplane)、汽车(automobile)、鸟类(bird)、猫(cat)、鹿(deer)、狗(dog)、蛙类(fog)、马(horse)、船(ship)和卡车(truck).每张图片大小为32x32，共有50000张训练图片和10000张测试图片。<br><img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/dl2/cifar10.png" alt=""><br><br></p>
+</li>
+</ul>
+<h1 id="Dataset"><a href="#Dataset" class="headerlink" title="Dataset"></a>Dataset</h1><hr>
+<p>首先，你需要下载 <a href="https://www.cs.toronto.edu/~kriz/cifar.html" target="_blank" rel="noopener">CIFAR-10数据集</a>。 网站上提供了三个版本的文件，分别是Python版本、Matlab版本以及C语言版本。</p>
+<p>下载Python版本的压缩包，约<code>163MB</code>，解压之后的文件夹下有八个文件。其中有五个<code>data_batch</code>，为训练集，每个文件包含一万张图片数据；一个 <code>test_batch</code>文件，包含一万张测试集图片数据。</p>
+<p>这些batch文件中的数据均为使用Python的pickle模块序列化的数据，若要将它们反序列化获取出来，可使用以下代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python 3.x</span></span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">unpickle</span><span class="params">(file)</span>:</span></span><br><span class="line">    <span class="keyword">with</span> open(file, <span class="string">'rb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        dict = pickle.load(f,encoding=<span class="string">'bytes'</span>)</span><br><span class="line">    <span class="keyword">return</span> dict</span><br></pre></td></tr></table></figure></p>
+<p>该函数返回的是一个包含两组键值对的字典，一个键为<code>data</code>，值为10000x3072的numpy数组，类型为uint8s; 另一个键为<code>label</code>，值为包含10000个0-9范围内数字的列表。</p>
+<p>解压出的文件中还有一个<code>batches.meta</code>文件，其中包含了十种类别的名称。<br><br></p>
+<h1 id="Process"><a href="#Process" class="headerlink" title="Process"></a>Process</h1><hr>
+<p>下图展示了利用Inception-v3模型进行迁移学习的原理：<br><img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/dl2/flowchart.png" alt=""></p>
+<p>首先，向Inception-v3模型输入一张图片，把将要输入到模型最终的分类层的数据，即所谓的Transfer-Values获取出来，作为我们自己的神经网络的输入数据。也就是说，Inception-v3模型在这里充当了一个特征提取的角色。</p>
+<p>因为Inception处理一张图片要花较长的时间（我的渣渣显卡NVIDIA GeForce 940MX用了三个小时才把训练集50000张图片的Transfer-Values计算完），而在后期调参过程中，程序可能需要运行多次。为了避免每张图片被Inception处理多次，可以在第一次运行时，将所有的图片处理得到的Transfer-Values保存到文件中。这样以后运行时，只需要直接读取文件中的数据，可以节约很多时间。</p>
+<p>接着，使用TensorFlow构建自己的神经网络，其结构为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">输入层 --&gt; 全连接层 --&gt; softmax层 --&gt; 输出层</span><br></pre></td></tr></table></figure></p>
+<p>输入的是每张图片的Transfer-Values，输出为类别编号(0-9)。<br><br></p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><hr>
+<p>首先是第一阶段，导入数据，并通过Inception模型得到Transfer-Values，并保存为文件。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># retrain.py</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> cifar10</span><br><span class="line"><span class="keyword">from</span> cache <span class="keyword">import</span> transfer_values_cache</span><br><span class="line"><span class="keyword">from</span> cifar10 <span class="keyword">import</span> num_classes</span><br><span class="line"><span class="keyword">from</span> inception.inception <span class="keyword">import</span> Inception</span><br><span class="line"></span><br><span class="line"><span class="comment"># 载入CIFAR-10数据集类别名称</span></span><br><span class="line"><span class="comment"># ['airplane','automobile','bird','cat','deer','dog','frog','horse','ship','truck']</span></span><br><span class="line">class_names = cifar10.load_class_names()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 载入训练集，返回图像、整形分类号码、以及用One-Hot编码的分类号数组</span></span><br><span class="line">images_train, cls_train, labels_train = cifar10.load_training_data()</span><br><span class="line"><span class="comment"># 载入测试集，返回图像、整形分类号码、以及用One-Hot编码的分类号数组</span></span><br><span class="line">images_test, cls_test, labels_test = cifar10.load_test_data()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置训练集和测试集缓存文件的目录</span></span><br><span class="line">file_path_cache_train = os.path.join(cifar10.data_path, <span class="string">'inception_cifar10_train.pkl'</span>)</span><br><span class="line">file_path_cache_test = os.path.join(cifar10.data_path, <span class="string">'inception_cifar10_test.pkl'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载Inception V3模型</span></span><br><span class="line">model = Inception()</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Processing transfer-learning transfer-values for training-images ..."</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果训练数据的transfer-values已经计算过，则从文件中加载出来；否则计算它们并保存为缓存文件</span></span><br><span class="line">transfer_values_train = transfer_values_cache(cache_path=file_path_cache_train,</span><br><span class="line">                                              images=images_train,</span><br><span class="line">                                              model=model)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查transfer-values的数组大小: (50000, 2048)</span></span><br><span class="line"><span class="comment"># 在训练集中有50,000张图像，每张图像有2048个transfer-values</span></span><br><span class="line">print(<span class="string">'The shape of transfer-values for training-images: '</span>, transfer_values_train.shape)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Processing transfer-learning transfer-values for test-images ..."</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果测试数据的transfer-values已经计算过，则从文件中加载出来；否则计算它们并保存为缓存文件</span></span><br><span class="line">transfer_values_test = transfer_values_cache(cache_path=file_path_cache_test,</span><br><span class="line">                                             images=images_test,</span><br><span class="line">                                             model=model)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 检查transfer-values的数组大小: (10000, 2048)</span></span><br><span class="line"><span class="comment"># 在测试集中有10,000张图像，每张图像有2048个transfer-values</span></span><br><span class="line">print(<span class="string">'The shape of transfer-values for test-images: '</span>, transfer_values_test.shape)</span><br></pre></td></tr></table></figure></p>
+<p>接着，创建一个简单的神经网络：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># transfer-values的数组长度</span></span><br><span class="line">transfer_len = model.transfer_len</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为输入的transfer-values创建一个placeholder变量</span></span><br><span class="line"><span class="comment"># 变量的形状是[None, transfer_len]</span></span><br><span class="line"><span class="comment"># None表示它的输入数组包含任意数量的样本，每个样本元素个数为2048，即transfer_len</span></span><br><span class="line">x = tf.placeholder(tf.float32, shape=[<span class="keyword">None</span>, transfer_len], name=<span class="string">'x'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为输入图像的真实类型标签定义另外一个placeholder变量</span></span><br><span class="line"><span class="comment"># 这是One-Hot编码的数组，包含10个元素，每个元素代表了数据集中的一种可能类别</span></span><br><span class="line">y_true = tf.placeholder(tf.float32, shape=[<span class="keyword">None</span>, num_classes], name=<span class="string">'y_true'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算代表真实类别的整形数字,即取y_true这个One-Hot编码的数组的最大值的位置索引</span></span><br><span class="line">y_true_cls = tf.argmax(y_true, dimension=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 全连接层</span></span><br><span class="line">layer_fc = tf.layers.dense(inputs=x, units=<span class="number">1024</span>, activation=tf.nn.relu)</span><br><span class="line"></span><br><span class="line"><span class="comment"># softmax层，包含10个神经元</span></span><br><span class="line">logits = tf.layers.dense(inputs=layer_fc, units=<span class="number">10</span>)</span><br><span class="line">y_pred = tf.nn.softmax(logits, name=<span class="string">"softmax_tensor"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算交叉熵</span></span><br><span class="line">cross_entropy = tf.nn.softmax_cross_entropy_with_logits(logits=y_pred, labels=y_true)</span><br><span class="line"><span class="comment"># 以交叉熵作为损失函数</span></span><br><span class="line">loss = tf.reduce_mean(cross_entropy)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个变量来记录当前优化迭代的次数。</span></span><br><span class="line">global_step = tf.Variable(initial_value=<span class="number">0</span>, name=<span class="string">'global_step'</span>, trainable=<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 优化神经网络的方法：adam方法，学习率为0.0001，目标为最小化损失函数</span></span><br><span class="line">optimizer = tf.train.AdamOptimizer(learning_rate=<span class="number">1e-4</span>).minimize(loss, global_step)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出层y_pred所表示的类编号，取y_pred中概率最大值的索引</span></span><br><span class="line">y_pred_cls = tf.argmax(y_pred, dimension=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个布尔向量，表示每张图像的真实类别是否与预测类别相同。</span></span><br><span class="line">correct_prediction = tf.equal(y_pred_cls, y_true_cls)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将布尔值向量类型转换成浮点型向量，False就变成0，True变成1</span></span><br><span class="line"><span class="comment"># 然后计算这些值的平均数，以此来计算分类的准确度。</span></span><br><span class="line">accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 每次同时输入多少张图的transfer-values</span></span><br><span class="line">train_batch_size = <span class="number">64</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Split the data-set in batches of this size to limit RAM usage.</span></span><br><span class="line">batch_size = <span class="number">256</span></span><br></pre></td></tr></table></figure></p>
+<p>然后定义了一些函数，部分函数的具体实现略去：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用来从训练集中选择随机batch的transfer-values</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">random_batch</span><span class="params">()</span>:</span>...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用来执行一定数量的优化迭代，以此来逐渐改善网络层的变量</span></span><br><span class="line"><span class="comment"># 在每次迭代中，会从训练集中选择新的一批数据，然后TensorFlow在这些训练样本上执行优化</span></span><br><span class="line"><span class="comment"># 每500次迭代会打印出进度</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">optimize</span><span class="params">(num_iterations)</span>:</span></span><br><span class="line">    <span class="comment"># 执行优化开始时间</span></span><br><span class="line">    start_time = time.time()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num_iterations):</span><br><span class="line">        x_batch, y_true_batch = random_batch()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将数据传入TensorFlow对应的占位符中</span></span><br><span class="line">        feed_dict_train = &#123;x: x_batch, y_true: y_true_batch&#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment"># 运行optimizer并获取全局步数</span></span><br><span class="line">       i_global, _ = session.run([global_step, optimizer], feed_dict=feed_dict_train)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 每迭代500次输出一次状态信息</span></span><br><span class="line">        <span class="keyword">if</span> (i_global % <span class="number">500</span> == <span class="number">0</span>) <span class="keyword">or</span> (i == num_iterations - <span class="number">1</span>):</span><br><span class="line">            <span class="comment"># 计算损失函数</span></span><br><span class="line">            batch_loss = session.run(loss, feed_dict=feed_dict_train)</span><br><span class="line"></span><br><span class="line">            msg = <span class="string">"Global Step: &#123;0:&gt;6&#125;, Training Batch Loss: &#123;1:&gt;6.4&#125;"</span></span><br><span class="line">            print(msg.format(i_global, batch_loss))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 优化结束时间</span></span><br><span class="line">    end_time = time.time()</span><br><span class="line">    time_dif = end_time - start_time</span><br><span class="line">    print(<span class="string">"Time usage: "</span> + str(timedelta(seconds=int(round(time_dif)))))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用来计算图像的预测类别，同时返回一个代表每张图像分类是否正确的布尔数组</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict_cls</span><span class="params">(transfer_values, labels, cls_true)</span>:</span>...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算测试集上的预测类别。</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">predict_cls_test</span><span class="params">()</span>:</span>...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算给定布尔数组的分类准确率，布尔数组表示每张图像是否被正确分类</span></span><br><span class="line"><span class="comment"># 比如， cls_accuracy([True, True, False, False, False]) = 2/5 = 0.4。</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">classification_accuracy</span><span class="params">(correct)</span>:</span>...</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用来打印测试集上的分类准确率。</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_test_accuracy</span><span class="params">()</span>:</span>...</span><br></pre></td></tr></table></figure></p>
+<p>最后，创建TensorFlow会话,用来运行图:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    session = tf.Session()</span><br><span class="line">    session.run(tf.global_variables_initializer())</span><br><span class="line">    optimize(num_iterations=<span class="number">20000</span>)</span><br><span class="line">    print_test_accuracy()</span><br><span class="line">    model.close()</span><br><span class="line">    session.close()</span><br></pre></td></tr></table></figure></p>
+<p>整个工程的完整代码请戳 <a href="https://github.com/fgksgf/TensorFlow-Toys" target="_blank" rel="noopener">这里</a> 。<br><br></p>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><hr>
+<p>在所有训练图片和测试图片的Transfer-Values已经保存为文件的情况下，程序只运行了3分钟左右，模型在测试集上的准确率达到了90.1%.<br><img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/dl2/result.png" alt=""><br><br></p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><hr>
+<ol>
+<li><a href="https://www.tensorflow.org/tutorials/image_recognition" target="_blank" rel="noopener">Image Recognition</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/27093918" target="_blank" rel="noopener">TensorFlow 教程 #08 - 迁移学习</a></li>
+</ol>
+
+                
+<p class="pink-link-context">
+    <a href="/2018/2018-07-19-compilers-notes/" rel="next" title="《编译原理》笔记">
+    上一篇：《编译原理》笔记
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2018/2018-04-17-deep-learning-1/" rel="next" title="Tensorflow第一枪--MNIST">
+    下一篇：Tensorflow第一枪--MNIST
+  </a>
+</p>
+
+
+            </div>
+			<br>
+            <blockquote>
+                作者：幻谲<br>
+                链接：<a href="https://zerone01.coding.me/2018/2018-04-25-deep-learning-2/">https://zerone01.coding.me/2018/2018-04-25-deep-learning-2/</a><br>
+                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
+            </blockquote>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+      new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: 'kxMncX2sVVSKzep617SN8LkJ-gzGzoHsz',
+        appKey: '07mWzGHPi2b9dsm20ojAJpUQ',
+        placeholder: '友善发言的人运气都不会太差:)',
+        path:window.location.pathname, 
+        avatar:'identicon' 
+       });
+    </script>
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    <div class="footer-copyright pink-link-context">
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <div class="container">
+            Copyright © Zerone&#39;s Blog 2018-2019
+            <p class="right" style="margin-top: 0;">Powered by <a href="https://hexo.io" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" style="font-weight: bold">raytaylorism</a> | Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

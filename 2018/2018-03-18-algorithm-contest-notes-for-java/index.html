@@ -1,0 +1,654 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    
+
+    <title>算法竞赛笔记之Java版 | Zerone&#39;s Blog</title>
+    <meta name="author" content="Zerone">
+    
+    <meta name="description" content="Algorithm Contest Notes for Java">
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <meta property="og:title" content="算法竞赛笔记之Java版"/>
+    <meta property="og:site_name" content="Zerone&#39;s Blog"/>
+
+    
+    <meta property="og:image" content=""/>
+    
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="alternate" href="/atom.xml" title="Zerone&#39;s Blog" type="application/atom+xml">
+    <link rel="stylesheet" href="/css/lib/materialize.min.css">
+    <link rel="stylesheet" href="/css/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?eec689fda5ac2ac70a1936c42dfe7f44";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+    
+        <link rel="stylesheet" href="/css/lib/tranquil-heart.css" type="text/css">
+    
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+
+
+<body>
+    <img src="/weixin_favicon.png" style="position: absolute; left: -9999px; opacity: 0; filter: alpha(opacity=0);">
+
+    <nav class="indigo">
+    <div class="nav-wrapper">
+        <a href="#" data-activates="main-menu" class="button-collapse">
+            <i class="fa fa-navicon"></i>
+        </a>
+        <div class="">
+            <a href="/" class="brand-logo hide-on-med-and-down">Zerone&#39;s Blog</a>
+            <ul class="right hide-on-med-and-down">
+                
+                    <li>
+                        <a class="menu-home " href="/" >
+                            <i class="fa fa-home "></i>
+                            
+                            首页
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-archive " href="/archives" >
+                            <i class="fa fa-archive "></i>
+                            
+                            归档
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                            <i class="fa fa-bookmark "></i>
+                            
+                            分类
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-about " href="/about" >
+                            <i class="fa fa-user "></i>
+                            
+                            关于
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a class="menu-search modal-trigger " href="#search" >
+                            <i class="fa fa-search "></i>
+                            
+                            搜索
+                        </a>
+                    </li>
+                
+            </ul>
+            <div>
+    <ul class="side-nav indigo darken-1" id="main-menu">
+        
+        <li class="side-user">
+            <div class="row">
+                <div class="col s4 no-padding">
+                    <img class="avatar-image circle responsive-img" src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/avatar1.jpg" alt="User Avatar">
+                </div>
+                <div class="info col s8 valign-wrapper no-padding">
+                    <div class="valign">
+                        <p class="name">幻谲</p>
+                        <p class="desc">fgksgf@yahoo.com</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+        
+
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-home " href="/" >
+                    <i class="fa fa-home "></i>
+                    
+                    首页
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-archive " href="/archives" >
+                    <i class="fa fa-archive "></i>
+                    
+                    归档
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-category category-menu" href="javascript:;" data-activates="category-menu" >
+                    <i class="fa fa-bookmark "></i>
+                    
+                    分类
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-about " href="/about" >
+                    <i class="fa fa-user "></i>
+                    
+                    关于
+                </a>
+            </li>
+        
+            <li class="no-padding">
+                <a class="waves-effect menu-search modal-trigger " href="#search" >
+                    <i class="fa fa-search "></i>
+                    
+                    搜索
+                </a>
+            </li>
+        
+    </ul>
+
+    <ul class="side-nav indigo darken-1" id="category-menu">
+    
+
+            
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Novel/">
+                    Novel <span class="right">4 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Novel/Unnamed/">
+                    Unnamed <span class="right">4 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Notes/">
+                    Notes <span class="right">9 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Notes/Java/">
+                    Java <span class="right">5 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Notes/Contest/">
+                    Contest <span class="right">2 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Notes/Compilers/">
+                    Compilers <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Notes/BigData/">
+                    BigData <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Life/">
+                    Life <span class="right">1 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Tutorial/">
+                    Tutorial <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-1" collapse-level="1">
+                <a class="no-padding" href="/categories/Tutorial/DeepLearning/">
+                    DeepLearning <span class="right">3 篇</span></a>
+                </a>
+            </li>
+
+        
+
+    </ul>
+</div>
+
+        </div>
+    </div>
+</nav>
+
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+              <input id="search-input" type="text">
+              <label for="search-input">搜索</label>
+        </div>
+
+    </div>
+    <div id="search-result" class="search-result col s12">
+
+    </div>
+</div>
+
+
+    <main>
+        <div class="container main-container">
+    <nav class="page-nav hide-on-small-only">
+    <div class="nav-wrapper indigo">
+        <span class="breadcrumb">当前位置（分类目录）</span>
+        
+            
+    
+    
+    <a class="breadcrumb" href="/categories/Notes/">Notes</a><a class="breadcrumb" href="/categories/Notes/Contest/">Contest</a>
+
+
+        
+
+        
+    </div>
+</nav>
+
+<article>
+    <div class="card">
+        <div class="card-content">
+            
+
+            <div class="article-title">
+                
+    
+        <h1>算法竞赛笔记之Java版</h1>
+    
+
+
+            </div>
+            <time class="pink-link-context" datetime="2018-03-17T16:00:00.000Z"><a href="/2018/2018-03-18-algorithm-contest-notes-for-java/">2018-03-18</a></time>
+
+            <span id="busuanzi_container_page_pv" class="read-times-container">
+    <i class="fa fa-eye"></i>
+    <span id="busuanzi_value_page_pv"></span>
+</span>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Java/" class="chip pink lighten-1">Java</a>
+        
+    </div>
+
+
+            <div class="toc pink-link-context hide-on-med-and-down">
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#输入"><span class="section table-of-contents-text">输入</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#基本输入"><span class="section table-of-contents-text">基本输入</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#字符串输入"><span class="section table-of-contents-text">字符串输入</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#输入易错点"><span class="section table-of-contents-text">输入易错点</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#大整数与高精度"><span class="section table-of-contents-text">大整数与高精度</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#大整数-BigInteger"><span class="section table-of-contents-text">大整数 BigInteger</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#高精度-BigDecimal"><span class="section table-of-contents-text">高精度 BigDecimal</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#字符串"><span class="section table-of-contents-text">字符串</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#StringBuilder类常用方法"><span class="section table-of-contents-text">StringBuilder类常用方法</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#数据类型转换"><span class="section table-of-contents-text">数据类型转换</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#string转int-float-double"><span class="section table-of-contents-text">string转int,float,double</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#int-float-double转string"><span class="section table-of-contents-text">int,float,double转string</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#进制转换"><span class="section table-of-contents-text">进制转换</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#从十进制转换到其他进制"><span class="section table-of-contents-text">从十进制转换到其他进制</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#从其他进制转换成十进制"><span class="section table-of-contents-text">从其他进制转换成十进制</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#常用代码段"><span class="section table-of-contents-text">常用代码段</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#判断是否为回文字符串"><span class="section table-of-contents-text">判断是否为回文字符串</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#判断是否为质数"><span class="section table-of-contents-text">判断是否为质数</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#求最大公因数"><span class="section table-of-contents-text">求最大公因数</span></a></li></ol></li></ol>
+</div>
+
+            
+            <div class="entry pink-link-context">
+
+                <p>Algorithm Contest Notes for Java<br><a id="more"></a></p>
+<h1 id="输入"><a href="#输入" class="headerlink" title="输入"></a>输入</h1><hr>
+<h2 id="基本输入"><a href="#基本输入" class="headerlink" title="基本输入"></a>基本输入</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Scanner in = <span class="keyword">new</span> Scanner(System.in);<span class="comment">//基本方法</span></span><br><span class="line">Scanner in = <span class="keyword">new</span> Scanner(<span class="keyword">new</span> BufferedInputStream(System.in));<span class="comment">//更快</span></span><br></pre></td></tr></table></figure>
+<h2 id="字符串输入"><a href="#字符串输入" class="headerlink" title="字符串输入"></a>字符串输入</h2><ol>
+<li><p><code>in.next()</code>读取到有效字符后才可以结束输入，对输入有效字符之前遇到的空格键、Tab键或Enter键等结束符，<code>in.next()</code>方法会自动将其去掉，只有在输入有效字符之后，<code>in.next()</code>方法才将其后输入的空格键、Tab键或Enter键等视为分隔符或结束符, <strong>不能用来读取包含空格的字符串</strong>。</p>
+</li>
+<li><p><code>in.nextLine()</code>方法的结束符只是Enter键，即<code>in.nextLine()</code>方法返回的是Enter键之前的所有字符，它是可以 <strong>用来读取带空格的字符串</strong>。</p>
+</li>
+</ol>
+<h2 id="输入易错点"><a href="#输入易错点" class="headerlink" title="输入易错点"></a>输入易错点</h2><p>当先输入一个数字回车后再输入一个字符串时，错误写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"><span class="keyword">int</span> n = in.nextInt();</span><br><span class="line">String s = in.nextLine();</span><br></pre></td></tr></table></figure>
+<p>这样写会把回车键读入到字符串s中，而真正需要读入的字符串则没有读取到。正确写法应为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Scanner in = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line"><span class="keyword">int</span> n = in.nextInt();</span><br><span class="line"><span class="comment">// 用于读取回车键</span></span><br><span class="line"><span class="keyword">int</span>.nextLine();</span><br><span class="line">String s = in.nextLine();</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="大整数与高精度"><a href="#大整数与高精度" class="headerlink" title="大整数与高精度"></a>大整数与高精度</h1><hr>
+<h2 id="大整数-BigInteger"><a href="#大整数-BigInteger" class="headerlink" title="大整数 BigInteger"></a>大整数 BigInteger</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.math.BigInteger;</span><br><span class="line"></span><br><span class="line"><span class="comment">//主要有以下方法可以使用</span></span><br><span class="line"><span class="function">BigInteger <span class="title">add</span><span class="params">(BigInteger other)</span></span>;</span><br><span class="line"><span class="function">BigInteger <span class="title">subtract</span><span class="params">(BigInteger other)</span></span>;</span><br><span class="line"><span class="function">BigInteger <span class="title">multiply</span><span class="params">(BigInteger other)</span></span>;</span><br><span class="line"><span class="function">BigInteger <span class="title">divide</span><span class="params">(BigInteger other)</span></span>;</span><br><span class="line">BigInteger[] dividedandRemainder(BigInteger other); <span class="comment">//数组第一位是商，第二位是余数</span></span><br><span class="line"><span class="function">BigInteger <span class="title">pow</span><span class="params">(<span class="keyword">int</span> other)</span></span>; <span class="comment">// other次方</span></span><br><span class="line"><span class="function">BigInteger <span class="title">mod</span><span class="params">(BigInteger other)</span></span>;</span><br><span class="line"><span class="function">BigInteger <span class="title">gcd</span><span class="params">(BigInteger other)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(BigInteger other)</span></span>; <span class="comment">//负数则小于,0则等于,正数则大于</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> BigInteger <span class="title">valueOf</span><span class="params">(<span class="keyword">long</span> x)</span></span>;</span><br></pre></td></tr></table></figure>
+<h2 id="高精度-BigDecimal"><a href="#高精度-BigDecimal" class="headerlink" title="高精度 BigDecimal"></a>高精度 BigDecimal</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BigDecimal <span class="title">add</span><span class="params">(BigDecimal other)</span></span>;</span><br><span class="line"><span class="function">BigDecimal <span class="title">subtract</span><span class="params">(BigDecimal other)</span></span>;</span><br><span class="line"><span class="function">BigDecimal <span class="title">multiply</span><span class="params">(BigDecimal other)</span></span>;</span><br><span class="line"><span class="function">BigDecimal <span class="title">divide</span><span class="params">(BigDecimal other)</span></span>;</span><br><span class="line"><span class="comment">//除数，保留小数位数，保留方法四舍五入</span></span><br><span class="line"><span class="function">BigDecimal <span class="title">divide</span><span class="params">(BigDecimal divisor, <span class="keyword">int</span> scale, BigDecimal.ROUND_HALF_UP)</span></span>;</span><br><span class="line"><span class="comment">//用于格式化小数点,setScale(1)表示保留一位小数，默认用四舍五入方式</span></span><br><span class="line">BigDecimal.setScale();</span><br><span class="line"></span><br><span class="line"><span class="comment">//求sqrt(x)，保留前n位数字（不是小数点后n位），n位后直接舍弃（非四舍五入）</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> BigDecimal <span class="title">sqrt</span><span class="params">(BigDecimal x, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    BigDecimal ans = BigDecimal.ZERO;</span><br><span class="line">    BigDecimal eps = BigDecimal.ONE;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">while</span> (ans.pow(<span class="number">2</span>).compareTo(x) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            ans = ans.add(eps);</span><br><span class="line">        &#125;</span><br><span class="line">        ans = ans.subtract(eps);</span><br><span class="line">        eps = eps.divide(BigDecimal.TEN);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><hr>
+<p>String的对象是不可变的。<br>如果需要对字符串进行大量的增加删除操作，建议使用StringBuilder类。</p>
+<h2 id="StringBuilder类常用方法"><a href="#StringBuilder类常用方法" class="headerlink" title="StringBuilder类常用方法"></a>StringBuilder类常用方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 初始化</span></span><br><span class="line">StringBuilder sb = <span class="keyword">new</span> StringBuilder(<span class="string">""</span>);</span><br><span class="line"><span class="comment">// 增加一个字符到末尾</span></span><br><span class="line">sb.append(<span class="string">'h'</span>);</span><br><span class="line"><span class="comment">// 反转字符串</span></span><br><span class="line">sb.reverse()</span><br><span class="line"><span class="comment">// 在索引为0处插入字符串：</span></span><br><span class="line">sb.insert(<span class="number">0</span>,<span class="string">"i"</span>);</span><br><span class="line"><span class="comment">// 删除从0到1位置上的子串</span></span><br><span class="line">sb.delete(<span class="number">0</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<p>使用StringBuilder时，有一点需要特别注意:<br><strong>它没用重载equals方法，所以不能用来比较两个字符串内容是否相同</strong><br>比较两个StringBuilder内容是否相同的正确写法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder s1 = <span class="keyword">new</span> StringBuilder(<span class="string">"abc"</span>);</span><br><span class="line">StringBuilder s2 = <span class="keyword">new</span> StringBuilder(<span class="string">"abc"</span>);</span><br><span class="line"><span class="keyword">if</span> (s1.toString.equals(s2.toString())) &#123;</span><br><span class="line">    System.out.println(<span class="string">"same"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="数据类型转换"><a href="#数据类型转换" class="headerlink" title="数据类型转换"></a>数据类型转换</h1><hr>
+<h2 id="string转int-float-double"><a href="#string转int-float-double" class="headerlink" title="string转int,float,double"></a>string转int,float,double</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String s = <span class="string">"12345"</span>;</span><br><span class="line"><span class="keyword">int</span> a = Integer.parseInt(s);</span><br><span class="line"><span class="keyword">float</span> b = Float.parseFloat(s);</span><br><span class="line"><span class="keyword">double</span> c = Double.parseDouble(s);</span><br></pre></td></tr></table></figure>
+<h2 id="int-float-double转string"><a href="#int-float-double转string" class="headerlink" title="int,float,double转string"></a>int,float,double转string</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">123</span>;</span><br><span class="line"><span class="keyword">float</span> b = <span class="number">1.23f</span></span><br><span class="line"><span class="keyword">double</span> c = <span class="number">1.234</span></span><br><span class="line">String s1 = String.valueOf(a);</span><br><span class="line">String s2 = String.valueOf(b);</span><br><span class="line">String s3 = String.valueOf(c);</span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="进制转换"><a href="#进制转换" class="headerlink" title="进制转换"></a>进制转换</h1><hr>
+<h2 id="从十进制转换到其他进制"><a href="#从十进制转换到其他进制" class="headerlink" title="从十进制转换到其他进制"></a>从十进制转换到其他进制</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">12345</span>;</span><br><span class="line">System.out.println(Integer.toBinaryString(i)); <span class="comment">// 十进制转为二进制字符串</span></span><br><span class="line">System.out.println(Integer.toHexString(i)); <span class="comment">// 十进制转为十六进制字符串</span></span><br><span class="line">System.out.println(Integer.toOctalString(i)); <span class="comment">// 十进制转为八进制字符串</span></span><br></pre></td></tr></table></figure>
+<h2 id="从其他进制转换成十进制"><a href="#从其他进制转换成十进制" class="headerlink" title="从其他进制转换成十进制"></a>从其他进制转换成十进制</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = Integer.valueOf(<span class="string">"1010"</span>, <span class="number">2</span>); <span class="comment">// 二进制字符串转为十进制整数</span></span><br><span class="line">System.out.println(Integer.valueOf(<span class="string">"125"</span>, <span class="number">8</span>)); <span class="comment">// 八进制转十进制</span></span><br><span class="line">System.out.println(Integer.valueOf(<span class="string">"ABCDEF"</span>, <span class="number">16</span>)); <span class="comment">// 十六进制转十进制</span></span><br></pre></td></tr></table></figure>
+<p><br></p>
+<h1 id="常用代码段"><a href="#常用代码段" class="headerlink" title="常用代码段"></a>常用代码段</h1><hr>
+<h2 id="判断是否为回文字符串"><a href="#判断是否为回文字符串" class="headerlink" title="判断是否为回文字符串"></a>判断是否为回文字符串</h2><p>从字符串的两端往中间遍历判断字符是否相等</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPalidrome</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> ret = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s.length() / <span class="number">2</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (s.charAt(i) != s.charAt(s.length() - <span class="number">1</span> - i)) &#123;</span><br><span class="line">            ret = <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">         &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="判断是否为质数"><a href="#判断是否为质数" class="headerlink" title="判断是否为质数"></a>判断是否为质数</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPrime</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">boolean</span> ret = <span class="keyword">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; (<span class="keyword">int</span>)Math.sqrt(num); ++i) &#123;</span><br><span class="line">        <span class="keyword">if</span> (num % i == <span class="number">0</span>) &#123;</span><br><span class="line">            ret = <span class="keyword">false</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="求最大公因数"><a href="#求最大公因数" class="headerlink" title="求最大公因数"></a>求最大公因数</h2><p>辗转相除法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> m;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> gcd(n, m % n);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                
+<p class="pink-link-context">
+    <a href="/2018/2018-03-20-hello-hexo/" rel="next" title="Hello Hexo">
+    上一篇：Hello Hexo
+  </a>
+</p>
+
+
+
+<p class="pink-link-context">
+    <a href="/2018/2018-03-17-algorithm-contest-notes-for-C++/" rel="next" title="算法竞赛笔记之C++版">
+    下一篇：算法竞赛笔记之C++版
+  </a>
+</p>
+
+
+            </div>
+			<br>
+            <blockquote>
+                作者：幻谲<br>
+                链接：<a href="https://zerone01.coding.me/2018/2018-03-18-algorithm-contest-notes-for-java/">https://zerone01.coding.me/2018/2018-03-18-algorithm-contest-notes-for-java/</a><br>
+                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
+            </blockquote>
+        </div>
+    </div>
+</article>
+
+
+
+
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <div id="comment"></div>
+    <script>
+      new Valine({
+        el: '#comment' ,
+        notify:false, 
+        verify:false, 
+        appId: 'kxMncX2sVVSKzep617SN8LkJ-gzGzoHsz',
+        appKey: '07mWzGHPi2b9dsm20ojAJpUQ',
+        placeholder: '友善发言的人运气都不会太差:)',
+        path:window.location.pathname, 
+        avatar:'identicon' 
+       });
+    </script>
+
+
+
+</div>
+
+        <div class="fixed-action-btn float-sitemap">
+    <a class="btn-floating btn-large pink">
+      <i class="fa fa-caret-square-o-up"></i>
+    </a>
+    <ul>
+      <li><a class="btn-return-top btn-floating waves-effect green" title="回到顶部"><i class="fa fa-arrow-circle-o-up"></i></a></li>
+      <li><a class="btn-floating waves-effect button-collapse yellow darken-1"  data-activates="main-menu" title="菜单"><i class="fa fa-navicon"></i></a></li>
+    </ul>
+  </div>
+
+    </main>
+    <footer class="page-footer indigo darken-1">
+    <div class="footer-copyright pink-link-context">
+    	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+        <div class="container">
+            Copyright © Zerone&#39;s Blog 2018-2019
+            <p class="right" style="margin-top: 0;">Powered by <a href="https://hexo.io" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" style="font-weight: bold">raytaylorism</a> | Hosted by <a href="https://pages.coding.me" style="font-weight: bold">Coding Pages</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <noscript>
+    <div class="noscript">
+        <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+    </div>
+</noscript>
+<div class="noscript">
+    <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
+</div>
+
+
+<script src="/js/jquery.min.js"></script>
+<script src="/js/materialize.min.js"></script>
+
+<script>
+    (function($) {
+        $(document).ready(function() {
+            // 隐藏禁用javascript（针对微信内置浏览器）的提示
+            $('.noscript').hide();
+
+            // 图片缩放效果
+            var $imgs = $('img').not('.slider-image').not('.avatar-image').not('.carousel-image').not('.card-cover-image').not('.qrcode');
+
+            // 给图片加上点击放大效果（materialbox插件）
+            $imgs.addClass('materialboxed').each(function(i, el) {
+                $(this).attr('data-caption', $(this).attr('alt') || ' ');
+            }).materialbox();
+
+            // 优化表格的显示
+            $('table').each(function() {
+                var $table = $(this);
+                // 除去多行代码的情况
+                if ($table.find('pre').length == 0) {
+                    $table.addClass('responsive-table striped bordered');
+                }
+            });
+
+            // 首页幻灯片
+            $('.slider').slider({indicators: true, full_width: true, interval: 8000});
+
+            $(".button-collapse").sideNav();
+            $(".category-menu").sideNav();
+
+            // 针对gallery post
+            $('.carousel').carousel({full_width: true});
+            $('.carousel-control.prev').click(function() {
+                $('.carousel').carousel('prev');
+            });
+            $('.carousel-control.next').click(function() {
+                $('.carousel').carousel('next');
+            });
+
+            // 文章目录
+            $('article').not('.simple-article').find('h1').add('h2').add('h3').add('h4').add('h5').add('h6').scrollSpy();
+
+            // 目录随屏幕滚动（防止目录过长越过footer）
+            var $toc = $('.toc');
+            var scrollTargetTop = 0;
+            $(window).scroll(function() {
+                var $activeLink = $toc.find('a.active.section');
+                if ($(window).scrollTop() < 100) {
+                    scrollTargetTop = 0;
+                } else {
+                    if ($activeLink[0]) {
+                        scrollTargetTop = $activeLink.offset().top - $toc.offset().top;
+                    }
+                }
+                $toc.css('top', '-' + scrollTargetTop + 'px');
+            });
+
+            // 修正文章目录的left-border颜色
+            var color = $('.table-of-contents-text').css('color');
+            $('.table-of-contents-link').css('border-left-color', color);
+
+            // 针对移动端做的优化：FAB按钮点击一下收回
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                $('.fixed-action-btn').addClass('click-to-toggle');
+            }
+            // 回到顶部
+            $('.btn-return-top').click(function() {
+                $('body, html').animate({
+                    scrollTop: 0
+                }, 500);
+            });
+
+            // 重置读书页面的Tab标签页的颜色
+            $('li.tab a').hover(function() {
+                $(this).toggleClass('text-lighten-4');
+            });
+            $('.indicator').addClass('pink lighten-2');
+
+            
+            // 添加new标签
+            $('').append('<span class="new badge pink"></span>');
+            
+
+            // 搜索功能
+            $('.modal-trigger').leanModal({
+                // 打开搜索框时自动聚焦
+                ready: function() {
+                    if ($('#search').is(":visible")) {
+                        $('#search-input').focus();
+                    }
+                }
+            });
+            var searchXml = "";
+            if (searchXml.length == 0) {
+             	searchXml = "search.xml";
+            }
+            var searchPath = "/" + searchXml;
+            initSearch(searchPath, 'search-input', 'search-result');
+        });
+
+        // 初始化搜索与匹配函数
+        var initSearch = function(path, search_id, content_id) {
+            'use strict';
+            $.ajax({
+                url: path,
+                dataType: "xml",
+                success: function(xmlResponse) {
+                    // get the contents from search data
+                    var datas = $("entry", xmlResponse).map(function() {
+                        return {
+                            title: $("title", this).text(),
+                            content: $("content", this).text(),
+                            url: $("url", this).text()
+                        };
+                    }).get();
+                    var $input = document.getElementById(search_id);
+                    var $resultContent = document.getElementById(content_id);
+                    $input.addEventListener('input', function() {
+                        var str = '<ul class=\"search-result-list\">';
+                        var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                        $resultContent.innerHTML = "";
+                        if (this.value.trim().length <= 0) {
+                            return;
+                        }
+                        // perform local searching
+                        datas.forEach(function(data) {
+                            var isMatch = true;
+                            var content_index = [];
+                            var data_title = data.title.trim().toLowerCase();
+                            var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                            var data_url = data.url;
+                            var index_title = -1;
+                            var index_content = -1;
+                            var first_occur = -1;
+                            // only match artiles with not empty titles and contents
+                            if (data_title != '' && data_content != '') {
+                                keywords.forEach(function(keyword, i) {
+                                    index_title = data_title.indexOf(keyword);
+                                    index_content = data_content.indexOf(keyword);
+                                    if (index_title < 0 && index_content < 0) {
+                                        isMatch = false;
+                                    } else {
+                                        if (index_content < 0) {
+                                            index_content = 0;
+                                        }
+                                        if (i == 0) {
+                                            first_occur = index_content;
+                                        }
+                                    }
+                                });
+                            }
+                            // show search results
+                            if (isMatch) {
+                                keywords.forEach(function(keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    data_title = data_title.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                });
+
+                                str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                                var content = data.content.trim().replace(/<[^>]+>/g, "");
+                                if (first_occur >= 0) {
+                                    // cut out 100 characters
+                                    var start = first_occur - 20;
+                                    var end = first_occur + 80;
+                                    if (start < 0) {
+                                        start = 0;
+                                    }
+                                    if (start == 0) {
+                                        end = 100;
+                                    }
+                                    if (end > content.length) {
+                                        end = content.length;
+                                    }
+                                    var match_content = content.substring(start, end);
+                                    // highlight all keywords
+                                    keywords.forEach(function(keyword) {
+                                        var regS = new RegExp(keyword, "gi");
+                                        match_content = match_content.replace(regS, "<span class=\"search-keyword pink lighten-2\">" + keyword + "</span>");
+                                    });
+
+                                    str += "<p class=\"search-result\">..." + match_content + "...</p>"
+                                }
+                                str += "</li>";
+                            }
+                        });
+                        str += "</ul>";
+                        $resultContent.innerHTML = str;
+                    });
+                }
+            });
+        }
+    })(jQuery);
+</script>
+
+
+<script src="/js/prettify.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("pre").addClass("prettyprint");
+        prettyPrint();
+    });
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>
