@@ -147,14 +147,6 @@
             
 
             <li class="collapse-level-0" collapse-level="0">
-                <a class="no-padding" href="/categories/Life/">
-                    Life <span class="right">1</span></a>
-                </a>
-            </li>
-
-        
-
-            <li class="collapse-level-0" collapse-level="0">
                 <a class="no-padding" href="/categories/Novel/">
                     Novel <span class="right">4</span></a>
                 </a>
@@ -165,6 +157,14 @@
             <li class="collapse-level-1" collapse-level="1">
                 <a class="no-padding" href="/categories/Novel/Unnamed/">
                     Unnamed <span class="right">4</span></a>
+                </a>
+            </li>
+
+        
+
+            <li class="collapse-level-0" collapse-level="0">
+                <a class="no-padding" href="/categories/Life/">
+                    Life <span class="right">1</span></a>
                 </a>
             </li>
 
@@ -327,17 +327,9 @@
     <p class="center-align">当前网速较慢或者你使用的浏览器不支持博客特定功能，请尝试刷新或换用Chrome、Firefox等现代浏览器</p>
 </div>
 
-<script>
-var LeanCounter=function(){"use strict";function t(t){void 0===t&&(t={});var e=t.appId,n=t.appKey,r=t.elementClass;void 0===r&&(r=".leancloud-counter");var i=t.addCountInterval;void 0===i&&(i=100);var a=t.base;void 0===a&&(a="/1.1/classes/Counter");var o=t.initOnLoaded;if(void 0===o&&(o=!0),!e||!n)throw new Error("Missing appId or appKey.");this._appId=e,this._appKey=n,this._idCache={},this._addCountUrlQueue=[],this.addCountInterval=i,this.base=a,this.elements=document.querySelectorAll(r),o&&("loading"!==document.readyState?this.init():document.addEventListener("DOMContentLoaded",this.init.bind(this)))}return t.prototype._request=function(t,e,n){if(!this.apiServer)return Promise.reject(new Error("This LeanCounter instance is not initialized."));if("get"===t){var r="https://"+this.apiServer+this.base+e;if(n){var i=[];Object.keys(n).forEach(function(t){i.push(t+"="+encodeURI(n[t]))}),r+="?"+i.join("&")}return fetch(r,{headers:{"Content-Type":"application/json","X-LC-Id":this._appId,"X-LC-Key":this._appKey}}).then(function(t){return t.json()})}return fetch("https://"+this.apiServer+this.base+e,{method:t,headers:{"Content-Type":"application/json","X-LC-Id":this._appId,"X-LC-Key":this._appKey},body:JSON.stringify(n)}).then(function(t){return t.json()})},t.prototype.getCount=function(t){var e,n,r=this,i=t;return Array.isArray(i)||(i=Array(i)),e=[],n={},i.forEach(function(t){n[t]||(e.push(t),n[t]=!0)}),i=e,this._request("get","",{where:JSON.stringify({url:{$in:i}})}).then(function(t){var e=t.results,n={};return e.forEach(function(t){var e=t.url,i=t.objectId,a=t.time;r._idCache[e]||(r._idCache[e]=i),n[e]=a}),n})},t.prototype.addCount=function(t){var e=this;this._addCountUrlQueue.push(t),this._addCountIntervalId||(this._addCountIntervalId=setInterval(function(){if(0!==e._addCountUrlQueue.length){var t=e._addCountUrlQueue.pop();e._idCache[t]||e.getCount(t),e._request("put","/"+e._idCache[t],{time:{__op:"Increment",amount:1}})}},this.addCountInterval))},t.prototype.init=function(){var t=this;fetch("https://app-router.leancloud.cn/2/route?appId="+this._appId).then(function(t){return t.json()}).then(function(e){var n=e.api_server;t.apiServer=n;var r=[];return t.elements.forEach(function(t){r.push(t.dataset.leancloudCounterUrl)}),t.getCount(r)}).then(function(e){t.elements.forEach(function(n){"leancloudCounterInc"in n.dataset?(n.textContent=String(e[n.dataset.leancloudCounterUrl]+1),t.addCount(n.dataset.leancloudCounterUrl)):n.textContent=String(e[n.dataset.leancloudCounterUrl])})})},t}();
-
-var leanCounter = new LeanCounter({
-  appId: 'kxMncX2sVVSKzep617SN8LkJ-gzGzoHsz',
-  appKey: '07mWzGHPi2b9dsm20ojAJpUQ',
-});
-</script>
 <script src="/js/jquery.min.js"></script>
 <script src="/js/materialize.min.js"></script>
-
+<script src="/js/av-min.js"></script>
 <script>
     (function($) {
         $(document).ready(function() {
@@ -545,6 +537,44 @@ var leanCounter = new LeanCounter({
 
 
 
+
+// leancloud page counter part
+<script>
+function addCount (Counter) {
+    url = $('time a').attr('href').trim();
+    title = $('.article-title').text().trim();
+            
+    var query=new AV.Query('Counter');
+    var ret;
+            
+    //use url as unique idnetfication
+    query.equalTo("url",url);
+            query.find.then(function (results) {
+                if(results.length>0) {
+                    var counter = results[0];
+                    counter.increment("time");
+                    ret = counter.save(null, {fetchWhenSave: true})
+                } else {
+                    var newcounter = new Counter()
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    ret = newcounter.save(null, {fetchWhenSave: true}).time
+                }
+            });
+            return ret;
+        }
+        
+        $(function(){
+            var Counter = AV.Object.extend("Counter");
+            var times;
+            //only increse visit counting when intering a page
+            if ($('.article-title').length == 1)
+                times = addCount(Counter);
+                console.log(times);
+                $('.leancloud-counter').text(times);
+        });
+</script>
 
 </body>
 </html>
