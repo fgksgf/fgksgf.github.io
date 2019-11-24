@@ -412,6 +412,7 @@
 
 <script src="/js/jquery.min.js"></script>
 <script src="/js/materialize.min.js"></script>
+<script src="/js/av-min.js"></script>
 
 <script>
     (function($) {
@@ -605,7 +606,6 @@
     })(jQuery);
 </script>
 
-
 <script src="/js/prettify.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -620,8 +620,6 @@
 
 
 
-
-// leancloud page counter part
 <script>
 function addCount (Counter) {
     url = $('time a').attr('href').trim();
@@ -630,33 +628,32 @@ function addCount (Counter) {
     var query=new AV.Query('Counter');
     var ret;
             
-    //use url as unique idnetfication
     query.equalTo("url",url);
-            query.find.then(function (results) {
-                if(results.length>0) {
-                    var counter = results[0];
-                    counter.increment("time");
-                    ret = counter.save(null, {fetchWhenSave: true})
-                } else {
-                    var newcounter = new Counter()
-                    newcounter.set("title",title);
-                    newcounter.set("url",url);
-                    newcounter.set("time",1);
-                    ret = newcounter.save(null, {fetchWhenSave: true}).time
-                }
-            });
-            return ret;
+    query.find().then(function (results) {
+        if(results.length>0) {
+            var counter = results[0];
+            counter.increment("time");
+            ret = counter.save(null, {fetchWhenSave: true})
+        } else {
+            var newcounter = new Counter()
+            newcounter.set("title",title);
+            newcounter.set("url",url);
+            newcounter.set("time",1);
+            ret = newcounter.save(null, {fetchWhenSave: true}).time
         }
+    });
+    return ret;
+}
         
-        $(function(){
-            var Counter = AV.Object.extend("Counter");
-            var times;
-            //only increse visit counting when intering a page
-            if ($('.article-title').length == 1)
-                times = addCount(Counter);
-                console.log(times);
-                $('.leancloud-counter').text(times);
-        });
+$(function(){
+    var Counter = AV.Object.extend("Counter");
+    var times = 0;
+    if ($('.article-title').length == 1) {
+        times = addCount(Counter);
+        console.log(times);
+        $('.leancloud-counter').text(times);
+    }
+});
 </script>
 
 </body>
