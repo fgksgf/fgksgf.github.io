@@ -5,9 +5,9 @@
   <subtitle>Zerone&#39;s Blog</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://zerone01.coding.me/"/>
+  <link href="https://fgksgf.github.io/"/>
   <updated>2019-11-26T07:37:02.434Z</updated>
-  <id>https://zerone01.coding.me/</id>
+  <id>https://fgksgf.github.io/</id>
   
   <author>
     <name>Zerone</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>浅谈个人信息保护</title>
-    <link href="https://zerone01.coding.me/2019/2019-11-20-protect-personal-information/"/>
-    <id>https://zerone01.coding.me/2019/2019-11-20-protect-personal-information/</id>
+    <link href="https://fgksgf.github.io/2019/2019-11-20-protect-personal-information/"/>
+    <id>https://fgksgf.github.io/2019/2019-11-20-protect-personal-information/</id>
     <published>2019-11-19T16:00:00.000Z</published>
     <updated>2019-11-26T07:37:02.434Z</updated>
     
@@ -33,17 +33,17 @@
     
     </summary>
     
-      <category term="Life" scheme="https://zerone01.coding.me/categories/Life/"/>
+      <category term="Life" scheme="https://fgksgf.github.io/categories/Life/"/>
     
     
-      <category term="Life" scheme="https://zerone01.coding.me/tags/Life/"/>
+      <category term="Life" scheme="https://fgksgf.github.io/tags/Life/"/>
     
   </entry>
   
   <entry>
     <title>图数据库Neo4j学习笔记</title>
-    <link href="https://zerone01.coding.me/2019/2019-10-10-neo4j-notes/"/>
-    <id>https://zerone01.coding.me/2019/2019-10-10-neo4j-notes/</id>
+    <link href="https://fgksgf.github.io/2019/2019-10-10-neo4j-notes/"/>
+    <id>https://fgksgf.github.io/2019/2019-10-10-neo4j-notes/</id>
     <published>2019-10-09T16:00:00.000Z</published>
     <updated>2019-10-11T07:46:28.352Z</updated>
     
@@ -55,23 +55,23 @@
     
     </summary>
     
-      <category term="Notes" scheme="https://zerone01.coding.me/categories/Notes/"/>
+      <category term="Notes" scheme="https://fgksgf.github.io/categories/Notes/"/>
     
-      <category term="Database" scheme="https://zerone01.coding.me/categories/Notes/Database/"/>
+      <category term="Database" scheme="https://fgksgf.github.io/categories/Notes/Database/"/>
     
     
-      <category term="Neo4j" scheme="https://zerone01.coding.me/tags/Neo4j/"/>
+      <category term="Neo4j" scheme="https://fgksgf.github.io/tags/Neo4j/"/>
     
-      <category term="Graph database" scheme="https://zerone01.coding.me/tags/Graph-database/"/>
+      <category term="Graph database" scheme="https://fgksgf.github.io/tags/Graph-database/"/>
     
-      <category term="NoSQL" scheme="https://zerone01.coding.me/tags/NoSQL/"/>
+      <category term="NoSQL" scheme="https://fgksgf.github.io/tags/NoSQL/"/>
     
   </entry>
   
   <entry>
     <title>未命名黑客小说——第三章</title>
-    <link href="https://zerone01.coding.me/2019/2019-08-10-hacker-ch3/"/>
-    <id>https://zerone01.coding.me/2019/2019-08-10-hacker-ch3/</id>
+    <link href="https://fgksgf.github.io/2019/2019-08-10-hacker-ch3/"/>
+    <id>https://fgksgf.github.io/2019/2019-08-10-hacker-ch3/</id>
     <published>2019-08-09T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.555Z</updated>
     
@@ -83,21 +83,21 @@
     
     </summary>
     
-      <category term="Novel" scheme="https://zerone01.coding.me/categories/Novel/"/>
+      <category term="Novel" scheme="https://fgksgf.github.io/categories/Novel/"/>
     
-      <category term="Unnamed" scheme="https://zerone01.coding.me/categories/Novel/Unnamed/"/>
+      <category term="Unnamed" scheme="https://fgksgf.github.io/categories/Novel/Unnamed/"/>
     
     
-      <category term="Fiction" scheme="https://zerone01.coding.me/tags/Fiction/"/>
+      <category term="Fiction" scheme="https://fgksgf.github.io/tags/Fiction/"/>
     
-      <category term="Hacker" scheme="https://zerone01.coding.me/tags/Hacker/"/>
+      <category term="Hacker" scheme="https://fgksgf.github.io/tags/Hacker/"/>
     
   </entry>
   
   <entry>
     <title>大数据入坑笔记</title>
-    <link href="https://zerone01.coding.me/2018/2018-10-13-getting-started-with-big-data/"/>
-    <id>https://zerone01.coding.me/2018/2018-10-13-getting-started-with-big-data/</id>
+    <link href="https://fgksgf.github.io/2018/2018-10-13-getting-started-with-big-data/"/>
+    <id>https://fgksgf.github.io/2018/2018-10-13-getting-started-with-big-data/</id>
     <published>2018-10-12T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.555Z</updated>
     
@@ -109,21 +109,21 @@
     
     </summary>
     
-      <category term="Notes" scheme="https://zerone01.coding.me/categories/Notes/"/>
+      <category term="Notes" scheme="https://fgksgf.github.io/categories/Notes/"/>
     
-      <category term="BigData" scheme="https://zerone01.coding.me/categories/Notes/BigData/"/>
+      <category term="BigData" scheme="https://fgksgf.github.io/categories/Notes/BigData/"/>
     
     
-      <category term="BigData" scheme="https://zerone01.coding.me/tags/BigData/"/>
+      <category term="BigData" scheme="https://fgksgf.github.io/tags/BigData/"/>
     
-      <category term="Hadoop" scheme="https://zerone01.coding.me/tags/Hadoop/"/>
+      <category term="Hadoop" scheme="https://fgksgf.github.io/tags/Hadoop/"/>
     
   </entry>
   
   <entry>
     <title>《Effective Java》笔记 (4)</title>
-    <link href="https://zerone01.coding.me/2018/2018-07-24-effective-java-4/"/>
-    <id>https://zerone01.coding.me/2018/2018-07-24-effective-java-4/</id>
+    <link href="https://fgksgf.github.io/2018/2018-07-24-effective-java-4/"/>
+    <id>https://fgksgf.github.io/2018/2018-07-24-effective-java-4/</id>
     <published>2018-07-23T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.555Z</updated>
     
@@ -135,19 +135,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="https://zerone01.coding.me/categories/Notes/"/>
+      <category term="Notes" scheme="https://fgksgf.github.io/categories/Notes/"/>
     
-      <category term="Java" scheme="https://zerone01.coding.me/categories/Notes/Java/"/>
+      <category term="Java" scheme="https://fgksgf.github.io/categories/Notes/Java/"/>
     
     
-      <category term="Java" scheme="https://zerone01.coding.me/tags/Java/"/>
+      <category term="Java" scheme="https://fgksgf.github.io/tags/Java/"/>
     
   </entry>
   
   <entry>
     <title>《Effective Java》笔记 (3)</title>
-    <link href="https://zerone01.coding.me/2018/2018-07-23-effective-java-3/"/>
-    <id>https://zerone01.coding.me/2018/2018-07-23-effective-java-3/</id>
+    <link href="https://fgksgf.github.io/2018/2018-07-23-effective-java-3/"/>
+    <id>https://fgksgf.github.io/2018/2018-07-23-effective-java-3/</id>
     <published>2018-07-22T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.554Z</updated>
     
@@ -159,19 +159,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="https://zerone01.coding.me/categories/Notes/"/>
+      <category term="Notes" scheme="https://fgksgf.github.io/categories/Notes/"/>
     
-      <category term="Java" scheme="https://zerone01.coding.me/categories/Notes/Java/"/>
+      <category term="Java" scheme="https://fgksgf.github.io/categories/Notes/Java/"/>
     
     
-      <category term="Java" scheme="https://zerone01.coding.me/tags/Java/"/>
+      <category term="Java" scheme="https://fgksgf.github.io/tags/Java/"/>
     
   </entry>
   
   <entry>
     <title>《编译原理》笔记</title>
-    <link href="https://zerone01.coding.me/2018/2018-07-19-compilers-notes/"/>
-    <id>https://zerone01.coding.me/2018/2018-07-19-compilers-notes/</id>
+    <link href="https://fgksgf.github.io/2018/2018-07-19-compilers-notes/"/>
+    <id>https://fgksgf.github.io/2018/2018-07-19-compilers-notes/</id>
     <published>2018-07-18T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.554Z</updated>
     
@@ -183,19 +183,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="https://zerone01.coding.me/categories/Notes/"/>
+      <category term="Notes" scheme="https://fgksgf.github.io/categories/Notes/"/>
     
-      <category term="Compilers" scheme="https://zerone01.coding.me/categories/Notes/Compilers/"/>
+      <category term="Compilers" scheme="https://fgksgf.github.io/categories/Notes/Compilers/"/>
     
     
-      <category term="compilers" scheme="https://zerone01.coding.me/tags/compilers/"/>
+      <category term="compilers" scheme="https://fgksgf.github.io/tags/compilers/"/>
     
   </entry>
   
   <entry>
     <title>TensorFlow #02 -- Transfer Learning</title>
-    <link href="https://zerone01.coding.me/2018/2018-04-25-deep-learning-2/"/>
-    <id>https://zerone01.coding.me/2018/2018-04-25-deep-learning-2/</id>
+    <link href="https://fgksgf.github.io/2018/2018-04-25-deep-learning-2/"/>
+    <id>https://fgksgf.github.io/2018/2018-04-25-deep-learning-2/</id>
     <published>2018-04-16T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.554Z</updated>
     
@@ -207,21 +207,21 @@
     
     </summary>
     
-      <category term="Tutorial" scheme="https://zerone01.coding.me/categories/Tutorial/"/>
+      <category term="Tutorial" scheme="https://fgksgf.github.io/categories/Tutorial/"/>
     
-      <category term="DeepLearning" scheme="https://zerone01.coding.me/categories/Tutorial/DeepLearning/"/>
+      <category term="DeepLearning" scheme="https://fgksgf.github.io/categories/Tutorial/DeepLearning/"/>
     
     
-      <category term="Tensorflow" scheme="https://zerone01.coding.me/tags/Tensorflow/"/>
+      <category term="Tensorflow" scheme="https://fgksgf.github.io/tags/Tensorflow/"/>
     
-      <category term="TransferLearning" scheme="https://zerone01.coding.me/tags/TransferLearning/"/>
+      <category term="TransferLearning" scheme="https://fgksgf.github.io/tags/TransferLearning/"/>
     
   </entry>
   
   <entry>
     <title>Tensorflow第一枪--MNIST</title>
-    <link href="https://zerone01.coding.me/2018/2018-04-17-deep-learning-1/"/>
-    <id>https://zerone01.coding.me/2018/2018-04-17-deep-learning-1/</id>
+    <link href="https://fgksgf.github.io/2018/2018-04-17-deep-learning-1/"/>
+    <id>https://fgksgf.github.io/2018/2018-04-17-deep-learning-1/</id>
     <published>2018-04-16T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.554Z</updated>
     
@@ -233,21 +233,21 @@
     
     </summary>
     
-      <category term="Tutorial" scheme="https://zerone01.coding.me/categories/Tutorial/"/>
+      <category term="Tutorial" scheme="https://fgksgf.github.io/categories/Tutorial/"/>
     
-      <category term="DeepLearning" scheme="https://zerone01.coding.me/categories/Tutorial/DeepLearning/"/>
+      <category term="DeepLearning" scheme="https://fgksgf.github.io/categories/Tutorial/DeepLearning/"/>
     
     
-      <category term="Tensorflow" scheme="https://zerone01.coding.me/tags/Tensorflow/"/>
+      <category term="Tensorflow" scheme="https://fgksgf.github.io/tags/Tensorflow/"/>
     
-      <category term="CNN" scheme="https://zerone01.coding.me/tags/CNN/"/>
+      <category term="CNN" scheme="https://fgksgf.github.io/tags/CNN/"/>
     
   </entry>
   
   <entry>
     <title>深度学习环境配置入坑指南</title>
-    <link href="https://zerone01.coding.me/2018/2018-04-04-begin-to-deep-learning/"/>
-    <id>https://zerone01.coding.me/2018/2018-04-04-begin-to-deep-learning/</id>
+    <link href="https://fgksgf.github.io/2018/2018-04-04-begin-to-deep-learning/"/>
+    <id>https://fgksgf.github.io/2018/2018-04-04-begin-to-deep-learning/</id>
     <published>2018-04-03T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.553Z</updated>
     
@@ -259,19 +259,19 @@
     
     </summary>
     
-      <category term="Tutorial" scheme="https://zerone01.coding.me/categories/Tutorial/"/>
+      <category term="Tutorial" scheme="https://fgksgf.github.io/categories/Tutorial/"/>
     
-      <category term="DeepLearning" scheme="https://zerone01.coding.me/categories/Tutorial/DeepLearning/"/>
+      <category term="DeepLearning" scheme="https://fgksgf.github.io/categories/Tutorial/DeepLearning/"/>
     
     
-      <category term="Tensorflow" scheme="https://zerone01.coding.me/tags/Tensorflow/"/>
+      <category term="Tensorflow" scheme="https://fgksgf.github.io/tags/Tensorflow/"/>
     
   </entry>
   
   <entry>
     <title>Hello Hexo</title>
-    <link href="https://zerone01.coding.me/2018/2018-03-20-hello-hexo/"/>
-    <id>https://zerone01.coding.me/2018/2018-03-20-hello-hexo/</id>
+    <link href="https://fgksgf.github.io/2018/2018-03-20-hello-hexo/"/>
+    <id>https://fgksgf.github.io/2018/2018-03-20-hello-hexo/</id>
     <published>2018-03-20T14:32:45.000Z</published>
     <updated>2019-10-09T08:32:12.553Z</updated>
     
@@ -283,17 +283,17 @@
     
     </summary>
     
-      <category term="Life" scheme="https://zerone01.coding.me/categories/Life/"/>
+      <category term="Life" scheme="https://fgksgf.github.io/categories/Life/"/>
     
     
-      <category term="Life" scheme="https://zerone01.coding.me/tags/Life/"/>
+      <category term="Life" scheme="https://fgksgf.github.io/tags/Life/"/>
     
   </entry>
   
   <entry>
     <title>算法竞赛笔记之Java版</title>
-    <link href="https://zerone01.coding.me/2018/2018-03-18-algorithm-contest-notes-for-java/"/>
-    <id>https://zerone01.coding.me/2018/2018-03-18-algorithm-contest-notes-for-java/</id>
+    <link href="https://fgksgf.github.io/2018/2018-03-18-algorithm-contest-notes-for-java/"/>
+    <id>https://fgksgf.github.io/2018/2018-03-18-algorithm-contest-notes-for-java/</id>
     <published>2018-03-17T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.553Z</updated>
     
@@ -305,19 +305,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="https://zerone01.coding.me/categories/Notes/"/>
+      <category term="Notes" scheme="https://fgksgf.github.io/categories/Notes/"/>
     
-      <category term="Contest" scheme="https://zerone01.coding.me/categories/Notes/Contest/"/>
+      <category term="Contest" scheme="https://fgksgf.github.io/categories/Notes/Contest/"/>
     
     
-      <category term="Java" scheme="https://zerone01.coding.me/tags/Java/"/>
+      <category term="Java" scheme="https://fgksgf.github.io/tags/Java/"/>
     
   </entry>
   
   <entry>
     <title>算法竞赛笔记之C++版</title>
-    <link href="https://zerone01.coding.me/2018/2018-03-17-algorithm-contest-notes-for-C++/"/>
-    <id>https://zerone01.coding.me/2018/2018-03-17-algorithm-contest-notes-for-C++/</id>
+    <link href="https://fgksgf.github.io/2018/2018-03-17-algorithm-contest-notes-for-C++/"/>
+    <id>https://fgksgf.github.io/2018/2018-03-17-algorithm-contest-notes-for-C++/</id>
     <published>2018-03-16T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.553Z</updated>
     
@@ -329,19 +329,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="https://zerone01.coding.me/categories/Notes/"/>
+      <category term="Notes" scheme="https://fgksgf.github.io/categories/Notes/"/>
     
-      <category term="Contest" scheme="https://zerone01.coding.me/categories/Notes/Contest/"/>
+      <category term="Contest" scheme="https://fgksgf.github.io/categories/Notes/Contest/"/>
     
     
-      <category term="C++" scheme="https://zerone01.coding.me/tags/C/"/>
+      <category term="C++" scheme="https://fgksgf.github.io/tags/C/"/>
     
   </entry>
   
   <entry>
     <title>Java 多线程学习笔记</title>
-    <link href="https://zerone01.coding.me/2017/2017-12-09-java-multithreading/"/>
-    <id>https://zerone01.coding.me/2017/2017-12-09-java-multithreading/</id>
+    <link href="https://fgksgf.github.io/2017/2017-12-09-java-multithreading/"/>
+    <id>https://fgksgf.github.io/2017/2017-12-09-java-multithreading/</id>
     <published>2017-12-08T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.552Z</updated>
     
@@ -353,21 +353,21 @@
     
     </summary>
     
-      <category term="Notes" scheme="https://zerone01.coding.me/categories/Notes/"/>
+      <category term="Notes" scheme="https://fgksgf.github.io/categories/Notes/"/>
     
-      <category term="Java" scheme="https://zerone01.coding.me/categories/Notes/Java/"/>
+      <category term="Java" scheme="https://fgksgf.github.io/categories/Notes/Java/"/>
     
     
-      <category term="Java" scheme="https://zerone01.coding.me/tags/Java/"/>
+      <category term="Java" scheme="https://fgksgf.github.io/tags/Java/"/>
     
-      <category term="Multithreading" scheme="https://zerone01.coding.me/tags/Multithreading/"/>
+      <category term="Multithreading" scheme="https://fgksgf.github.io/tags/Multithreading/"/>
     
   </entry>
   
   <entry>
     <title>《Effective Java》笔记 (2)</title>
-    <link href="https://zerone01.coding.me/2017/2017-11-09-effective-java-2/"/>
-    <id>https://zerone01.coding.me/2017/2017-11-09-effective-java-2/</id>
+    <link href="https://fgksgf.github.io/2017/2017-11-09-effective-java-2/"/>
+    <id>https://fgksgf.github.io/2017/2017-11-09-effective-java-2/</id>
     <published>2017-11-08T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.552Z</updated>
     
@@ -379,19 +379,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="https://zerone01.coding.me/categories/Notes/"/>
+      <category term="Notes" scheme="https://fgksgf.github.io/categories/Notes/"/>
     
-      <category term="Java" scheme="https://zerone01.coding.me/categories/Notes/Java/"/>
+      <category term="Java" scheme="https://fgksgf.github.io/categories/Notes/Java/"/>
     
     
-      <category term="Java" scheme="https://zerone01.coding.me/tags/Java/"/>
+      <category term="Java" scheme="https://fgksgf.github.io/tags/Java/"/>
     
   </entry>
   
   <entry>
     <title>《Effective Java》笔记 (1)</title>
-    <link href="https://zerone01.coding.me/2017/2017-11-03-effective-java-1/"/>
-    <id>https://zerone01.coding.me/2017/2017-11-03-effective-java-1/</id>
+    <link href="https://fgksgf.github.io/2017/2017-11-03-effective-java-1/"/>
+    <id>https://fgksgf.github.io/2017/2017-11-03-effective-java-1/</id>
     <published>2017-11-02T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.552Z</updated>
     
@@ -403,19 +403,19 @@
     
     </summary>
     
-      <category term="Notes" scheme="https://zerone01.coding.me/categories/Notes/"/>
+      <category term="Notes" scheme="https://fgksgf.github.io/categories/Notes/"/>
     
-      <category term="Java" scheme="https://zerone01.coding.me/categories/Notes/Java/"/>
+      <category term="Java" scheme="https://fgksgf.github.io/categories/Notes/Java/"/>
     
     
-      <category term="Java" scheme="https://zerone01.coding.me/tags/Java/"/>
+      <category term="Java" scheme="https://fgksgf.github.io/tags/Java/"/>
     
   </entry>
   
   <entry>
     <title>未命名黑客小说——第二章</title>
-    <link href="https://zerone01.coding.me/2017/2017-05-23-hacker-ch2/"/>
-    <id>https://zerone01.coding.me/2017/2017-05-23-hacker-ch2/</id>
+    <link href="https://fgksgf.github.io/2017/2017-05-23-hacker-ch2/"/>
+    <id>https://fgksgf.github.io/2017/2017-05-23-hacker-ch2/</id>
     <published>2017-05-22T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.552Z</updated>
     
@@ -427,21 +427,21 @@
     
     </summary>
     
-      <category term="Novel" scheme="https://zerone01.coding.me/categories/Novel/"/>
+      <category term="Novel" scheme="https://fgksgf.github.io/categories/Novel/"/>
     
-      <category term="Unnamed" scheme="https://zerone01.coding.me/categories/Novel/Unnamed/"/>
+      <category term="Unnamed" scheme="https://fgksgf.github.io/categories/Novel/Unnamed/"/>
     
     
-      <category term="Fiction" scheme="https://zerone01.coding.me/tags/Fiction/"/>
+      <category term="Fiction" scheme="https://fgksgf.github.io/tags/Fiction/"/>
     
-      <category term="Hacker" scheme="https://zerone01.coding.me/tags/Hacker/"/>
+      <category term="Hacker" scheme="https://fgksgf.github.io/tags/Hacker/"/>
     
   </entry>
   
   <entry>
     <title>未命名黑客小说——第一章</title>
-    <link href="https://zerone01.coding.me/2017/2017-05-13-hacker-ch1/"/>
-    <id>https://zerone01.coding.me/2017/2017-05-13-hacker-ch1/</id>
+    <link href="https://fgksgf.github.io/2017/2017-05-13-hacker-ch1/"/>
+    <id>https://fgksgf.github.io/2017/2017-05-13-hacker-ch1/</id>
     <published>2017-05-12T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.551Z</updated>
     
@@ -453,21 +453,21 @@
     
     </summary>
     
-      <category term="Novel" scheme="https://zerone01.coding.me/categories/Novel/"/>
+      <category term="Novel" scheme="https://fgksgf.github.io/categories/Novel/"/>
     
-      <category term="Unnamed" scheme="https://zerone01.coding.me/categories/Novel/Unnamed/"/>
+      <category term="Unnamed" scheme="https://fgksgf.github.io/categories/Novel/Unnamed/"/>
     
     
-      <category term="Fiction" scheme="https://zerone01.coding.me/tags/Fiction/"/>
+      <category term="Fiction" scheme="https://fgksgf.github.io/tags/Fiction/"/>
     
-      <category term="Hacker" scheme="https://zerone01.coding.me/tags/Hacker/"/>
+      <category term="Hacker" scheme="https://fgksgf.github.io/tags/Hacker/"/>
     
   </entry>
   
   <entry>
     <title>未命名黑客小说——序</title>
-    <link href="https://zerone01.coding.me/2017/2017-04-23-hacker-ch0/"/>
-    <id>https://zerone01.coding.me/2017/2017-04-23-hacker-ch0/</id>
+    <link href="https://fgksgf.github.io/2017/2017-04-23-hacker-ch0/"/>
+    <id>https://fgksgf.github.io/2017/2017-04-23-hacker-ch0/</id>
     <published>2017-04-21T16:00:00.000Z</published>
     <updated>2019-10-09T08:32:12.551Z</updated>
     
@@ -479,14 +479,14 @@
     
     </summary>
     
-      <category term="Novel" scheme="https://zerone01.coding.me/categories/Novel/"/>
+      <category term="Novel" scheme="https://fgksgf.github.io/categories/Novel/"/>
     
-      <category term="Unnamed" scheme="https://zerone01.coding.me/categories/Novel/Unnamed/"/>
+      <category term="Unnamed" scheme="https://fgksgf.github.io/categories/Novel/Unnamed/"/>
     
     
-      <category term="Fiction" scheme="https://zerone01.coding.me/tags/Fiction/"/>
+      <category term="Fiction" scheme="https://fgksgf.github.io/tags/Fiction/"/>
     
-      <category term="Hacker" scheme="https://zerone01.coding.me/tags/Hacker/"/>
+      <category term="Hacker" scheme="https://fgksgf.github.io/tags/Hacker/"/>
     
   </entry>
   

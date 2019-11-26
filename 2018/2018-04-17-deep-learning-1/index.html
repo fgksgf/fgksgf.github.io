@@ -377,7 +377,7 @@
 			<br>
             <blockquote>
                 作者：零壹<br>
-                链接：<a href="https://zerone01.coding.me/2018/2018-04-17-deep-learning-1/">https://zerone01.coding.me/2018/2018-04-17-deep-learning-1/</a><br>
+                链接：<a href="https://fgksgf.github.io/2018/2018-04-17-deep-learning-1/">https://fgksgf.github.io/2018/2018-04-17-deep-learning-1/</a><br>
                 版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
             </blockquote>
         </div>
@@ -661,17 +661,23 @@ function addCount (Counter) {
         if(results.length>0) {
             var counter = results[0];
             counter.increment("time");
-            counter.save(null, {fetchWhenSave: true}).then(function (time) {
-                ret = time
-            }, function (error) {});
+            counter.save(null, {fetchWhenSave: true}).then(function (obj) {
+                console.log(obj);
+                ret = obj.get('time');
+            }, function (error) {
+                console.log(error);
+            });
         } else {
             var newcounter = new Counter()
             newcounter.set("title",title);
             newcounter.set("url",url);
             newcounter.set("time",1);
-            newcounter.save(null, {fetchWhenSave: true}).then(function (time) {
-                ret = time
-            }, function (error) {});
+            newcounter.save(null, {fetchWhenSave: true}).then(function (obj) {
+                console.log(obj);
+                ret = obj.get('time');
+            }, function (error) {
+                console.log(error);
+            });
         }
     });
     return ret;
