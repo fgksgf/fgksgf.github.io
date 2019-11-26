@@ -587,47 +587,6 @@
             <div class="article-title">
                 
     
-        <h1 class="indigo-link-context"><a href="/2018/2018-04-25-deep-learning-2/">TensorFlow #02 -- Transfer Learning</a></h1>
-    
-
-
-            </div>
-
-            <time class="pink-link-context" datetime="2018-04-16T16:00:00.000Z"><a href="/2018/2018-04-25-deep-learning-2/">2018-04-17</a></time>
-
-            
-    <div class="tags-row">
-        
-            <a href="/tags/Tensorflow/" class="chip pink lighten-1">Tensorflow</a>
-        
-            <a href="/tags/TransferLearning/" class="chip pink lighten-1">TransferLearning</a>
-        
-    </div>
-
-
-
-            
-                <div class="entry pink-link-context">
-                    <p>通过迁移学习在CIRAR-10数据集上进行图像分类<br>
-                </div>
-            
-        </div>
-
-        
-        <div class="card-action pink-link-context">
-            <a href="/2018/2018-04-25-deep-learning-2/">READ MORE</a>
-        </ div>
-        
-    </div>
-</article>
-
-    
-        <article class="simple-article">
-    <div class="card">
-        <div class="card-content">
-            <div class="article-title">
-                
-    
         <h1 class="indigo-link-context"><a href="/2018/2018-04-17-deep-learning-1/">Tensorflow第一枪--MNIST</a></h1>
     
 
@@ -657,6 +616,47 @@
         
         <div class="card-action pink-link-context">
             <a href="/2018/2018-04-17-deep-learning-1/">READ MORE</a>
+        </ div>
+        
+    </div>
+</article>
+
+    
+        <article class="simple-article">
+    <div class="card">
+        <div class="card-content">
+            <div class="article-title">
+                
+    
+        <h1 class="indigo-link-context"><a href="/2018/2018-04-25-deep-learning-2/">TensorFlow #02 -- Transfer Learning</a></h1>
+    
+
+
+            </div>
+
+            <time class="pink-link-context" datetime="2018-04-16T16:00:00.000Z"><a href="/2018/2018-04-25-deep-learning-2/">2018-04-17</a></time>
+
+            
+    <div class="tags-row">
+        
+            <a href="/tags/Tensorflow/" class="chip pink lighten-1">Tensorflow</a>
+        
+            <a href="/tags/TransferLearning/" class="chip pink lighten-1">TransferLearning</a>
+        
+    </div>
+
+
+
+            
+                <div class="entry pink-link-context">
+                    <p>通过迁移学习在CIRAR-10数据集上进行图像分类<br>
+                </div>
+            
+        </div>
+
+        
+        <div class="card-action pink-link-context">
+            <a href="/2018/2018-04-25-deep-learning-2/">READ MORE</a>
         </ div>
         
     </div>
@@ -975,14 +975,20 @@ function addCount (Counter) {
     query.find().then(function (results) {
         if(results.length>0) {
             var counter = results[0];
+            counter.fetchWhenSave(true);
             counter.increment("time");
-            ret = counter.save(null, {fetchWhenSave: true})
+            counter.save().then(function(time) {
+                ret = time
+            }, function(error) {});
         } else {
             var newcounter = new Counter()
             newcounter.set("title",title);
             newcounter.set("url",url);
             newcounter.set("time",1);
-            ret = newcounter.save(null, {fetchWhenSave: true})
+            newcounter.fetchWhenSave(true);
+            newcounter.save().then(function(out) {
+                ret = out.get('time')
+            }, function(error) {});
         }
     });
     return ret;

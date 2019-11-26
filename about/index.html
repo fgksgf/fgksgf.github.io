@@ -849,14 +849,20 @@ function addCount (Counter) {
     query.find().then(function (results) {
         if(results.length>0) {
             var counter = results[0];
+            counter.fetchWhenSave(true);
             counter.increment("time");
-            ret = counter.save(null, {fetchWhenSave: true})
+            counter.save().then(function(time) {
+                ret = time
+            }, function(error) {});
         } else {
             var newcounter = new Counter()
             newcounter.set("title",title);
             newcounter.set("url",url);
             newcounter.set("time",1);
-            ret = newcounter.save(null, {fetchWhenSave: true})
+            newcounter.fetchWhenSave(true);
+            newcounter.save().then(function(out) {
+                ret = out.get('time')
+            }, function(error) {});
         }
     });
     return ret;

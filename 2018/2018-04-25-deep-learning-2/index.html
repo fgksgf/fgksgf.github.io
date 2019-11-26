@@ -350,16 +350,16 @@
 
                 
 <p class="pink-link-context">
-    <a href="/2018/2018-07-19-compilers-notes/" rel="next" title="《编译原理》笔记">
-    Prev: 《编译原理》笔记
+    <a href="/2018/2018-04-17-deep-learning-1/" rel="next" title="Tensorflow第一枪--MNIST">
+    Prev: Tensorflow第一枪--MNIST
   </a>
 </p>
 
 
 
 <p class="pink-link-context">
-    <a href="/2018/2018-04-17-deep-learning-1/" rel="next" title="Tensorflow第一枪--MNIST">
-    Next: Tensorflow第一枪--MNIST
+    <a href="/2018/2018-04-04-begin-to-deep-learning/" rel="next" title="深度学习环境配置入坑指南">
+    Next: 深度学习环境配置入坑指南
   </a>
 </p>
 
@@ -651,14 +651,20 @@ function addCount (Counter) {
     query.find().then(function (results) {
         if(results.length>0) {
             var counter = results[0];
+            counter.fetchWhenSave(true);
             counter.increment("time");
-            ret = counter.save(null, {fetchWhenSave: true})
+            counter.save().then(function(time) {
+                ret = time
+            }, function(error) {});
         } else {
             var newcounter = new Counter()
             newcounter.set("title",title);
             newcounter.set("url",url);
             newcounter.set("time",1);
-            ret = newcounter.save(null, {fetchWhenSave: true})
+            newcounter.fetchWhenSave(true);
+            newcounter.save().then(function(out) {
+                ret = out.get('time')
+            }, function(error) {});
         }
     });
     return ret;

@@ -333,16 +333,16 @@
                                 《编译原理》笔记
                             </a>
                         
-                            <a href="/2018/2018-04-25-deep-learning-2/" class="collection-item grey-text text-darken-1">
-                                <time datetime="2018-04-16T16:00:00.000Z">2018-04-17</time>
-                                <span>&nbsp;&nbsp;&nbsp;</span>
-                                TensorFlow #02 -- Transfer Learning
-                            </a>
-                        
                             <a href="/2018/2018-04-17-deep-learning-1/" class="collection-item grey-text text-darken-1">
                                 <time datetime="2018-04-16T16:00:00.000Z">2018-04-17</time>
                                 <span>&nbsp;&nbsp;&nbsp;</span>
                                 Tensorflow第一枪--MNIST
+                            </a>
+                        
+                            <a href="/2018/2018-04-25-deep-learning-2/" class="collection-item grey-text text-darken-1">
+                                <time datetime="2018-04-16T16:00:00.000Z">2018-04-17</time>
+                                <span>&nbsp;&nbsp;&nbsp;</span>
+                                TensorFlow #02 -- Transfer Learning
                             </a>
                         
                             <a href="/2018/2018-04-04-begin-to-deep-learning/" class="collection-item grey-text text-darken-1">
@@ -679,14 +679,20 @@ function addCount (Counter) {
     query.find().then(function (results) {
         if(results.length>0) {
             var counter = results[0];
+            counter.fetchWhenSave(true);
             counter.increment("time");
-            ret = counter.save(null, {fetchWhenSave: true})
+            counter.save().then(function(time) {
+                ret = time
+            }, function(error) {});
         } else {
             var newcounter = new Counter()
             newcounter.set("title",title);
             newcounter.set("url",url);
             newcounter.set("time",1);
-            ret = newcounter.save(null, {fetchWhenSave: true})
+            newcounter.fetchWhenSave(true);
+            newcounter.save().then(function(out) {
+                ret = out.get('time')
+            }, function(error) {});
         }
     });
     return ret;
