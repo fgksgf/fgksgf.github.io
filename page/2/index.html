@@ -930,7 +930,6 @@ function addCount (Counter) {
     query.find().then(function (results) {
         if(results.length>0) {
             var counter = results[0];
-            counter.fetchWhenSave(true);
             counter.increment("time");
             counter.save(null, {fetchWhenSave: true}).then(function (time) {
                 ret = time
@@ -940,7 +939,6 @@ function addCount (Counter) {
             newcounter.set("title",title);
             newcounter.set("url",url);
             newcounter.set("time",1);
-            newcounter.fetchWhenSave(true);
             newcounter.save(null, {fetchWhenSave: true}).then(function (time) {
                 ret = time
             }, function (error) {});
