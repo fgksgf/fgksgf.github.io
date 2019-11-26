@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://zerone01.coding.me/"/>
-  <updated>2019-10-11T07:46:28.352Z</updated>
+  <updated>2019-11-26T07:37:02.434Z</updated>
   <id>https://zerone01.coding.me/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>浅谈个人信息保护</title>
+    <link href="https://zerone01.coding.me/2019/2019-11-20-protect-personal-information/"/>
+    <id>https://zerone01.coding.me/2019/2019-11-20-protect-personal-information/</id>
+    <published>2019-11-19T16:00:00.000Z</published>
+    <updated>2019-11-26T07:37:02.434Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>I’m a very private person.    – Harold Finch</p></blockquote><a id="more"></a> <h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>前段时间发现住我对面寝室的“远房室友”是知乎大V，获得了几十万赞同的那种。进入他的知乎主页，他的昵称和微信名一样，他的本科学校、读研学校和所学专业等信息一览无余……这让我不禁想到自己，与室友几乎是完全相反，<strong>我向来不喜欢在网上公布自己真实信息，甚至总是尽可能的隐藏这些信息</strong>。</p><p>大概就像《疑犯追踪》里Harold所说，<strong>我是一个非常注重隐私的人</strong>。我的这个习惯大概是从我看完一本讲<code>社会工程</code>的书后开始养成的，那时我才知道，原来黑客不仅仅只是活跃在虚拟的网络世界里，现实世界也有，而且更加让人防不胜防。对于精通<code>社会工程</code>的黑客来说，无论是渗透入侵多么复杂严密的系统，只要有人的存在，这个系统就不是安全的，因为人类就是这个系统最大的漏洞。</p><p>如果你是第一次听说<code>社会工程</code>，可能会觉得我在胡说八道。但你肯定听说过<code>人肉搜索</code>,它可以算是<code>社会工程</code>的一种。<em><code>社会工程</code>是一种通过欺骗、假冒、伪造和心理学等手段操纵和控制人们，以使其执行特定动作或泄露敏感信息的行为，而不是通过侵入或使用计算机技术来实现的。</em>生活中最常见的例子可能就是电信诈骗了，冒充官方人员打电话给你说你的银行账户出现问题之类，或者告诉你你的亲人发生意外等……</p><p>我曾试着用搜索引擎人肉搜索自己，就从自己的手机号开始，在搜索结果里看到了自己的名字、本科学校、专业、班级等信息。再用名字，搜索看到了自己的初中、高中、大学和一些获奖信息……令人触目惊心。</p><p>在这个互联网高度发达的时代，想要在网络上保护和隐藏自己的信息变得格外困难，而社交网络的出现，又使其难度更上一层楼。要想不被社工和人肉，不仅自己要有防范意识，采取一些措施，还要让自己身边的人也做到这点，这不太现实。</p><p>到目前为止，我养成了以下这些习惯来保护自己的信息，仅供参考：</p><ul><li>尽可能在不同的社交媒体采用不同的昵称或用户名，昵称和用户名中不包含任何个人信息（生日、名字等）</li><li><strong>关闭所有类似“通过手机号找到我”这种功能</strong></li><li>社交媒体上的个人资料不要过于真实 :P</li><li>朋友圈、QQ空间等不对陌生人开放</li><li>将快递单上的个人信息部分“手动打码”或“手动碎纸”后再丢弃</li><li>网上购物时收货人名字不填真实名字</li><li>用专门的一个不常用的邮箱和手机号用于注册</li><li><strong>注册国外的一些网站需要填详细的个人信息时</strong>，可以用这个 <a href="https://www.fakeaddressgenerator.com" target="_blank" rel="noopener">在线工具</a> 生成虚假的信息（包含名字，住址，手机号等）</li><li><strong>不与可能暴露个人信息的实体互动</strong>，例如在百度贴吧中关注母校贴吧等行为</li><li>关闭照片附带地理信息功能</li><li>（以后想到再慢慢更新）……</li></ul><p>还有一条我自己也很难做到：“<strong>不在社交媒体中与熟人互动</strong>”。因为微博和b站的关注列表中一般会有自己的朋友和同学，而他们不经意间泄露的个人信息可能就会导致自身的信息被泄露。</p><p>比如你找到了我的知乎账号，虽然上面几乎没有个人信息，但你发现我的关注列表中有一个认证的信息填写很详细的知乎大V，还互相关注了……</p><p>这种可能是最致命的。</p><p><br></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;I’m a very private person.    – Harold Finch&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="Life" scheme="https://zerone01.coding.me/categories/Life/"/>
+    
+    
+      <category term="Life" scheme="https://zerone01.coding.me/tags/Life/"/>
+    
+  </entry>
   
   <entry>
     <title>图数据库Neo4j学习笔记</title>

@@ -7,15 +7,15 @@
 
     
 
-    <title>《编译原理》笔记 | Zerone&#39;s Blog</title>
+    <title>浅谈个人信息保护 | Zerone&#39;s Blog</title>
     <meta name="author" content="Zerone">
     
-    <meta name="description" content="Reading notes of Compilers">
+    <meta name="description" content="I’m a very private person.    – Harold Finch">
     
     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <meta property="og:title" content="《编译原理》笔记"/>
+    <meta property="og:title" content="浅谈个人信息保护"/>
     <meta property="og:site_name" content="Zerone&#39;s Blog"/>
 
     
@@ -266,7 +266,7 @@
             
     
     
-    <a class="breadcrumb" href="/categories/Notes/">Notes</a><a class="breadcrumb" href="/categories/Notes/Compilers/">Compilers</a>
+    <a class="breadcrumb" href="/categories/Life/">Life</a>
 
 
         
@@ -283,12 +283,12 @@
             <div class="article-title">
                 
     
-        <h1>《编译原理》笔记</h1>
+        <h1>浅谈个人信息保护</h1>
     
 
 
             </div>
-            <time class="pink-link-context" datetime="2018-07-18T16:00:00.000Z"><a href="/2018/2018-07-19-compilers-notes/">2018-07-19</a></time>
+            <time class="pink-link-context" datetime="2019-11-19T16:00:00.000Z"><a href="/2019/2019-11-20-protect-personal-information/">2019-11-20</a></time>
 
             <span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
@@ -298,74 +298,52 @@
             
     <div class="tags-row">
         
-            <a href="/tags/compilers/" class="chip pink lighten-1">compilers</a>
+            <a href="/tags/Life/" class="chip pink lighten-1">Life</a>
         
     </div>
 
 
             <div class="toc pink-link-context hide-on-med-and-down">
-    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#基本概念"><span class="section table-of-contents-text">基本概念</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#编译器的结构"><span class="section table-of-contents-text">编译器的结构</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#编译器的步骤"><span class="section table-of-contents-text">编译器的步骤</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#词法分析"><span class="section table-of-contents-text">词法分析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#语法分析"><span class="section table-of-contents-text">语法分析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#语义分析"><span class="section table-of-contents-text">语义分析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#中间表示"><span class="section table-of-contents-text">中间表示</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#代码优化"><span class="section table-of-contents-text">代码优化</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#代码生成"><span class="section table-of-contents-text">代码生成</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#符号表管理"><span class="section table-of-contents-text">符号表管理</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#将多个步骤组合成趟（pass）"><span class="section table-of-contents-text">将多个步骤组合成趟（pass）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#编译器构造工具"><span class="section table-of-contents-text">编译器构造工具</span></a></li></ol></li></ol>
+    <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#正文"><span class="section table-of-contents-text">正文</span></a></li></ol>
 </div>
 
             
             <div class="entry pink-link-context">
 
-                <p>Reading notes of Compilers<br><a id="more"></a></p>
-<h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><ol>
-<li><p><code>编译器</code>就是一个程序，它可以阅读以某种语言（源语言）编写的程序，并把该程序翻译为一个等价的、用另一种语言（目标语言）编写的程序。</p>
-</li>
-<li><p><code>解释器</code>直接利用用户提供的输入执行源程序中指定的操作。</p>
-</li>
-<li><p><code>编译器</code>产生的机器语言目标程序通常比<code>解释器</code>快很多；<code>解释器</code>的错误诊断效果通常比<code>编译器</code>好，因为它逐个语句地执行源程序。</p>
-</li>
-<li><p>源程序 ==&gt;&gt; [ 预处理器 ] ==&gt;&gt; 经过预处理的源程序 ==&gt;&gt; [ 编译器 ] ==&gt;&gt; 目标汇编程序 ==&gt;&gt; [ 汇编器 ] ==&gt;&gt; 可重定位机器代码 ==&gt;&gt; [ 链接器 / 加载器 ] ==&gt;&gt; 目标机器代码</p>
-</li>
-<li><p>预处理器负责把称为宏的缩写形式转换为源语言的语句；编译器产生汇编语言程序作为输出，<strong>因为汇编语言比较容易输出和调试</strong>；链接器可以解决外部内存地址的问题；加载器把所有的可执行目标文件放到内存中执行。<br><br></p>
-</li>
-</ol>
-<h1 id="编译器的结构"><a href="#编译器的结构" class="headerlink" title="编译器的结构"></a>编译器的结构</h1><p>编译器相当于一个黑盒子，它能够把源程序映射为语义上等价的目标程序。</p>
-<p>编译器由两部分组成：分析部分和综合部分。</p>
-<p>分析部分把源程序分解为多个组成要素，并在这些要素上加上语法结构，使用该结构来创建该源程序的中间表示。分析部分还会收集有关源程序的信息，并把信息存放在称为符号表的数据结构中。符号表将和中间表示形式一起传送给综合部分。</p>
-<p>综合部分根据中间表示和符号表中的信息构造目标程序。</p>
-<p>分析部分称为编译器的前端，综合部分称为后端。</p>
+                <blockquote>
+<p>I’m a very private person.    – Harold Finch</p>
+</blockquote>
+<a id="more"></a> 
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>前段时间发现住我对面寝室的“远房室友”是知乎大V，获得了几十万赞同的那种。进入他的知乎主页，他的昵称和微信名一样，他的本科学校、读研学校和所学专业等信息一览无余……这让我不禁想到自己，与室友几乎是完全相反，<strong>我向来不喜欢在网上公布自己真实信息，甚至总是尽可能的隐藏这些信息</strong>。</p>
+<p>大概就像《疑犯追踪》里Harold所说，<strong>我是一个非常注重隐私的人</strong>。我的这个习惯大概是从我看完一本讲<code>社会工程</code>的书后开始养成的，那时我才知道，原来黑客不仅仅只是活跃在虚拟的网络世界里，现实世界也有，而且更加让人防不胜防。对于精通<code>社会工程</code>的黑客来说，无论是渗透入侵多么复杂严密的系统，只要有人的存在，这个系统就不是安全的，因为人类就是这个系统最大的漏洞。</p>
+<p>如果你是第一次听说<code>社会工程</code>，可能会觉得我在胡说八道。但你肯定听说过<code>人肉搜索</code>,它可以算是<code>社会工程</code>的一种。<em><code>社会工程</code>是一种通过欺骗、假冒、伪造和心理学等手段操纵和控制人们，以使其执行特定动作或泄露敏感信息的行为，而不是通过侵入或使用计算机技术来实现的。</em>生活中最常见的例子可能就是电信诈骗了，冒充官方人员打电话给你说你的银行账户出现问题之类，或者告诉你你的亲人发生意外等……</p>
+<p>我曾试着用搜索引擎人肉搜索自己，就从自己的手机号开始，在搜索结果里看到了自己的名字、本科学校、专业、班级等信息。再用名字，搜索看到了自己的初中、高中、大学和一些获奖信息……令人触目惊心。</p>
+<p>在这个互联网高度发达的时代，想要在网络上保护和隐藏自己的信息变得格外困难，而社交网络的出现，又使其难度更上一层楼。要想不被社工和人肉，不仅自己要有防范意识，采取一些措施，还要让自己身边的人也做到这点，这不太现实。</p>
+<p>到目前为止，我养成了以下这些习惯来保护自己的信息，仅供参考：</p>
+<ul>
+<li>尽可能在不同的社交媒体采用不同的昵称或用户名，昵称和用户名中不包含任何个人信息（生日、名字等）</li>
+<li><strong>关闭所有类似“通过手机号找到我”这种功能</strong></li>
+<li>社交媒体上的个人资料不要过于真实 :P</li>
+<li>朋友圈、QQ空间等不对陌生人开放</li>
+<li>将快递单上的个人信息部分“手动打码”或“手动碎纸”后再丢弃</li>
+<li>网上购物时收货人名字不填真实名字</li>
+<li>用专门的一个不常用的邮箱和手机号用于注册</li>
+<li><strong>注册国外的一些网站需要填详细的个人信息时</strong>，可以用这个 <a href="https://www.fakeaddressgenerator.com" target="_blank" rel="noopener">在线工具</a> 生成虚假的信息（包含名字，住址，手机号等）</li>
+<li><strong>不与可能暴露个人信息的实体互动</strong>，例如在百度贴吧中关注母校贴吧等行为</li>
+<li>关闭照片附带地理信息功能</li>
+<li>（以后想到再慢慢更新）……</li>
+</ul>
+<p>还有一条我自己也很难做到：“<strong>不在社交媒体中与熟人互动</strong>”。因为微博和b站的关注列表中一般会有自己的朋友和同学，而他们不经意间泄露的个人信息可能就会导致自身的信息被泄露。</p>
+<p>比如你找到了我的知乎账号，虽然上面几乎没有个人信息，但你发现我的关注列表中有一个认证的信息填写很详细的知乎大V，还互相关注了……</p>
+<p>这种可能是最致命的。</p>
 <p><br></p>
-<h1 id="编译器的步骤"><a href="#编译器的步骤" class="headerlink" title="编译器的步骤"></a>编译器的步骤</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字符流 ---&gt; [词法分析器] ---&gt; 符号流 ---&gt; [语法分析] ---&gt; 语法树 ---&gt; [语义分析] ---&gt; 语法树 ---&gt; [中间代码生成器] ---&gt; 中间表示形式 ---&gt; [机器无关代码优化器] ---&gt; 中间表示形式 ---&gt; [代码生成器] ---&gt; 目标机器语言 ---&gt; [机器相关代码优化器] ---&gt; 目标机器语言</span><br></pre></td></tr></table></figure>
-<h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><p>读入组成源程序的字符流，并将它们组织成有意义的词素序列。对于每个词素，词法分析器产生如下形式的词法单元作为输出：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;token-name, attribute-value&gt;</span><br></pre></td></tr></table></figure>
-<p>第一个分量是<strong>由语法分析步骤使用</strong>的抽象符号，第二个分量指向符号表中关于这个词法单元的条目。</p>
-<h2 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h2><p>使用由词法分析器生成的各个词法单元的第一个分量来创建树形的中间表示。</p>
-<p>常用的表示方法是语法树，树中的每个节点表示一个运算。</p>
-<h2 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h2><p>使用语法树和符号表中的信息来检查源程序是否和语言定义的语义一致，同时也收集类型信息，并把这些信息存放在语法树或符号表中。</p>
-<h2 id="中间表示"><a href="#中间表示" class="headerlink" title="中间表示"></a>中间表示</h2><p>在源程序的语法分析和语义分析完成之后，很多编译器会生成一个明确的低级的或类机器语言的中间表示。</p>
-<p>该中间表示有两个重要性质：易于生成；易被翻译为目标机器上的语言。</p>
-<h2 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h2><p>机器无关的代码优化试图改进中间代码，以便生成更快或更段或能耗更低的目标代码。</p>
-<h2 id="代码生成"><a href="#代码生成" class="headerlink" title="代码生成"></a>代码生成</h2><p>代码生成器以源程序的中间表示形式作为输入，并把它映射到目标语言。</p>
-<h2 id="符号表管理"><a href="#符号表管理" class="headerlink" title="符号表管理"></a>符号表管理</h2><p>符号表数据结构为每一个变量名字或过程名字创建一个记录条目，记录的字段就是名字的各个属性，例如类型、作用域、参数数量、参数的传递方法（传值或传引用）。</p>
-<p>这个数据结构允许编译器迅速查找到每个名字的记录，并向记录中快速存放和获取记录中的数据。</p>
-<h2 id="将多个步骤组合成趟（pass）"><a href="#将多个步骤组合成趟（pass）" class="headerlink" title="将多个步骤组合成趟（pass）"></a>将多个步骤组合成趟（pass）</h2><p>前端步骤中的词法分析、语法分析、语义分析以及中间代码生成可以被组合在一起成为一趟；代码优化可以作为一个可选的趟；一个为特定目标机生成代码的后端趟。</p>
-<p>这样可以把不同的前端和某个目标机的后端结合，为不同的源语言建立该目标机上的编译器；也可以把一个前端和不同的后端结合，建立针对不同目标机的编译器。</p>
-<h2 id="编译器构造工具"><a href="#编译器构造工具" class="headerlink" title="编译器构造工具"></a>编译器构造工具</h2><p>常用的编译器构造工具包括：</p>
-<ol>
-<li>语法分析器的生成器：可根据一个程序设计语言的语法描述自动生成语法分析器。</li>
-<li>扫描器的生成器：可根据一个语言的语法单元的正则表达式描述生成词法分析器。</li>
-<li>语法制导的翻译引擎：可生成一组用于遍历分析树并生成中间代码的例程。</li>
-<li>代码生成器的生成器</li>
-<li>数据流分析引擎：可帮助收集数据流信息，数据流分析是代码优化的一个重要部分。</li>
-<li>编译器构造工具集</li>
-</ol>
 
                 
-<p class="pink-link-context">
-    <a href="/2018/2018-07-23-effective-java-3/" rel="next" title="《Effective Java》笔记 (3)">
-    上一篇：《Effective Java》笔记 (3)
-  </a>
-</p>
-
 
 
 <p class="pink-link-context">
-    <a href="/2018/2018-04-25-deep-learning-2/" rel="next" title="TensorFlow #02 -- Transfer Learning">
-    下一篇：TensorFlow #02 -- Transfer Learning
+    <a href="/2019/2019-10-10-neo4j-notes/" rel="next" title="图数据库Neo4j学习笔记">
+    下一篇：图数据库Neo4j学习笔记
   </a>
 </p>
 
@@ -374,7 +352,7 @@
 			<br>
             <blockquote>
                 作者：零壹<br>
-                链接：<a href="https://zerone01.coding.me/2018/2018-07-19-compilers-notes/">https://zerone01.coding.me/2018/2018-07-19-compilers-notes/</a><br>
+                链接：<a href="https://zerone01.coding.me/2019/2019-11-20-protect-personal-information/">https://zerone01.coding.me/2019/2019-11-20-protect-personal-information/</a><br>
                 版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
             </blockquote>
         </div>
