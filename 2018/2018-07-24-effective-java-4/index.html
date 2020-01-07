@@ -42,7 +42,7 @@
         <link rel="stylesheet" href="/css/lib/tranquil-heart.css" type="text/css">
     
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -289,20 +289,29 @@
 
             </div>
             <time class="pink-link-context" datetime="2018-07-23T16:00:00.000Z"><a href="/2018/2018-07-24-effective-java-4/">2018-07-24</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
+<span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
     <span class="leancloud-counter"></span>
 </span>
+<div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.5k字</span>
+      </span>
+    </span>
 
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">5分</span>
+      </span>
+    </span>
+</div>
             
-    <div class="tags-row">
-        
-            <a href="/tags/Java/" class="chip pink lighten-1">Java</a>
-        
-    </div>
-
-
             <div class="toc pink-link-context hide-on-med-and-down">
     <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-45"><span class="section table-of-contents-text">Item 45</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-46"><span class="section table-of-contents-text">Item 46</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-47"><span class="section table-of-contents-text">Item 47</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-48"><span class="section table-of-contents-text">Item 48</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#小结"><span class="section table-of-contents-text">小结</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-49"><span class="section table-of-contents-text">Item 49</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-50"><span class="section table-of-contents-text">Item 50</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-51"><span class="section table-of-contents-text">Item 51</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-52"><span class="section table-of-contents-text">Item 52</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-53"><span class="section table-of-contents-text">Item 53</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-54"><span class="section table-of-contents-text">Item 54</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-55"><span class="section table-of-contents-text">Item 55</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-56"><span class="section table-of-contents-text">Item 56</span></a></li></ol>
 </div>
@@ -310,12 +319,17 @@
             
             <div class="entry pink-link-context">
 
-                <p>Chapter 8 - General Programming<br><a id="more"></a></p>
+                <p>Chapter 8 - General Programming</p>
+<a id="more"></a>
+
 <h1 id="Item-45"><a href="#Item-45" class="headerlink" title="Item 45"></a>Item 45</h1><hr>
 <p><strong>最小化本地变量的作用域</strong></p>
 <ul>
 <li>遵守这个原则最有效的方法就是：<strong>在本地变量第一次被使用时声明它</strong>。</li>
-<li>几乎每一个本地变量的声明都包含初始化。<br><br></li>
+<li>几乎每一个本地变量的声明都包含初始化。<br>
+
+
+</li>
 </ul>
 <h1 id="Item-46"><a href="#Item-46" class="headerlink" title="Item 46"></a>Item 46</h1><hr>
 <p><strong>尽量使用for-each而不是for循环</strong></p>
@@ -326,7 +340,8 @@
 <li>变换：当需要遍历容器并修改一些元素时。</li>
 <li>并行迭代：当需要平行地遍历多个容器时。</li>
 </ol>
-<p><br></p>
+<br>
+
 <h1 id="Item-47"><a href="#Item-47" class="headerlink" title="Item 47"></a>Item 47</h1><hr>
 <p><strong>了解并使用库</strong></p>
 <p>不要重复造轮子，要对java常用的标准库有一定的了解，尽量使用库而不要自己去实现。<br><br></p>
@@ -335,12 +350,15 @@
 <p><code>float</code>和 <code>double</code>类型特别不适合于货币运算，因为它们无法准确地表示出0.1。</p>
 <p>假设你有1.03元，花掉0.42元后，还剩多少？简单的用下面的代码给出答案:</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="number">1.03</span> - <span class="number">0.42</span>);</span><br></pre></td></tr></table></figure>
+
 <p>它的输出会是<code>0.6100000000000001</code>。或许你认为可以用四舍五入来解决这个问题，但这并不总是有效。</p>
 <p>假设你有1元，货架上有一排糖果，价格为0.1，0.2，0.3…依次递增，你从0.1的糖果开始买，直到没有足够的钱，请问最多能买多少个，最后还剩多少钱？</p>
 <p>若使用下面的代码来求解：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">double</span> funds = <span class="number">1.00</span>;</span><br><span class="line">    <span class="keyword">int</span> itemsBought = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">double</span> price = <span class="number">0.10</span>; funds &gt;= price; price += <span class="number">0.10</span>) &#123;</span><br><span class="line">        funds -= price;</span><br><span class="line">        ++itemsBought;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(itemsBought + <span class="string">" items bought."</span>);</span><br><span class="line">    System.out.println(<span class="string">"Change: "</span> + funds);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>最后剩余的钱应该是0，但是运行结果却是<code>0.399999999999999</code>。解决这题的正确方法应该是使用<code>BigDecimal</code>，<code>int</code>，<code>long</code>来进行货币的运算：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">final</span> BigDecimal TEN_CENTS = <span class="keyword">new</span> BigDecimal(<span class="string">"0.10"</span>);</span><br><span class="line">    BigDecimal funds = <span class="keyword">new</span> BigDecimal(<span class="string">"1.00"</span>);</span><br><span class="line">    <span class="keyword">int</span> itemsBought = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (BigDecimal price = TEN_CENTS;</span><br><span class="line">         funds.compareTo(price) &gt;= <span class="number">0</span>;</span><br><span class="line">         price = price.add(TEN_CENTS)) &#123;</span><br><span class="line">        funds.subtract(price);</span><br><span class="line">        ++itemsBought;</span><br><span class="line">    &#125;</span><br><span class="line">    System.out.println(itemsBought + <span class="string">" items bought."</span>);</span><br><span class="line">    System.out.println(<span class="string">"Change: "</span> + funds);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>使用<code>BigDecimal</code>有两个缺点：使用不如基础类型方便，更慢。还有一种备选方法，使用<code>int</code>或<code>long</code>。在这个例子中，<strong>可以统一使用分为单位，这样所有的运算就变成了整数运算。</strong></p>
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>在需要精确结果的计算时（例如货币），如果数量不超过九位数，可以使用<code>int</code>；如果数量不超过十八位数，可以使用<code>long</code>；如果超过十八位数，必须使用<code>BigDecimal</code>.<br><br></p>
 <h1 id="Item-49"><a href="#Item-49" class="headerlink" title="Item 49"></a>Item 49</h1><hr>
@@ -353,6 +371,7 @@
 </ol>
 <p>下面是一个有缺陷的比较器：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Comparator&lt;Interger&gt; naturalOrder = <span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer first, Integer second)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> first &lt; second ? -<span class="number">1</span> : (first == second ? <span class="number">0</span> : <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>这个比较器看起来没有问题，当第一个数小于第二个数时返回-1，大于返回1，相等返回0.但是当传入两个值相等的封装类型时：<code>compare(new Integer(42), new Integer(42))</code>,返回的将会是1，而不是所预想的0.</p>
 <p>这是因为在判断<code>fitst &lt; second</code>时，<code>first</code>和<code>second</code>会自动解除封装转换为基本类型int进行比较，因为值相等，所以进入下一个表达式<code>first == second</code>进行判断，对于两个封装类型，这里进行的是id值的判断，它们是不同的实例，id也就不同，因此会返回1.</p>
 <p><strong>将<code>==</code>运算符用于封装类型几乎永远是错误的。</strong></p>
@@ -362,7 +381,9 @@
 <ol>
 <li>作为集合元素、key、value。</li>
 <li>做类型参数</li>
-<li><code>when making reflective method invocation</code>(反射法调用时？)<br><br></li>
+<li><code>when making reflective method invocation</code>(反射法调用时？)<br>
+
+</li>
 </ol>
 <h1 id="Item-50"><a href="#Item-50" class="headerlink" title="Item 50"></a>Item 50</h1><hr>
 <p><strong>在有其他更合适的数据类型时避免使用<code>String</code>类型</strong></p>
@@ -380,18 +401,23 @@
 <p><strong>通过接口来引用对象</strong></p>
 <p>如果存在合适的接口类型，那么在声明参数、返回值、变量类型时应该使用接口类型名称。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用接口作为类型，更佳</span></span><br><span class="line">List&lt;Subscriber&gt; subscribers = <span class="keyword">new</span> Vector&lt;Subscriber&gt;();</span><br><span class="line"><span class="comment">// 直接使用类，不好</span></span><br><span class="line">Vector&lt;Subscriber&gt; subscribers = <span class="keyword">new</span> Vector&lt;Subscribr&gt;();</span><br></pre></td></tr></table></figure>
-<p><br></p>
+
+<br>
+
 <h1 id="Item-53"><a href="#Item-53" class="headerlink" title="Item 53"></a>Item 53</h1><hr>
 <p><strong>尽量用接口而不是反射</strong></p>
 <p>使用反射的缺点：</p>
 <ol>
 <li>失去了编译时类型检查的好吃</li>
 <li>代码冗长而笨拙</li>
-<li>性能受到影响<br><br></li>
+<li>性能受到影响<br>
+
+</li>
 </ol>
 <h1 id="Item-54"><a href="#Item-54" class="headerlink" title="Item 54"></a>Item 54</h1><hr>
 <p><strong>明智地使用原生方法</strong></p>
-<p><br></p>
+<br>
+
 <h1 id="Item-55"><a href="#Item-55" class="headerlink" title="Item 55"></a>Item 55</h1><hr>
 <p><strong>明智地进行优化</strong></p>
 <ol>
@@ -399,43 +425,42 @@
 <li>努力避免限制性能的设计决策</li>
 <li>包装API以获得良好性能是一个非常糟糕的主意</li>
 </ol>
-<p><br></p>
+<br>
+
 <h1 id="Item-56"><a href="#Item-56" class="headerlink" title="Item 56"></a>Item 56</h1><hr>
 <p><strong>遵守公认的命名惯例</strong></p>
 <table>
 <thead>
 <tr>
 <th></th>
-<th style="text-align:center">例子</th>
+<th align="center">例子</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>包</td>
-<td style="text-align:center">com.google.inject, com.joda.time.format</td>
+<td align="center">com.google.inject, com.joda.time.format</td>
 </tr>
 <tr>
 <td>类和接口</td>
-<td style="text-align:center">Timer, FutureTast, HttpServlet</td>
+<td align="center">Timer, FutureTast, HttpServlet</td>
 </tr>
 <tr>
 <td>方法或类成员变量</td>
-<td style="text-align:center">remove, ensureCapacity, getCrc</td>
+<td align="center">remove, ensureCapacity, getCrc</td>
 </tr>
 <tr>
 <td>常量</td>
-<td style="text-align:center">MIN_VALUE, NEGATIVE_INFINITY</td>
+<td align="center">MIN_VALUE, NEGATIVE_INFINITY</td>
 </tr>
 <tr>
 <td>本地变量</td>
-<td style="text-align:center">i, xref, houseNumber</td>
+<td align="center">i, xref, houseNumber</td>
 </tr>
 <tr>
 <td>类型参数</td>
-<td style="text-align:center">T, E, K, V, X, T1, T2</td>
+<td align="center">T, E, K, V, X, T1, T2</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 
                 
 <p class="pink-link-context">
@@ -458,7 +483,7 @@
             <blockquote>
                 作者：Hoshea<br>
                 链接：<a href="https://fgksgf.github.io/2018/2018-07-24-effective-java-4/">https://fgksgf.github.io/2018/2018-07-24-effective-java-4/</a><br>
-                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
+                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
             </blockquote>
         </div>
     </div>
@@ -502,7 +527,7 @@
     	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <div class="container" style="height: auto;">
             © 2018-2020 Hoshea | All rights reserved.
-            <p class="right" style="margin-top: 0;font-size: 14px">Powered by <a href="https://hexo.io/" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" style="font-weight: bold">raytaylorism</a> | <i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv" style="color:#f5f5f5;font-weight: bold"></span> | <i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv" style="color:#f5f5f5;font-weight: bold"></span></p>
+            <p class="right" style="margin-top: 0;font-size: 14px">Powered by <a href="https://hexo.io/" target="_blank" rel="noopener" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" target="_blank" rel="noopener" style="font-weight: bold">raytaylorism</a> | <i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv" style="color:#f5f5f5;font-weight: bold"></span> | <i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv" style="color:#f5f5f5;font-weight: bold"></span></p>
              <br>            
         </div>
     </div>

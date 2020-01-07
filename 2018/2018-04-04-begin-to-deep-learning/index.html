@@ -42,7 +42,7 @@
         <link rel="stylesheet" href="/css/lib/tranquil-heart.css" type="text/css">
     
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -289,20 +289,29 @@
 
             </div>
             <time class="pink-link-context" datetime="2018-04-03T16:00:00.000Z"><a href="/2018/2018-04-04-begin-to-deep-learning/">2018-04-04</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
+<span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
     <span class="leancloud-counter"></span>
 </span>
+<div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">949字</span>
+      </span>
+    </span>
 
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">3分</span>
+      </span>
+    </span>
+</div>
             
-    <div class="tags-row">
-        
-            <a href="/tags/Tensorflow/" class="chip pink lighten-1">Tensorflow</a>
-        
-    </div>
-
-
             <div class="toc pink-link-context hide-on-med-and-down">
     <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Requirements"><span class="section table-of-contents-text">Requirements</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Steps"><span class="section table-of-contents-text">Steps</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Update-graphics-driver"><span class="section table-of-contents-text">Update graphics driver</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Download"><span class="section table-of-contents-text">Download</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Install"><span class="section table-of-contents-text">Install</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Validate-your-installation"><span class="section table-of-contents-text">Validate your installation</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#References"><span class="section table-of-contents-text">References</span></a></li></ol>
 </div>
@@ -310,29 +319,38 @@
             
             <div class="entry pink-link-context">
 
-                <p>win10 + CUDA + cuDNN + tensorflow-gpu 环境搭建<br><a id="more"></a>  </p>
+                <p>win10 + CUDA + cuDNN + tensorflow-gpu 环境搭建</p>
+<a id="more"></a>  
+
 <h1 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h1><hr>
 <ul>
 <li>具有CUDA Compute Capability 3.0或更高版本的NVIDIA显卡。 可以参阅 <a href="https://developer.nvidia.com/cuda-gpus" target="_blank" rel="noopener">NVIDIA官网</a>查看符合条件的显卡列表。</li>
-<li><a href="https://developer.nvidia.com/cuda-90-download-archive?target_os=Windows&amp;target_arch=x86_64&amp;target_version=10&amp;target_type=exelocal" target="_blank" rel="noopener">CUDA Toolkit 9.0</a></li>
+<li><a href="https://developer.nvidia.com/cuda-90-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exelocal" target="_blank" rel="noopener">CUDA Toolkit 9.0</a></li>
 <li>与CUDA 9.0 版本对应的 <a href="https://developer.nvidia.com/rdp/cudnn-download" target="_blank" rel="noopener">cuDNN 7.0.5</a><br>注：下载需要注册NVIDIA账号，还需要填写一些问卷。</li>
-<li><a href="https://pypi.python.org/pypi/tensorflow-gpu/1.7.0" target="_blank" rel="noopener">tensorflow-gpu 1.7.0</a><br><br></li>
+<li><a href="https://pypi.python.org/pypi/tensorflow-gpu/1.7.0" target="_blank" rel="noopener">tensorflow-gpu 1.7.0</a><br />
+
+
+</li>
 </ul>
 <h1 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h1><hr>
-<h2 id="Update-graphics-driver"><a href="#Update-graphics-driver" class="headerlink" title="Update graphics driver"></a>Update graphics driver</h2><p>首先你需要知道自己的显卡型号，然后在 <a href="http://www.nvidia.cn/Download/index.aspx?lang=cn" target="_blank" rel="noopener">官网</a> 上选择对应型号的显卡下载最新的驱动并安装。<br><br></p>
+<h2 id="Update-graphics-driver"><a href="#Update-graphics-driver" class="headerlink" title="Update graphics driver"></a>Update graphics driver</h2><p>首先你需要知道自己的显卡型号，然后在 <a href="http://www.nvidia.cn/Download/index.aspx?lang=cn" target="_blank" rel="noopener">官网</a> 上选择对应型号的显卡下载最新的驱动并安装。<br><br /></p>
 <h2 id="Download"><a href="#Download" class="headerlink" title="Download"></a>Download</h2><p>首先是 CUDA 9.0，约1.33G，这是下载页面：<br><img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/begin-to-deep-learning/cuda.png" alt=""><br>注意图中的version表示你电脑windows的版本，所以应该选择10。我在参照别人写的教程下载时，误以为version表示的是CUDA的版本，下载之后因为版本不兼容导致安装失败。</p>
 <p>此外，强烈建议使用百度网盘离线下载，我直接使用下载工具下载时多次碰到了下载到百分之九十多速度变为0的情况。</p>
 <p>然后下载cuDNN 7.0.5，约172M, 注册NVIDIA账号之后登陆，下载页面如下：<br><img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/begin-to-deep-learning/cudnn.png" alt=""><br>点击CUDA 9.0那一栏，选择windows10版本的那一个。</p>
-<p>最后是下载tensorflow，有两种方式：<br>第一种，在命令行输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install  --upgrade tensorflow-gpu</span><br></pre></td></tr></table></figure></p>
-<p>这种方法容易因为网络原因而中断，所以推荐使用第二种方法：<br>在 <a href="https://pypi.python.org/pypi/tensorflow-gpu/1.7.0" target="_blank" rel="noopener">pypi</a> 上下载whl文件到本地，再使用命令 <code>pip install whl文件名</code> 安装。<br><img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/begin-to-deep-learning/pypi.png" alt=""><br>在选择whl文件时需要注意，如果你的python版本是3.5.x, 则下载第一个；若是3.6.x则下载第二个。同样强烈建议使用百度网盘离线下载。<br><br></p>
+<p>最后是下载tensorflow，有两种方式：<br>第一种，在命令行输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install  --upgrade tensorflow-gpu</span><br></pre></td></tr></table></figure>
+<p>这种方法容易因为网络原因而中断，所以推荐使用第二种方法：<br>在 <a href="https://pypi.python.org/pypi/tensorflow-gpu/1.7.0" target="_blank" rel="noopener">pypi</a> 上下载whl文件到本地，再使用命令 <code>pip install whl文件名</code> 安装。<br><img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/begin-to-deep-learning/pypi.png" alt=""><br>在选择whl文件时需要注意，如果你的python版本是3.5.x, 则下载第一个；若是3.6.x则下载第二个。同样强烈建议使用百度网盘离线下载。<br><br /></p>
 <h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p>下载的CUDA是一个可执行文件，运行之后会先让你选择一个目录用于暂时存放安装文件，安装完之后会自动删除，然后按照安装程序的提示一步一步进行安装，最后会安装在C盘的program file目录下，并会自动添加环境变量。</p>
-<p>而下载的cuDNN是一个压缩包，解压之后有三个文件夹：<br><img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/begin-to-deep-learning/cudnn2.png" alt=""><br>分别将这三个文件夹下的文件复制到CUDA安装目录中对应文件夹中。例如，我的CUDA的安装目录为<code>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0</code>, 我需要把cuDNN第一个文件夹<code>bin</code>下的<code>cudnn64_7.dll</code> 文件复制到CUDA安装目录下的<code>bin</code>文件夹下，即<code>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin</code>。另外两个同理。<br><br></p>
+<p>而下载的cuDNN是一个压缩包，解压之后有三个文件夹：<br><img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/begin-to-deep-learning/cudnn2.png" alt=""><br>分别将这三个文件夹下的文件复制到CUDA安装目录中对应文件夹中。例如，我的CUDA的安装目录为<code>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0</code>, 我需要把cuDNN第一个文件夹<code>bin</code>下的<code>cudnn64_7.dll</code> 文件复制到CUDA安装目录下的<code>bin</code>文件夹下，即<code>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.0\bin</code>。另外两个同理。<br><br /></p>
 <h1 id="Validate-your-installation"><a href="#Validate-your-installation" class="headerlink" title="Validate your installation"></a>Validate your installation</h1><hr>
-<p>在安装完上述必需的软件之后，还有一个很玄学的操作： 重启。<br>如果不重启，CUDA添加的环境变量可能不会生效。<br>重启之后，最激动人心的时刻到了：检验我们gpu版本的tensorflow是否安装成功，并能够使用，先来一段最经典的helloworld代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">hello = tf.constant(<span class="string">'Hello, TensorFlow!'</span>)</span><br><span class="line">sess = tf.Session()</span><br><span class="line">print(sess.run(hello))</span><br></pre></td></tr></table></figure></p>
-<p>首先映入眼帘的是一段警告文字：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.</span><br><span class="line">  from ._conv import register_converters as _register_converters</span><br></pre></td></tr></table></figure></p>
+<p>在安装完上述必需的软件之后，还有一个很玄学的操作： 重启。<br>如果不重启，CUDA添加的环境变量可能不会生效。<br>重启之后，最激动人心的时刻到了：检验我们gpu版本的tensorflow是否安装成功，并能够使用，先来一段最经典的helloworld代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line">hello = tf.constant(<span class="string">'Hello, TensorFlow!'</span>)</span><br><span class="line">sess = tf.Session()</span><br><span class="line">print(sess.run(hello))</span><br></pre></td></tr></table></figure>
+<p>首先映入眼帘的是一段警告文字：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FutureWarning: Conversion of the second argument of issubdtype from &#96;float&#96; to &#96;np.floating&#96; is deprecated. In future, it will be treated as &#96;np.float64 &#x3D;&#x3D; np.dtype(float).type&#96;.</span><br><span class="line">  from ._conv import register_converters as _register_converters</span><br></pre></td></tr></table></figure>
 <p>google之后，在 <a href="https://stackoverflow.com/questions/48340392/futurewarning-conversion-of-the-second-argument-of-issubdtype-from-float-to" target="_blank" rel="noopener">stackoverflow</a> 上看到了这个解释:<br><img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/begin-to-deep-learning/stackoverflow1.png" alt=""><br>大意是说，这是一个已知的问题，可以忽略该警告。</p>
-<p>紧接这个警告之后的是：<code>Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2</code>， 同样能够在 <a href="https://stackoverflow.com/questions/47068709/your-cpu-supports-instructions-that-this-tensorflow-binary-was-not-compiled-to-u" target="_blank" rel="noopener">stackoverflow</a> 找到解释，回答有点长，简而言之呢，解决办法就是在忽略该警告，在你的tensorflow代码前加上：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">'TF_CPP_MIN_LOG_LEVEL'</span>] = <span class="string">'2'</span></span><br></pre></td></tr></table></figure></p>
-<p>完善代码之后，再次运行，看到如下结果则表示你的tensorflow成功安装并能正常使用了。<br><img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/begin-to-deep-learning/result.png" alt=""><br><br></p>
+<p>紧接这个警告之后的是：<code>Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2</code>， 同样能够在 <a href="https://stackoverflow.com/questions/47068709/your-cpu-supports-instructions-that-this-tensorflow-binary-was-not-compiled-to-u" target="_blank" rel="noopener">stackoverflow</a> 找到解释，回答有点长，简而言之呢，解决办法就是在忽略该警告，在你的tensorflow代码前加上：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">'TF_CPP_MIN_LOG_LEVEL'</span>] = <span class="string">'2'</span></span><br></pre></td></tr></table></figure>
+<p>完善代码之后，再次运行，看到如下结果则表示你的tensorflow成功安装并能正常使用了。<br><img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/begin-to-deep-learning/result.png" alt=""><br><br /></p>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><hr>
 <ol>
 <li><p><a href="https://medium.com/@minhplayer95/how-to-install-tensorflow-with-gpu-support-on-windows-10-with-anaconda-4e80a8beaaf0" target="_blank" rel="noopener">How to install TensorFlow with GPU support on Windows 10 with Anaconda</a></p>
@@ -362,7 +380,7 @@
             <blockquote>
                 作者：Hoshea<br>
                 链接：<a href="https://fgksgf.github.io/2018/2018-04-04-begin-to-deep-learning/">https://fgksgf.github.io/2018/2018-04-04-begin-to-deep-learning/</a><br>
-                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
+                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
             </blockquote>
         </div>
     </div>
@@ -406,7 +424,7 @@
     	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <div class="container" style="height: auto;">
             © 2018-2020 Hoshea | All rights reserved.
-            <p class="right" style="margin-top: 0;font-size: 14px">Powered by <a href="https://hexo.io/" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" style="font-weight: bold">raytaylorism</a> | <i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv" style="color:#f5f5f5;font-weight: bold"></span> | <i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv" style="color:#f5f5f5;font-weight: bold"></span></p>
+            <p class="right" style="margin-top: 0;font-size: 14px">Powered by <a href="https://hexo.io/" target="_blank" rel="noopener" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" target="_blank" rel="noopener" style="font-weight: bold">raytaylorism</a> | <i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv" style="color:#f5f5f5;font-weight: bold"></span> | <i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv" style="color:#f5f5f5;font-weight: bold"></span></p>
              <br>            
         </div>
     </div>

@@ -42,7 +42,7 @@
         <link rel="stylesheet" href="/css/lib/tranquil-heart.css" type="text/css">
     
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -289,20 +289,29 @@
 
             </div>
             <time class="pink-link-context" datetime="2017-11-08T16:00:00.000Z"><a href="/2017/2017-11-09-effective-java-2/">2017-11-09</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
+<span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
     <span class="leancloud-counter"></span>
 </span>
+<div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.1k字</span>
+      </span>
+    </span>
 
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">7分</span>
+      </span>
+    </span>
+</div>
             
-    <div class="tags-row">
-        
-            <a href="/tags/Java/" class="chip pink lighten-1">Java</a>
-        
-    </div>
-
-
             <div class="toc pink-link-context hide-on-med-and-down">
     <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-8"><span class="section table-of-contents-text">Item 8</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#小结"><span class="section table-of-contents-text">小结</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-9"><span class="section table-of-contents-text">Item 9</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-10"><span class="section table-of-contents-text">Item 10</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-11"><span class="section table-of-contents-text">Item 11</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-12"><span class="section table-of-contents-text">Item 12</span></a></li></ol>
 </div>
@@ -310,7 +319,9 @@
             
             <div class="entry pink-link-context">
 
-                <p>Chapter 2 - Methods Common to All Objects<br><a id="more"></a></p>
+                <p>Chapter 2 - Methods Common to All Objects</p>
+<a id="more"></a>
+
 <h1 id="Item-8"><a href="#Item-8" class="headerlink" title="Item 8"></a>Item 8</h1><hr>
 <p><strong>在重载equals函数时遵从基本原则</strong></p>
 <p>重载equals方法看上去很简单，但是实际上却非常容易出错，从而导致一些严重的后果。为了避免这些错误，最好的方法就是不去重载它。</p>
@@ -362,8 +373,10 @@
 <p>在计算hash code时还必须排除掉equals函数中没用比较的成员变量。</p>
 <p>下面是电话号码类的hashCode函数，areaCode为int类型，表示区号，lineNumber也是int类型，表示区号后面的号码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result = <span class="number">17</span>;</span><br><span class="line">    result = <span class="number">31</span> * result + areaCode;</span><br><span class="line">    result = <span class="number">31</span> * result + lineNumber;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>如果像上面这样写，每次调用该函数都需要计算一次，要计算的哈希值很多时，这样就会降低性能，因此可以进一步改进。因为哈希值是不变的，因此可以将第一次的计算结果保存起来,这样只需要计算一次：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> hashCode;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result = hashCode;</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="number">0</span>) &#123;</span><br><span class="line">        result = <span class="number">17</span>;</span><br><span class="line">        result = <span class="number">31</span> * result + areaCode;</span><br><span class="line">        result = <span class="number">31</span> * result + lineNumber;</span><br><span class="line">        hashCode = result;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>不要为了提高性能而减少对对象中一些关键成员变量的哈希值的计算。<br><br></p>
 <h1 id="Item-10"><a href="#Item-10" class="headerlink" title="Item 10"></a>Item 10</h1><hr>
 <p><strong>永远重载toString函数</strong></p>
@@ -387,17 +400,21 @@
 <p>为了拷贝一个类，可能需要将类的成员变量的final修饰符去掉。</p>
 <p>拷贝对象还有一种很好的方法，就是提供一个拷贝构造函数，形如：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Yum</span><span class="params">(Yum yum)</span></span>;</span><br></pre></td></tr></table></figure>
+
 <p>这种方法和clone函数相比有许多的优点，然而我们却不可能将拷贝构造函数防止接口中。<br><br></p>
 <h1 id="Item-12"><a href="#Item-12" class="headerlink" title="Item 12"></a>Item 12</h1><hr>
 <p><strong>考虑实现Comparable方法</strong></p>
 <p>与之前提到的几个方法不同，compareTo方法不是声明在Object类中的，而是Comparable接口中的一个方法，但它却非常常用，通过实现这个方法可以实现对象按照自定义的顺序来排序。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WordList</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Set&lt;String&gt; s = <span class="keyword">new</span> TreeSet&lt;String&gt;();</span><br><span class="line">        Collections.addAll(s, args);</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>上述代码输出的结果的字符串是按照字母顺序排序的，通过实现Comparable接口可以实现按数字排序，按时间排序等顺序。</p>
 <p>实现compareTo方法的原则与equals的相似。它的返回值有三种情况：-1，0，1，分别表示小于，等于和大于的情况。</p>
 <p>比较两个电话号码的compareTo方法可以这样写：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(PhoneNumber pn)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 比较区号</span></span><br><span class="line">    <span class="keyword">if</span> (areaCode &lt; pn.areaCode)</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (areaCode &gt; pn.areaCode)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 比较区号后的数字</span></span><br><span class="line">    <span class="keyword">if</span> (lineNumber &lt; pn.lineNumber)</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (lineNumber &gt; pn.lineNumber)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>然而这种写法还可以改进变的更快：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compareTo</span><span class="params">(PhoneNumber pn)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> areaCodeDiff = areaCode - pn.areaCode;</span><br><span class="line">    <span class="keyword">if</span> (areaCodeDiff != <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> areaCodeDiff;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> lineNumber - pn.lineNumber;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>这样写确实很巧妙但是要注意一个问题，当lineNumber为一个很大的正数而pn.lineNumber是一个很小的负数，两个相减将会导致溢出，从而得到一个负数结果。</p>
 <p>因此除非十分确定成员变量的范围，否则不要使用第二种方法。</p>
 
@@ -422,7 +439,7 @@
             <blockquote>
                 作者：Hoshea<br>
                 链接：<a href="https://fgksgf.github.io/2017/2017-11-09-effective-java-2/">https://fgksgf.github.io/2017/2017-11-09-effective-java-2/</a><br>
-                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
+                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
             </blockquote>
         </div>
     </div>
@@ -466,7 +483,7 @@
     	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <div class="container" style="height: auto;">
             © 2018-2020 Hoshea | All rights reserved.
-            <p class="right" style="margin-top: 0;font-size: 14px">Powered by <a href="https://hexo.io/" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" style="font-weight: bold">raytaylorism</a> | <i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv" style="color:#f5f5f5;font-weight: bold"></span> | <i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv" style="color:#f5f5f5;font-weight: bold"></span></p>
+            <p class="right" style="margin-top: 0;font-size: 14px">Powered by <a href="https://hexo.io/" target="_blank" rel="noopener" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" target="_blank" rel="noopener" style="font-weight: bold">raytaylorism</a> | <i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv" style="color:#f5f5f5;font-weight: bold"></span> | <i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv" style="color:#f5f5f5;font-weight: bold"></span></p>
              <br>            
         </div>
     </div>

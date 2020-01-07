@@ -42,7 +42,7 @@
         <link rel="stylesheet" href="/css/lib/tranquil-heart.css" type="text/css">
     
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -289,20 +289,29 @@
 
             </div>
             <time class="pink-link-context" datetime="2018-07-18T16:00:00.000Z"><a href="/2018/2018-07-19-compilers-notes/">2018-07-19</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
+<span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
     <span class="leancloud-counter"></span>
 </span>
+<div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.4k字</span>
+      </span>
+    </span>
 
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">4分</span>
+      </span>
+    </span>
+</div>
             
-    <div class="tags-row">
-        
-            <a href="/tags/compilers/" class="chip pink lighten-1">compilers</a>
-        
-    </div>
-
-
             <div class="toc pink-link-context hide-on-med-and-down">
     <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#基本概念"><span class="section table-of-contents-text">基本概念</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#编译器的结构"><span class="section table-of-contents-text">编译器的结构</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#编译器的步骤"><span class="section table-of-contents-text">编译器的步骤</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#词法分析"><span class="section table-of-contents-text">词法分析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#语法分析"><span class="section table-of-contents-text">语法分析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#语义分析"><span class="section table-of-contents-text">语义分析</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#中间表示"><span class="section table-of-contents-text">中间表示</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#代码优化"><span class="section table-of-contents-text">代码优化</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#代码生成"><span class="section table-of-contents-text">代码生成</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#符号表管理"><span class="section table-of-contents-text">符号表管理</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#将多个步骤组合成趟（pass）"><span class="section table-of-contents-text">将多个步骤组合成趟（pass）</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#编译器构造工具"><span class="section table-of-contents-text">编译器构造工具</span></a></li></ol></li></ol>
 </div>
@@ -310,7 +319,9 @@
             
             <div class="entry pink-link-context">
 
-                <p>Reading notes of Compilers<br><a id="more"></a></p>
+                <p>Reading notes of Compilers</p>
+<a id="more"></a>
+
 <h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><ol>
 <li><p><code>编译器</code>就是一个程序，它可以阅读以某种语言（源语言）编写的程序，并把该程序翻译为一个等价的、用另一种语言（目标语言）编写的程序。</p>
 </li>
@@ -320,7 +331,9 @@
 </li>
 <li><p>源程序 ==&gt;&gt; [ 预处理器 ] ==&gt;&gt; 经过预处理的源程序 ==&gt;&gt; [ 编译器 ] ==&gt;&gt; 目标汇编程序 ==&gt;&gt; [ 汇编器 ] ==&gt;&gt; 可重定位机器代码 ==&gt;&gt; [ 链接器 / 加载器 ] ==&gt;&gt; 目标机器代码</p>
 </li>
-<li><p>预处理器负责把称为宏的缩写形式转换为源语言的语句；编译器产生汇编语言程序作为输出，<strong>因为汇编语言比较容易输出和调试</strong>；链接器可以解决外部内存地址的问题；加载器把所有的可执行目标文件放到内存中执行。<br><br></p>
+<li><p>预处理器负责把称为宏的缩写形式转换为源语言的语句；编译器产生汇编语言程序作为输出，<strong>因为汇编语言比较容易输出和调试</strong>；链接器可以解决外部内存地址的问题；加载器把所有的可执行目标文件放到内存中执行。</p>
+<br>
+
 </li>
 </ol>
 <h1 id="编译器的结构"><a href="#编译器的结构" class="headerlink" title="编译器的结构"></a>编译器的结构</h1><p>编译器相当于一个黑盒子，它能够把源程序映射为语义上等价的目标程序。</p>
@@ -328,10 +341,13 @@
 <p>分析部分把源程序分解为多个组成要素，并在这些要素上加上语法结构，使用该结构来创建该源程序的中间表示。分析部分还会收集有关源程序的信息，并把信息存放在称为符号表的数据结构中。符号表将和中间表示形式一起传送给综合部分。</p>
 <p>综合部分根据中间表示和符号表中的信息构造目标程序。</p>
 <p>分析部分称为编译器的前端，综合部分称为后端。</p>
-<p><br></p>
+<br>
+
 <h1 id="编译器的步骤"><a href="#编译器的步骤" class="headerlink" title="编译器的步骤"></a>编译器的步骤</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">字符流 ---&gt; [词法分析器] ---&gt; 符号流 ---&gt; [语法分析] ---&gt; 语法树 ---&gt; [语义分析] ---&gt; 语法树 ---&gt; [中间代码生成器] ---&gt; 中间表示形式 ---&gt; [机器无关代码优化器] ---&gt; 中间表示形式 ---&gt; [代码生成器] ---&gt; 目标机器语言 ---&gt; [机器相关代码优化器] ---&gt; 目标机器语言</span><br></pre></td></tr></table></figure>
+
 <h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><p>读入组成源程序的字符流，并将它们组织成有意义的词素序列。对于每个词素，词法分析器产生如下形式的词法单元作为输出：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;token-name, attribute-value&gt;</span><br></pre></td></tr></table></figure>
+
 <p>第一个分量是<strong>由语法分析步骤使用</strong>的抽象符号，第二个分量指向符号表中关于这个词法单元的条目。</p>
 <h2 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h2><p>使用由词法分析器生成的各个词法单元的第一个分量来创建树形的中间表示。</p>
 <p>常用的表示方法是语法树，树中的每个节点表示一个运算。</p>
@@ -375,7 +391,7 @@
             <blockquote>
                 作者：Hoshea<br>
                 链接：<a href="https://fgksgf.github.io/2018/2018-07-19-compilers-notes/">https://fgksgf.github.io/2018/2018-07-19-compilers-notes/</a><br>
-                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
+                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
             </blockquote>
         </div>
     </div>
@@ -419,7 +435,7 @@
     	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <div class="container" style="height: auto;">
             © 2018-2020 Hoshea | All rights reserved.
-            <p class="right" style="margin-top: 0;font-size: 14px">Powered by <a href="https://hexo.io/" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" style="font-weight: bold">raytaylorism</a> | <i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv" style="color:#f5f5f5;font-weight: bold"></span> | <i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv" style="color:#f5f5f5;font-weight: bold"></span></p>
+            <p class="right" style="margin-top: 0;font-size: 14px">Powered by <a href="https://hexo.io/" target="_blank" rel="noopener" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" target="_blank" rel="noopener" style="font-weight: bold">raytaylorism</a> | <i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv" style="color:#f5f5f5;font-weight: bold"></span> | <i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv" style="color:#f5f5f5;font-weight: bold"></span></p>
              <br>            
         </div>
     </div>

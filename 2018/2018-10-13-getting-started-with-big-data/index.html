@@ -42,7 +42,7 @@
         <link rel="stylesheet" href="/css/lib/tranquil-heart.css" type="text/css">
     
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -289,22 +289,29 @@
 
             </div>
             <time class="pink-link-context" datetime="2018-10-12T16:00:00.000Z"><a href="/2018/2018-10-13-getting-started-with-big-data/">2018-10-13</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
+<span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
     <span class="leancloud-counter"></span>
 </span>
+<div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">2.3k字</span>
+      </span>
+    </span>
 
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">7分</span>
+      </span>
+    </span>
+</div>
             
-    <div class="tags-row">
-        
-            <a href="/tags/BigData/" class="chip pink lighten-1">BigData</a>
-        
-            <a href="/tags/Hadoop/" class="chip pink lighten-1">Hadoop</a>
-        
-    </div>
-
-
             <div class="toc pink-link-context hide-on-med-and-down">
     <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Background"><span class="section table-of-contents-text">Background</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Big-Data"><span class="section table-of-contents-text">Big Data</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Definition"><span class="section table-of-contents-text">Definition</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#The-3-V’s"><span class="section table-of-contents-text">The 3 V’s</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#The-Core-Idea"><span class="section table-of-contents-text">The Core Idea</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Hadoop"><span class="section table-of-contents-text">Hadoop</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#Hadoop-Ecosystem"><span class="section table-of-contents-text">Hadoop Ecosystem</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#HDFS"><span class="section table-of-contents-text">HDFS</span></a></li><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#MapReduce"><span class="section table-of-contents-text">MapReduce</span></a></li></ol></li></ol>
 </div>
@@ -312,7 +319,9 @@
             
             <div class="entry pink-link-context">
 
-                <p>Getting Started with Big Data<br><a id="more"></a></p>
+                <p>Getting Started with Big Data</p>
+<a id="more"></a>
+
 <h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><hr>
 <p>我们正处于一个每天都产生海量数据的时代：社交媒体上的聊天记录和动态、电商平台上的浏览记录与订单和各类媒体发布的新闻等。可以预见，随着时代的进步，数据只会越来越多，而且数据中包含着不少有价值的信息。大数据的需求就这样产生了：<strong>我们既需要将所有的数据存储下来，同时也要能够在一个合理的时间内对数据进行处理</strong>。<br><br></p>
 <h1 id="Big-Data"><a href="#Big-Data" class="headerlink" title="Big Data"></a>Big Data</h1><hr>
@@ -344,7 +353,8 @@
 <p>为了防止某个节点故障导致数据块丢失，每个数据块在存储时会默认复制三份来做数据冗余。</p>
 <p>每个数据节点都会周期性地发送心跳信息到名称节点，如果名称节点在预定的时间内没有收到，它就会认为数据节点出现故障。然后名称节点就会主动对存储在故障数据节点上的数据块重新备份，把相关数据块（从其他健康节点的备份数据块获取）转移到状态健康的数据节点，以保证数据块备份数量不变。</p>
 <p>大多数生产环境的<code>Hadoop</code>集群都会有两个名称节点: 一个处于活动状态和一个待命状态。如果活动状态的服务器出现故障, 待命状态的会自动接管工作。这样, 如果任何一个节点甚至一个名称节点发生故障, 群集将继续运行。</p>
-<p><br></p>
+<br>
+
 <h2 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h2><p>假设有一个账本，上面记录着世界各地成千上万的商店按日期组织的销售账目，现在需要计算每家商店在过去一年所产生的销售总额。</p>
 <p>一种常规的方法就是：从账本第一条记录开始，写下商店名和销售额。从第二条开始，先看这一条目的商店是否已经列出，如果是则将当前条目的销售额与已知的销售额相加，若不是，则写下新的商店名和销售额，如此反复。</p>
 <p>而如果采取<code>MapReduce</code>的思想来做：雇佣一批人，将他们分为两组，一组叫<code>mapper</code>，一组叫<code>reducer</code>。然后我们将账本数据拆分成若干数据块，分配给<code>mapper</code>组里的每一个人，组里的每个人都能同时进行工作。<code>mapper</code>组员对于数据块里的每一个条目都会在一张卡片上写下商店名和销售额。在这个过程中，他们会把同一个商店的卡片堆放在一起。</p>
@@ -377,7 +387,7 @@
             <blockquote>
                 作者：Hoshea<br>
                 链接：<a href="https://fgksgf.github.io/2018/2018-10-13-getting-started-with-big-data/">https://fgksgf.github.io/2018/2018-10-13-getting-started-with-big-data/</a><br>
-                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
+                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
             </blockquote>
         </div>
     </div>
@@ -421,7 +431,7 @@
     	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <div class="container" style="height: auto;">
             © 2018-2020 Hoshea | All rights reserved.
-            <p class="right" style="margin-top: 0;font-size: 14px">Powered by <a href="https://hexo.io/" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" style="font-weight: bold">raytaylorism</a> | <i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv" style="color:#f5f5f5;font-weight: bold"></span> | <i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv" style="color:#f5f5f5;font-weight: bold"></span></p>
+            <p class="right" style="margin-top: 0;font-size: 14px">Powered by <a href="https://hexo.io/" target="_blank" rel="noopener" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" target="_blank" rel="noopener" style="font-weight: bold">raytaylorism</a> | <i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv" style="color:#f5f5f5;font-weight: bold"></span> | <i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv" style="color:#f5f5f5;font-weight: bold"></span></p>
              <br>            
         </div>
     </div>

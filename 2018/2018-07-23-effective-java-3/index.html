@@ -42,7 +42,7 @@
         <link rel="stylesheet" href="/css/lib/tranquil-heart.css" type="text/css">
     
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 
 <body>
@@ -289,20 +289,29 @@
 
             </div>
             <time class="pink-link-context" datetime="2018-07-22T16:00:00.000Z"><a href="/2018/2018-07-23-effective-java-3/">2018-07-23</a></time>
-
-            <span id="busuanzi_container_page_pv" class="read-times-container">
+<span id="busuanzi_container_page_pv" class="read-times-container">
     <i class="fa fa-eye"></i>
     <span class="leancloud-counter"></span>
 </span>
+<div style="margin-top:10px;">
+    <span class="post-time">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-keyboard-o"></i>
+        <span class="post-meta-item-text">  字数统计: </span>
+        <span class="post-count">1.2k字</span>
+      </span>
+    </span>
 
+    <span class="post-time">
+      &nbsp; | &nbsp;
+      <span class="post-meta-item-icon">
+        <i class="fa fa-hourglass-half"></i>
+        <span class="post-meta-item-text">  阅读时长: </span>
+        <span class="post-count">5分</span>
+      </span>
+    </span>
+</div>
             
-    <div class="tags-row">
-        
-            <a href="/tags/Java/" class="chip pink lighten-1">Java</a>
-        
-    </div>
-
-
             <div class="toc pink-link-context hide-on-med-and-down">
     <ol class="section table-of-contents"><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-38"><span class="section table-of-contents-text">Item 38</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-39"><span class="section table-of-contents-text">Item 39</span></a><ol class="section table-of-contents-child"><li class="section table-of-contents-item section table-of-contents-level-2"><a class="section table-of-contents-link" href="#小结"><span class="section table-of-contents-text">小结</span></a></li></ol></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-40"><span class="section table-of-contents-text">Item 40</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-41"><span class="section table-of-contents-text">Item 41</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-42"><span class="section table-of-contents-text">Item 42</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-43"><span class="section table-of-contents-text">Item 43</span></a></li><li class="section table-of-contents-item section table-of-contents-level-1"><a class="section table-of-contents-link" href="#Item-44"><span class="section table-of-contents-text">Item 44</span></a></li></ol>
 </div>
@@ -310,7 +319,9 @@
             
             <div class="entry pink-link-context">
 
-                <p>Chapter 7 - Methods<br><a id="more"></a></p>
+                <p>Chapter 7 - Methods</p>
+<a id="more"></a>
+
 <h1 id="Item-38"><a href="#Item-38" class="headerlink" title="Item 38"></a>Item 38</h1><hr>
 <p><strong>检查函数传入参数的有效性</strong></p>
 <p>在编写函数时，首先应该对传入参数的有效性进行检查，比如不能小于零等。<br><br></p>
@@ -318,20 +329,26 @@
 <p><strong>在需要时使用防御性的拷贝</strong></p>
 <p>原文是<code>Make defensive copies when needed</code>，不是很好翻译，初次看到我也是不知所云。先看这样一个例子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Period</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Date start;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Date end;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Period</span><span class="params">(Date start, Date end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (start.compareTo(end) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(start + <span class="string">" after "</span> + end);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">this</span>.start = start;</span><br><span class="line">        <span class="keyword">this</span>.end = end;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Date <span class="title">start</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> start;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Date <span class="title">end</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> end;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>初看这段代码，Period类似乎是不可变的，但其实上面的代码是存在漏洞的，Period类是可变的：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Date start = <span class="keyword">new</span> Date();</span><br><span class="line">Date end = <span class="keyword">new</span> Date();</span><br><span class="line">Period p = <span class="keyword">new</span> Period(start, end);</span><br><span class="line">end.setYear(<span class="number">78</span>); <span class="comment">// 修改了p中的内部变量值！！！</span></span><br></pre></td></tr></table></figure>
+
 <p>所以说为每个可变的参数制作防御性的拷贝非常重要，Period的构造函数应该这样修改：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">Period</span><span class="params">(Date start, Date end)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.start = <span class="keyword">new</span> Date(start.getTime());</span><br><span class="line">    <span class="keyword">this</span>.end = <span class="keyword">new</span> Date(end.getTime());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (start.compareTo(end) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(start + <span class="string">" after "</span> + end);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>需要注意的是，<strong>防御性拷贝的制作要先于参数有效性检查，并且有效性检查是检查拷贝而不是原数据</strong>。</p>
 <p>以下是另一种形式的攻击：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Date start = <span class="keyword">new</span> Date();</span><br><span class="line">Date end = <span class="keyword">new</span> Date();</span><br><span class="line">Period p = <span class="keyword">new</span> Period(start, end);</span><br><span class="line">p.end.setYear(<span class="number">78</span>); <span class="comment">// 修改了p中的内部变量值！！！</span></span><br></pre></td></tr></table></figure>
+
 <p>为了防御这种攻击，需要这样改进源代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Date <span class="title">start</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> <span class="keyword">new</span> Date(start.getTime());&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> Date <span class="title">end</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> <span class="keyword">new</span> Date(end.getTime());&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
 <li>编程需要有防御意识，要假设类的使用者会尽一切可能去摧毁类的不变性、修改不可变类的成员变量。</li>
 <li>防御性复制可能会带来与之相关的性能损失，而且它并不总是合理的。</li>
 </ul>
-<p><br></p>
+<br>
+
 <h1 id="Item-40"><a href="#Item-40" class="headerlink" title="Item 40"></a>Item 40</h1><hr>
 <p><strong>谨慎设计方法签名（方法名、返回值、形参等）</strong></p>
 <ol>
@@ -341,27 +358,34 @@
 <li>参数尽量使用双元素的枚举类型而不是布尔型。这使得代码的可读性更好。</li>
 <li><code>Don&#39;t go overboard in providing convenience methods</code>，这句话不是很理解。</li>
 </ol>
-<p><br></p>
+<br>
+
 <h1 id="Item-41"><a href="#Item-41" class="headerlink" title="Item 41"></a>Item 41</h1><hr>
 <p><strong>明智地使用函数重载</strong></p>
 <p>下面这段代码是一个容器分类器，根据传入的容器类型输入类型名称：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CollectionClassifier</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">classify</span><span class="params">(Set&lt;?&gt; s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Set"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">classify</span><span class="params">(List&lt;?&gt; lst)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"List"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">classify</span><span class="params">(Collection&lt;?&gt; c)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Unknown Collection"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Colletion&lt;?&gt;[] collections = &#123;</span><br><span class="line">            <span class="keyword">new</span> HashSet&lt;String&gt;(),</span><br><span class="line">            <span class="keyword">new</span> ArrayList&lt;Integer&gt;(),</span><br><span class="line">            <span class="keyword">new</span> HashMap&lt;String, String&gt;().values()</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Collection&lt;?&gt; c : collections) &#123;</span><br><span class="line">            System.out.println(classify(c));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>你可能认为运行的输出结果是三行，依次是<code>Set</code>、<code>List</code>和<code>Unknown Collection</code>。而实际上，输出的都是<code>Unknown Collection</code>。</p>
 <p>因为<code>classify</code>函数被重载了，<strong>重载时具体调用哪一个是在编译时决定的</strong>，而在编译时，数组中的元素类型都是一样的，都是<code>Collection&lt;?&gt;</code>类型;而在运行时，数组中的元素类型才是不同的。</p>
 <p><strong>对重载函数的选择是静态的，而对重写函数的选择是动态的。</strong></p>
 <p>如果要实现期望的效果，应该将三个同名函数修改为一个：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">classify</span><span class="params">(Collection&lt;?&gt; c)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> c <span class="keyword">instanceof</span> Set ? <span class="string">"Set"</span> : c <span class="keyword">instanceof</span> List ? <span class="string">"List"</span> : <span class="string">"Unknown Collection"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>再看下面这个函数重写的例子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Wine</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">name</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> <span class="string">"Wine"</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SparklingWine</span> <span class="keyword">extends</span> <span class="title">Wine</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span> <span class="function">String <span class="title">name</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> <span class="string">"Sparkling wine"</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Champagne</span> <span class="keyword">extends</span> <span class="title">SparklingWine</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span> <span class="function">String <span class="title">name</span><span class="params">()</span> </span>&#123;<span class="keyword">return</span> <span class="string">"Champagne"</span>;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Overriding</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Wine[] wines = &#123;</span><br><span class="line">            <span class="keyword">new</span> Wine(), <span class="keyword">new</span> SparklingWine(), <span class="keyword">new</span> Champagne()</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (Wine w: wines) &#123;</span><br><span class="line">            System.out.println(w.name);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>上述程序的输出就是<code>Wine</code>，<code>Sparkling Wine</code>和<code>Champagne</code>。</p>
 <p>一个安全而保守的政策就是绝不编写两个有着相同数目形参的重载函数。<br><br></p>
 <h1 id="Item-42"><a href="#Item-42" class="headerlink" title="Item 42"></a>Item 42</h1><hr>
 <p><strong>明智地使用可变参数</strong></p>
 <p>java中可变参数的用法如下，sum函数可以接受零个或多个参数：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span>... args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> arg: args) &#123;</span><br><span class="line">        sum += arg;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>如果要让函数接收一个或多个参数，正确写法为：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">min</span><span class="params">(<span class="keyword">int</span> firstArg, <span class="keyword">int</span>... remainArgs)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> min = firstArg;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> arg: remainArgs) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arg &lt; min) &#123;</span><br><span class="line">            min = arg;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> min;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><br></p>
+
+<br>
+
 <h1 id="Item-43"><a href="#Item-43" class="headerlink" title="Item 43"></a>Item 43</h1><hr>
 <p><strong>返回空的数组或容器，而不是null</strong></p>
 <p>如果返回null将会需要额外的代码对null的情况进行处理，甚至有时候会忘记处理这种情况<br><br></p>
@@ -390,7 +414,7 @@
             <blockquote>
                 作者：Hoshea<br>
                 链接：<a href="https://fgksgf.github.io/2018/2018-07-23-effective-java-3/">https://fgksgf.github.io/2018/2018-07-23-effective-java-3/</a><br>
-                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
+                版权声明：本博客所有文章均采用<a href="https://creativecommons.org/licenses/by-nc-nd/4.0/deed.zh" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a>许可协议。转载请注明出处！
             </blockquote>
         </div>
     </div>
@@ -434,7 +458,7 @@
     	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <div class="container" style="height: auto;">
             © 2018-2020 Hoshea | All rights reserved.
-            <p class="right" style="margin-top: 0;font-size: 14px">Powered by <a href="https://hexo.io/" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" style="font-weight: bold">raytaylorism</a> | <i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv" style="color:#f5f5f5;font-weight: bold"></span> | <i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv" style="color:#f5f5f5;font-weight: bold"></span></p>
+            <p class="right" style="margin-top: 0;font-size: 14px">Powered by <a href="https://hexo.io/" target="_blank" rel="noopener" style="font-weight: bold">Hexo</a> | Theme by <a href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" target="_blank" rel="noopener" style="font-weight: bold">raytaylorism</a> | <i class="fa fa-user"></i><span class="busuanzi-value" id="busuanzi_value_site_uv" style="color:#f5f5f5;font-weight: bold"></span> | <i class="fa fa-eye"></i><span class="busuanzi-value" id="busuanzi_value_site_pv" style="color:#f5f5f5;font-weight: bold"></span></p>
              <br>            
         </div>
     </div>
