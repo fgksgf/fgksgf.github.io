@@ -69,6 +69,9 @@ jobs:
     steps:
       - name: Checkout master
         uses: actions/checkout@v2
+          with:
+            submodules: true
+            fetch-depth: 0
       
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -77,7 +80,7 @@ jobs:
           extended: true
 
       - name: Build
-        run: hugo # 第一次使用`hugo`，之后改成`hugo --minify` 
+        run: hugo --minify
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
