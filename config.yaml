@@ -1,5 +1,5 @@
 baseurl: https://fgksgf.github.io
-languageCode: en-us
+languageCode: zh-cn
 theme: hugo-theme-stack
 paginate: 5
 title: Hoshea's Blog
@@ -9,11 +9,14 @@ disqusShortname: hugo-theme-stack
 
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn
-DefaultContentLanguage: en
+DefaultContentLanguage: zh-cn
 
 permalinks:
     post: /p/:slug/
     page: /:slug/
+
+enableEmoji: true
+enableInlineShortcodes: true
 
 params:
     mainSections:
@@ -28,11 +31,10 @@ params:
 
     dateFormat:
         published: Jan 02, 2006
-        lastUpdated: Jan 02, 2006 15:04 MST
+        lastUpdated: Jan 02, 2006
 
     sidebar:
-        emoji: 🍥
-        subtitle: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        subtitle: Do something today that your future self will thank you for.
         avatar:
             local: true
             src: img/avatar.png
@@ -41,7 +43,7 @@ params:
         math: false
         license:
             enabled: true
-            default: Licensed under CC BY-NC-SA 4.0
+            default: Licensed under CC BY-NC-ND 4.0
 
     comments:
         enabled: true
