@@ -1,5 +1,5 @@
 +++
-title = "About Me"
+title = "About"
 description = ""
 date = "2020-12-28"
 license = "CC BY-NC-ND"
