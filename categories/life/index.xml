@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hoshea&#39;s Blog</title>
-    <link>https://fgksgf.github.io/</link>
-    <description>Recent content on Hoshea&#39;s Blog</description>
+    <title>Life on Hoshea&#39;s Blog</title>
+    <link>https://fgksgf.github.io/categories/life/</link>
+    <description>Recent content in Life on Hoshea&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>About Me</title>
-      <link>https://fgksgf.github.io/about-me/</link>
-      <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://fgksgf.github.io/about-me/</guid>
-      <description> 开源爱好者 95后钢铁直男 热爱编程与计算机技术 软件工程专业，双非院校研究生在读  </description>
-    </item>
-    
+    <lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/categories/life/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hello Hugo</title>
       <link>https://fgksgf.github.io/p/hello-hugo/</link>
@@ -31,24 +22,6 @@
 hugo server 5.配置 GitHub Actions 自动部署 主要参考了这篇文章。
 GitHub Actions 配置文件如下：
 name:GitHub Pages Deployon:push:branches:- masterjobs:deploy:runs-on:ubuntu-18.</description>
-    </item>
-    
-    <item>
-      <title>Archives</title>
-      <link>https://fgksgf.github.io/archives/</link>
-      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://fgksgf.github.io/archives/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Search</title>
-      <link>https://fgksgf.github.io/search/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fgksgf.github.io/search/</guid>
-      <description></description>
     </item>
     
   </channel>
