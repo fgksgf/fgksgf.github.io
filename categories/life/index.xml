@@ -1,19 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Life on Hoshea&#39;s Blog</title>
-    <link>https://fgksgf.github.io/categories/life/</link>
-    <description>Recent content in Life on Hoshea&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-cn</language>
-    <lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/categories/life/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Hello Hugo</title>
-      <link>https://fgksgf.github.io/p/hello-hugo/</link>
-      <pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://fgksgf.github.io/p/hello-hugo/</guid>
-      <description>前言 2017年，我在知乎受到启发，决定动手搭建一个自己的博客。一番搜索之后，得知 Github 的每一个用户都可以定制一个自己的 github page。当时正好看到了 黄玄 大佬的简洁精致的博客，遂决定照猫画虎，照着他写的教程一步一步搭建环境，摸索修改各种参数，最后有了第一个博客。
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Life on Hoshea's Blog</title><link>https://fgksgf.github.io/categories/life/</link><description>Recent content in Life on Hoshea's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/categories/life/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello Hugo</title><link>https://fgksgf.github.io/p/hello-hugo/</link><pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/hello-hugo/</guid><description>前言 2017年，我在知乎受到启发，决定动手搭建一个自己的博客。一番搜索之后，得知 Github 的每一个用户都可以定制一个自己的 github page。当时正好看到了 黄玄 大佬的简洁精致的博客，遂决定照猫画虎，照着他写的教程一步一步搭建环境，摸索修改各种参数，最后有了第一个博客。
 然而最近我想要在博客上发表新的文章的时候，碰到了一个问题：如果我想要在发表前在本地预览效果，我必须重配环境，因为当时是在原来的电脑上搭建的，否则只能 push 到 GitHub 上预览，这样十分麻烦。
 于是在2018年决定使用 Hexo 重新搭建一个博客，它只需要 Node.js 环境和 git，而之前的 Jekyll 需要安装 Ruby 环境。把 Hexo 官网上几乎所有主题都看了一遍以后，我最后选择了 raytaylorism 主题。
 现在是2020年12月，在我的2020年的 flag 中有这么一条：Perfect blog，眼看2020年即将过去，于是决定抓住2020的尾巴，用 Hugo 重构一下博客。
@@ -21,8 +6,4 @@
 1.安装 Hugo brew install hugo 2.建站 hugo new site Blog/ -f &amp;#34;yaml&amp;#34; cd Blog 3.下载主题并配置 git clone https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack 4.本地预览 经过以上步骤的折腾摸索，博客的框架已经搭好，接下来使用以下命令来启动服务器以预览博客:
 hugo server 5.配置 GitHub Actions 自动部署 主要参考了这篇文章。
 GitHub Actions 配置文件如下：
-name:GitHub Pages Deployon:push:branches:- masterjobs:deploy:runs-on:ubuntu-18.</description>
-    </item>
-    
-  </channel>
-</rss>
+name:GitHub Pages Deployon:push:branches:- masterjobs:deploy:runs-on:ubuntu-18.</description></item></channel></rss>
