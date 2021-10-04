@@ -6,6 +6,10 @@ slug: hello-hugo
 image: helena-hertz-wWZzXlDpMog-unsplash.jpg
 categories:
     - Life
+tags:
+    - hexo
+    - hugo
+    - github actions
 ---
 
 ## 前言
