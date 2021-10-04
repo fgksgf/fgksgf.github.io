@@ -66,11 +66,17 @@
 &lt;p>其次，我的编程能力得到了锻炼。因为开源项目对于代码的质量有较高的要求，因此我会在编程时有意识地遵守相关的规范，培养良好的编码习惯。然后在导师的 code review 中也学习到了一些编程技巧。&lt;/p>
 &lt;p>此外，参与开源为我的科研带来了不少灵感。因为我的研究方向是智能软件工程，旨在将人工智能技术应用在软件工程的各个环节中，这需要我在实践中发现实际问题。而开源则提供了这样一个窗口，让我足不出户即可参与到软件项目的设计、开发、测试和发布等环节。&lt;/p>
 &lt;p>最后也是本次活动最大的一个收获，我的贡献得到了社区的认可，被提名成为了 SkyWalking 社区的第一位学生 committer。&lt;/p>
-&lt;p>&lt;figure style="flex-grow: 96; flex-basis: 230px">
-&lt;a href="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer.png" data-size="1250x1301">&lt;img src="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer.png"
-srcset="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer_hu07fa9e9323fa930153bc823db3e5cb9b_61225_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer_hu07fa9e9323fa930153bc823db3e5cb9b_61225_1024x0_resize_box_2.png 1024w"
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 96;
+flex-basis: 230px"
+>
+&lt;a href="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer.png" data-size="1250x1301">
+&lt;img src="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer.png"
 width="1250"
 height="1301"
+srcset="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer_hu07fa9e9323fa930153bc823db3e5cb9b_61225_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer_hu07fa9e9323fa930153bc823db3e5cb9b_61225_1024x0_resize_box_2.png 1024w"
 loading="lazy"
 >
 &lt;/a>
@@ -79,11 +85,17 @@ loading="lazy"
 &lt;p>最后，对于将来想要参加此类活动的同学，附上我的一些建议：&lt;/p>
 &lt;p>第一，选择活跃、知名的社区。社区对你的影响将是极其深远的，好的社区意味着成熟的协作流程、良好的氛围、严谨的代码规范，以及有更大几率遇到优秀的导师，这些对于你今后在开源方面的发展都是非常有帮助的。&lt;/p>
 &lt;p>第二，以兴趣为导向来选择项目，同时要敢于走出舒适区。我最初在选择项目时，初步确定了两个，一个是低难度的 Python 项目，另一个是中等难度的 Go 项目。当时我很纠结：因为我对 Python 语言比较熟悉，选择一个低难度的项目是比较稳妥的，但是项目的代码我看的并不是很懂，具体要怎么做我完全没有头绪；而 Go 项目是一个命令行工具，我对这个比较感兴趣，且有一个大致的思路，但是我对 Go 语言并不是很熟悉，实践经验为零。最后凭借清晰具体的 proposal 我成功申请到了 Go 项目并顺利地完成了，还在实践中快速掌握了一门新的编程语言。&lt;/p>
-&lt;p>&lt;figure style="flex-grow: 74; flex-basis: 178px">
-&lt;a href="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone.png" data-size="500x672">&lt;img src="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone.png"
-srcset="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone_hu4f2080d71f10f975509688f3424d1b84_81441_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone_hu4f2080d71f10f975509688f3424d1b84_81441_1024x0_resize_box_2.png 1024w"
+&lt;p>&lt;figure
+class="gallery-image"
+style="
+flex-grow: 74;
+flex-basis: 178px"
+>
+&lt;a href="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone.png" data-size="500x672">
+&lt;img src="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone.png"
 width="500"
 height="672"
+srcset="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone_hu4f2080d71f10f975509688f3424d1b84_81441_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone_hu4f2080d71f10f975509688f3424d1b84_81441_1024x0_resize_box_2.png 1024w"
 loading="lazy"
 >
 &lt;/a>
@@ -121,12 +133,26 @@ loading="lazy"
 &lt;p>&lt;code>NoSQL&lt;/code>数据库是一类涵盖范围非常广泛的持久化解决方案，它们不遵循关系数据库模型，也不使用SQL作为查询语言。它们的数据存储可以不需要固定的表格模式，经常避免使用SQL的JOIN操作，一般具有水平可扩展的特征。&lt;/p>
 &lt;p>按照数据模型的不同，NoSQL数据库可分成4类，分别是键-值存储库、列存储数据库、文档数据库和图数据库。从最近十年的发展趋势来看，图数据库已经成为关注度最高、最有发展和应用潜力的数据库类型。&lt;/p>
 &lt;p>如下图所示，&lt;a class="link" href="db-engines.com" >DB-Engines&lt;/a>对近六年来所有数据模型的数据库进行了发展趋势的分析，结果如下图所示：&lt;/p>
-&lt;p>&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/1.jpg" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/1.jpg" >
+&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/1.jpg"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;p>可以明显的看出，&lt;strong>图数据库正获得越来越多的关注&lt;/strong>。&lt;/p>
 &lt;h2 id="简介">简介&lt;/h2>
 &lt;p>Neo4j是一个高性能、高可靠性、可扩展、支持ACID事务的图数据库，&lt;strong>它基本由Java语言实现&lt;/strong>，支持数据平台的平滑扩展和过渡，同时能够在多种系统上完成部署。它使用Cypher查询语言对数据进行增删查改。&lt;strong>相对于关系数据模型而言，Neo4j重点解决了拥有大量连接的传统RDBMS在查询时出现的性能衰退问题。&lt;/strong>&lt;/p>
 &lt;h3 id="数据模型">数据模型&lt;/h3>
-&lt;p>&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/2.jpg" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/2.jpg" >
+&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/2.jpg"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;p>Neo4j采用&lt;strong>属性图模型&lt;/strong>对数据进行建模，能够以相同的速度遍历结点与边，其遍历速度与构成图形的数据量没有任何关系。属性图模型中包含四种构造元素：&lt;/p>
 &lt;ul>
 &lt;li>节点，即顶点，主要的数据元素&lt;/li>
@@ -163,10 +189,24 @@ loading="lazy"
 &lt;h3 id="工具和插件">工具和插件&lt;/h3>
 &lt;h4 id="可视化工具">可视化工具&lt;/h4>
 &lt;p>Neo4j Browser提供图形化界面来与图数据库进行交互。用户可以通过它执行cypher语句并得到图形化的查询结果。在Neo4j Browser中，可以看到当前数据库中的节点数目和关系数目、节点和关系的种类、属性键名、存储空间占用情况等。此外，它还提供了一些新手教程、样例数据等。&lt;/p>
-&lt;p>&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/3.jpeg" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/3.jpeg" >
+&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/3.jpeg"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;h4 id="数据迁移工具">数据迁移工具&lt;/h4>
 &lt;p>Neo4j ETL Tool可以将关系型数据库中的数据迁移到图数据库中。它通过JDBC连接关系型数据库，然后通过图形化界面来调整参数，最终将表结构的数据转换为图数据库中的节点、关系和属性。&lt;/p>
-&lt;p>&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/4.jpg" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/4.jpg" >
+&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/4.jpg"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;h4 id="数据导入工具">数据导入工具&lt;/h4>
 &lt;p>Neo4j提供了一个命令行批量数据导入工具import-tool，支持百亿级数据，导入效率极高，但此工具只适用于将全量数据加载到空数据库中。&lt;/p>
 &lt;p>该工具对数据的要求较高，它需要CSV格式的节点数据文件和关系数据文件，且每个节点必须具有唯一标识符，即节点标识符。工具先创建所有的节点，然后通过节点标识符快速找到起点节点和终点节点从而迅速创建关系。&lt;/p>
@@ -246,7 +286,14 @@ loading="lazy"
 &lt;p>另一种典型的多表连接方式为散列连接。散列连接是做大数据集连接时的常用方式，优化器使用两个表中数据量更小的那个表的连接键（JOIN KEY）在内存中建立临时散列表，然后遍历较大的表，找出与散列表匹配的行。&lt;/p>
 &lt;p>&lt;strong>图数据库Neo4j的优点在于，它根本不使用索引来进行连接，图数据库的节点本身存储了它第一个关系的id，通过它可以直接找到相邻节点，这种特性称为“无索引邻接”。&lt;/strong>&lt;/p>
 &lt;h3 id="同类产品对比">同类产品对比&lt;/h3>
-&lt;p>&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/5.jpg" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/5.jpg" >
+&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/5.jpg"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;p>上图为著名的数据库排名网站DB-Engines.com根据搜索引擎查询的结果数量、Google Trends指数、提及的工作机会的数量和社交网络提及次数计算得出的流行程度得分对图数据库进行排名。可以看出，在过去六年里，Neo4j始终是最为流行的图数据库，其流行程度远远高于其他图数据库。&lt;/p>
 &lt;p>下面我们主要对目前较为流行的6个开源图数据库进行了横向分析和比较：&lt;/p>
 &lt;table>
@@ -332,7 +379,14 @@ loading="lazy"
 &lt;/ul>
 &lt;h2 id="体系结构">体系结构&lt;/h2>
 &lt;h3 id="内部结构">内部结构&lt;/h3>
-&lt;p>&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/6.jpg" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/6.jpg" >
+&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/6.jpg"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;ul>
 &lt;li>
 &lt;p>记录文件（Record Files）：数据存储层，Neo4j 将图形数据存储在许多不同的存储文件中，每个存储文件都包含图形特定部分的数据 (例如, 节点、关系、标签和属性有单独的存储区)。存储责任的划分——特别是图形结构与属性数据的分离，促进了图的高性能遍历。但这也意味着用户对其图形的视图和磁盘上的实际记录在结构上是不同的。&lt;/p>
@@ -358,12 +412,26 @@ loading="lazy"
 &lt;li>neostore.propertystore.db.arrays&lt;/li>
 &lt;/ul>
 &lt;p>其中，节点、关系和属性都采用固定大小的方式存储。固定大小的记录允许对存储文件中的节点与关系进行快速查找。如果我们有一个 id 为n的节点, 那么我们知道它的记录是从（n乘以节点字节大小）开始。根据这种格式, 数据库可以直接计算记录的位置, 时间复杂度为O(1), 而不是执行搜索, 时间复杂度将是O (log n)。&lt;/p>
-&lt;p>&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/7.jpg" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/7.jpg" >
+&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/7.jpg"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;p>如上图所示，每个节点记录大小为15字节。第一个字节是正在使用的标志；接下来的四个字节表示连接到节点的第一个关系的 ID；后面的四个字节表示节点的第一个属性的 ID；节点标签占用五个字节，指向此节点的标签存储区；最后一个额外字节保留给标志。节点记录非常轻量级: 它实际上只是指向关系、标签和属性的几个指针。&lt;/p>
 &lt;p>关系存储结构不像节点存储那么简单。关系记录的大小为34个字节。每个关系记录都包含关系开始和结束时节点的 id、指向关系类型的指针、该关系的起点节点的下一个和上一个关系记录的指针、该关系的终点节点的下一个和上一个关系记录的指针、关系的第一个属性的ID以及指示当前关系是否是关系链中的第一个关系的标志。&lt;/p>
 &lt;p>属性记录的存储采用的是单链表结构，每个属性记录由四个属性块和下一条属性记录的 ID 组成。每个属性记录占用一个到四个属性块，一条属性记录最多可以记录四个属性。属性记录包含属性类型以及指向属性索引文件 (neostore.propertystore.db.index) 的指针, 该文件是存储属性名称的地方。对于每个属性的值, 记录包含指向动态存储记录的指针或内联值。动态存储允许存储较大的属性值。有两个动态存储: 动态字符串存储 (neostore.propertystore.db.strings) 和动态数组存储 (neostore.propertystore.db.arrays)。动态记录包括固定大小记录的链接列表;因此, 一个非常大的字符串或大数组可能会占用多个动态记录。&lt;/p>
 &lt;p>下图展示了Neo4j图数据库对数据的物理存储模式：&lt;/p>
-&lt;p>&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/8.jpg" alt="" />&lt;/p>
+&lt;p>&lt;figure
+>
+&lt;a href="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/8.jpg" >
+&lt;img src="https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/8.jpg"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p>
 &lt;p>在图中我们可以看到：两个节点记录中的每一个都包含指向该节点的第一个属性和关系链中的第一个关系的指针。若要读取节点的属性,我们从节点指向的第一个属性开始遍历链表结构的属性。若要查找节点的关系,我们从该节点的关系指针到其第一个关系 (本例中的 LIKES 关系)。然后,在这里, 我们按照该特定节点 (即起点节点双链接列表或结束节点双链接列表)的关系的双链接列表进行操作, 直到找到我们感兴趣的关系。找到所需关系的记录后, 我们可以使用与节点属性相同的单独链接列表结构读取该关系的属性(如果有的话), 也可以检查关系所连接的两个节点的节点记录使用其起始节点和结束节点 Id。这些 Id 乘以节点记录大小,给出节点存储文件中每个节点的直接偏移量。&lt;/p>
 &lt;h2 id="cypher查询语言">Cypher查询语言&lt;/h2>
 &lt;p>Cypher是一种声明性图形查询语言，允许对图形进行富有表现力和有效的查询和更新，十分适合开发人员和专业人员对针对业务场景完成一些应用。Cypher设计简单但功能强大，可以轻松完成对高度复杂的数据库的查询。Cypher查询语言的构建受到了多种方法的启发，并建立在表达性查询的既定实践基础之上。许多关键字的应用，例如“WHERR”和&amp;quot;ORDER BY&amp;quot;都受到SQL语句的启发。模式匹配借用了SPARQL中的表达式方法，而一些列表语义则是借用了Haskell和Python等语言的开发使用。&lt;/p>
