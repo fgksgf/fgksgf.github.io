@@ -62,34 +62,36 @@
 &lt;/ul>
 &lt;h2 id="主节点">主节点&lt;/h2>
 &lt;p>首先在主节点安装好所需的软件，然后再将该虚拟机复制到其他 PC 上，从而省去重复安装和配置的过程。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="c1"># 设置 hostname，用于区分不同的虚拟机&lt;/span>
-sudo hostnamectl set-hostname master --static
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="软件安装">软件安装&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 设置 hostname，用于区分不同的虚拟机&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo hostnamectl set-hostname master --static
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="软件安装">软件安装&lt;/h3>
 &lt;p>使用阿里云的镜像仓库，避免因网络问题无法拉取镜像。&lt;/p>
 &lt;h4 id="docker">Docker&lt;/h4>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">curl -fsSL https://get.docker.com &lt;span class="p">|&lt;/span> sudo sh -s -- --mirror Aliyun
-sudo usermod -aG docker &lt;span class="nv">$USER&lt;/span>
-sudo mkdir -p /etc/docker
-sudo tee /etc/docker/daemon.json &lt;span class="s">&amp;lt;&amp;lt;-&amp;#39;EOF&amp;#39;
-&lt;/span>&lt;span class="s">{
-&lt;/span>&lt;span class="s"> &amp;#34;exec-opts&amp;#34;: [&amp;#34;native.cgroupdriver=systemd&amp;#34;],
-&lt;/span>&lt;span class="s"> &amp;#34;log-driver&amp;#34;: &amp;#34;json-file&amp;#34;,
-&lt;/span>&lt;span class="s"> &amp;#34;log-opts&amp;#34;: {
-&lt;/span>&lt;span class="s"> &amp;#34;max-size&amp;#34;: &amp;#34;100m&amp;#34;
-&lt;/span>&lt;span class="s"> },
-&lt;/span>&lt;span class="s"> &amp;#34;storage-driver&amp;#34;: &amp;#34;overlay2&amp;#34;,
-&lt;/span>&lt;span class="s"> &amp;#34;registry-mirrors&amp;#34;: [&amp;#34;https://bdbdr6uo.mirror.aliyuncs.com&amp;#34;]
-&lt;/span>&lt;span class="s">}
-&lt;/span>&lt;span class="s">EOF&lt;/span>
-sudo systemctl daemon-reload
-sudo systemctl restart docker
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="k8s">K8s&lt;/h4>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># 添加并信任APT证书&lt;/span>
-curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg &lt;span class="p">|&lt;/span> sudo apt-key add -
-&lt;span class="c1"># 添加源地址&lt;/span>
-add-apt-repository &lt;span class="s2">&amp;#34;deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main&amp;#34;&lt;/span>
-sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> apt install -y kubelet kubeadm kubectl
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="复制虚拟机">复制虚拟机&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">curl -fsSL https://get.docker.com &lt;span class="p">|&lt;/span> sudo sh -s -- --mirror Aliyun
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo usermod -aG docker &lt;span class="nv">$USER&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo mkdir -p /etc/docker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo tee /etc/docker/daemon.json &lt;span class="s">&amp;lt;&amp;lt;-&amp;#39;EOF&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s">{
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;exec-opts&amp;#34;: [&amp;#34;native.cgroupdriver=systemd&amp;#34;],
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;log-driver&amp;#34;: &amp;#34;json-file&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;log-opts&amp;#34;: {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;max-size&amp;#34;: &amp;#34;100m&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> },
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;storage-driver&amp;#34;: &amp;#34;overlay2&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;registry-mirrors&amp;#34;: [&amp;#34;https://bdbdr6uo.mirror.aliyuncs.com&amp;#34;]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s">}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s">EOF&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo systemctl daemon-reload
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo systemctl restart docker
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="k8s">K8s&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 添加并信任APT证书&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg &lt;span class="p">|&lt;/span> sudo apt-key add -
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 添加源地址&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">add-apt-repository &lt;span class="s2">&amp;#34;deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> apt install -y kubelet kubeadm kubectl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="复制虚拟机">复制虚拟机&lt;/h3>
 &lt;p>在 VitrualBox 界面将虚拟机关机后，右键复制，选择保存的路径，需要注意：&lt;/p>
 &lt;ul>
 &lt;li>
@@ -105,7 +107,7 @@ sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> apt install -y k
 &lt;p>&lt;img src="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-1.png"
 width="581"
 height="496"
-srcset="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-1_hub3248eff56d3833c4cb41b8aebeba2e9_181540_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-1_hub3248eff56d3833c4cb41b8aebeba2e9_181540_1024x0_resize_box_2.png 1024w"
+srcset="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-1_hub3248eff56d3833c4cb41b8aebeba2e9_181540_480x0_resize_box_3.png 480w, https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-1_hub3248eff56d3833c4cb41b8aebeba2e9_181540_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 class="gallery-image"
 data-flex-grow="117"
@@ -114,7 +116,7 @@ data-flex-basis="281px"
 &lt;img src="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-2.png"
 width="579"
 height="396"
-srcset="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-2_hu3ff4c1d45e77a359f3d4dfa5274206dd_134521_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-2_hu3ff4c1d45e77a359f3d4dfa5274206dd_134521_1024x0_resize_box_2.png 1024w"
+srcset="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-2_hu3ff4c1d45e77a359f3d4dfa5274206dd_134521_480x0_resize_box_3.png 480w, https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-2_hu3ff4c1d45e77a359f3d4dfa5274206dd_134521_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 class="gallery-image"
 data-flex-grow="146"
@@ -124,7 +126,7 @@ data-flex-basis="350px"
 &lt;p>&lt;img src="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-3.png"
 width="1920"
 height="1112"
-srcset="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-3_hu549c367b379192130df9b1c0d4b0b6b5_604144_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-3_hu549c367b379192130df9b1c0d4b0b6b5_604144_1024x0_resize_box_2.png 1024w"
+srcset="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-3_hu549c367b379192130df9b1c0d4b0b6b5_604144_480x0_resize_box_3.png 480w, https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-3_hu549c367b379192130df9b1c0d4b0b6b5_604144_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 class="gallery-image"
 data-flex-grow="172"
@@ -133,63 +135,67 @@ data-flex-basis="414px"
 &lt;h2 id="网络配置">网络配置&lt;/h2>
 &lt;p>在虚拟机关机状态下，在虚拟机设置中将网络设置为&lt;strong>桥接网络&lt;/strong>，相当于在局域网中虚拟出一台新主机，然后启动虚拟机，&lt;strong>切换到 root 用户，接下来的操作都用 root 进行操作&lt;/strong>。&lt;/p>
 &lt;p>通过命令&lt;code>vim /etc/netplan/00-installer-config.yaml&lt;/code>配置静态 IP 地址：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">network&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">ethernets&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">enp0s3&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">dhcp4&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 关闭动态分配 IP&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">addresses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">192.168.2.81&lt;/span>&lt;span class="l">/24]&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 设置一个和宿主机同网段的 IP，并确保该 IP 未被占用&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">gateway4&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">192.168.2.1&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 与宿主机一致&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">nameservers&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">addresses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">8.8.8.8&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">8.8.4.4&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 与宿主机一致&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">2&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>修改完成后保存，执行：&lt;code>netplan apply&lt;/code>，然后测试虚拟机之间是否能够 ping 通以及访问外网。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">network&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">ethernets&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">enp0s3&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dhcp4&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 关闭动态分配 IP&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">addresses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">192.168.2.81&lt;/span>&lt;span class="l">/24]&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 设置一个和宿主机同网段的 IP，并确保该 IP 未被占用&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">gateway4&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">192.168.2.1&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 与宿主机一致&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">nameservers&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">addresses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">8.8.8.8&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">8.8.4.4&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 与宿主机一致&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>修改完成后保存，执行：&lt;code>netplan apply&lt;/code>，然后测试虚拟机之间是否能够 ping 通以及访问外网。&lt;/p>
 &lt;h2 id="集群初始化">集群初始化&lt;/h2>
 &lt;p>在主节点上，以 root 用户执行：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">kubeadm init --image-repository&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;registry.cn-hangzhou.aliyuncs.com/google_containers&amp;#39;&lt;/span>
-&lt;span class="c1"># 安装网络插件&lt;/span>
-kubectl apply -f &lt;span class="s2">&amp;#34;https://cloud.weave.works/k8s/net?k8s-version=&lt;/span>&lt;span class="k">$(&lt;/span>kubectl version &lt;span class="p">|&lt;/span> base64 &lt;span class="p">|&lt;/span> tr -d &lt;span class="s1">&amp;#39;\n&amp;#39;&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>kubeadm init&lt;/code>成功后会显示类似信息，复制用于工作节点加入集群：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">kubeadm join 192.168.2.80:6443 --token szeip3.tm5ji5ajpa6xfk64 &lt;span class="se">\
-&lt;/span>&lt;span class="se">&lt;/span> --discovery-token-ca-cert-hash sha256:f256bb87bb7d80eca7e620562a1adcbadbdc0ecd799da659403d193cb3dc3037
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中的 token 24 小时后过期，过期后可通过&lt;code>kubeadm token create --print-join-command&lt;/code>再次获取上面的信息。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">kubeadm init --image-repository&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;registry.cn-hangzhou.aliyuncs.com/google_containers&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 安装网络插件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl apply -f &lt;span class="s2">&amp;#34;https://cloud.weave.works/k8s/net?k8s-version=&lt;/span>&lt;span class="k">$(&lt;/span>kubectl version &lt;span class="p">|&lt;/span> base64 &lt;span class="p">|&lt;/span> tr -d &lt;span class="s1">&amp;#39;\n&amp;#39;&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>kubeadm init&lt;/code>成功后会显示类似信息，复制用于工作节点加入集群：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">kubeadm join 192.168.2.80:6443 --token szeip3.tm5ji5ajpa6xfk64 &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --discovery-token-ca-cert-hash sha256:f256bb87bb7d80eca7e620562a1adcbadbdc0ecd799da659403d193cb3dc3037
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中的 token 24 小时后过期，过期后可通过&lt;code>kubeadm token create --print-join-command&lt;/code>再次获取上面的信息。&lt;/p>
 &lt;p>在工作节点以 root 执行前面复制的 &lt;code>kubeadm join&lt;/code> 命令即可加入集群。&lt;/p>
 &lt;p>在主节点上查看节点：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="nb">export&lt;/span> &lt;span class="nv">KUBECONFIG&lt;/span>&lt;span class="o">=&lt;/span>/etc/kubernetes/admin.conf
-kubectl get nodes
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>应该可以看到三个节点，且都是&lt;code>Ready&lt;/code>状态，然后只有主节点有 role 字段，两个工作节点没有，可以通过以下命令来设置：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">kubectl label node &amp;lt;node name&amp;gt; node-role.kubernetes.io/worker&lt;span class="o">=&lt;/span>worker
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用&lt;code>kubectl get pod -n kube-system&lt;/code>查看核心组件的运行情况。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">KUBECONFIG&lt;/span>&lt;span class="o">=&lt;/span>/etc/kubernetes/admin.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl get nodes
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>应该可以看到三个节点，且都是&lt;code>Ready&lt;/code>状态，然后只有主节点有 role 字段，两个工作节点没有，可以通过以下命令来设置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">kubectl label node &amp;lt;node name&amp;gt; node-role.kubernetes.io/worker&lt;span class="o">=&lt;/span>worker
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用&lt;code>kubectl get pod -n kube-system&lt;/code>查看核心组件的运行情况。&lt;/p>
 &lt;h2 id="ssh-配置可选">SSH 配置（可选）&lt;/h2>
 &lt;p>为了便于 SSH 到各 k8s 节点上，可以进行以下配置：&lt;/p>
 &lt;h3 id="免密码登陆">免密码登陆&lt;/h3>
 &lt;p>在各虚拟机上通过&lt;code>sudo vim /etc/ssh/sshd_config&lt;/code>编辑 sshd 的配置文件，允许 root 登陆和使用公钥认证:&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-fallback" data-lang="fallback">PermitRootLogin yes
-PubkeyAuthentication yes
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>保存后重启 sshd 服务：&lt;code>service sshd restart&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">PermitRootLogin yes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">PubkeyAuthentication yes
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>保存后重启 sshd 服务：&lt;code>service sshd restart&lt;/code>&lt;/p>
 &lt;p>在个人 PC 上：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># 将公钥复制到虚拟机上&lt;/span>
-scp ~/.ssh/id_rsa.pub root@192.168.2.81:~/.ssh/
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>在虚拟机上：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-fallback" data-lang="fallback">cat ~/.ssh/id_rsa.pub &amp;gt;&amp;gt; authorized_keys
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="快捷连接">快捷连接&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 将公钥复制到虚拟机上&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">scp ~/.ssh/id_rsa.pub root@192.168.2.81:~/.ssh/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在虚拟机上：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cat ~/.ssh/id_rsa.pub &amp;gt;&amp;gt; authorized_keys
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="快捷连接">快捷连接&lt;/h3>
 &lt;p>在个人 PC 上给 ssh 的虚拟机设置别名，从而实现执行&lt;code>ssh master&lt;/code>就能连接虚拟机，而无需记忆 IP 地址：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-fallback" data-lang="fallback">vim ~/.ssh/config
-Host master
-user root
-hostname 192.168.2.80
-port 22
-IdentityFile /Users/hoshea/.ssh/id_rsa
-Host worker1
-user root
-hostname 192.168.2.84
-port 22
-IdentityFile /Users/hoshea/.ssh/id_rsa
-Host worker2
-user root
-hostname 192.168.2.81
-port 22
-IdentityFile /Users/hoshea/.ssh/id_rsa
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考">参考&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">vim ~/.ssh/config
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Host master
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> user root
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> hostname 192.168.2.80
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> port 22
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IdentityFile /Users/hoshea/.ssh/id_rsa
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Host worker1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> user root
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> hostname 192.168.2.84
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> port 22
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IdentityFile /Users/hoshea/.ssh/id_rsa
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Host worker2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> user root
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> hostname 192.168.2.81
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> port 22
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IdentityFile /Users/hoshea/.ssh/id_rsa
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考">参考&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a class="link" href="https://github.com/islishude/blog/issues/212" target="_blank" rel="noopener"
 >k8s 国内源安装备忘清单 · Issue #212 · islishude/blog · GitHub&lt;/a>&lt;/li>
@@ -204,51 +210,51 @@ IdentityFile /Users/hoshea/.ssh/id_rsa
 &lt;p>实现这个博客大概分成以下几个步骤(以 MacOS 为例)：&lt;/p>
 &lt;h3 id="1安装-hugohttpgohugoio">1.安装 &lt;a class="link" href="http://gohugo.io/" target="_blank" rel="noopener"
 >Hugo&lt;/a>&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">brew install hugo
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2建站">2.建站&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">hugo new site Blog/ -f &lt;span class="s2">&amp;#34;yaml&amp;#34;&lt;/span>
-&lt;span class="nb">cd&lt;/span> Blog
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3下载主题并配置">3.下载主题并配置&lt;/h3>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">git clone https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4本地预览">4.本地预览&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">brew install hugo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2建站">2.建站&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">hugo new site Blog/ -f &lt;span class="s2">&amp;#34;yaml&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> Blog
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3下载主题并配置">3.下载主题并配置&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git clone https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4本地预览">4.本地预览&lt;/h3>
 &lt;p>经过以上步骤的折腾摸索，博客的框架已经搭好，接下来使用以下命令来启动服务器以预览博客:&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">hugo server
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5配置-github-actions-自动部署">5.配置 GitHub Actions 自动部署&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">hugo server
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5配置-github-actions-自动部署">5.配置 GitHub Actions 自动部署&lt;/h3>
 &lt;p>主要参考了&lt;a class="link" href="https://blog.humblepg.com/post/2020/02/log-hugo-github-actions.html" target="_blank" rel="noopener"
 >这篇文章&lt;/a>。&lt;/p>
 &lt;p>GitHub Actions 配置文件如下：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">GitHub Pages Deploy&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">master&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-18.04&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Checkout master&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v2&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">submodules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">fetch-depth&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup Hugo&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-hugo@v2&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;0.79.0&amp;#39;&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">extended&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">hugo --minify&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-gh-pages@v3&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy_key&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.ACTIONS_DEPLOY_KEY }}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_dir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">./public&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="后记">后记&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">GitHub Pages Deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="l">master&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-18.04&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Checkout master&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">submodules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">fetch-depth&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup Hugo&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-hugo@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;0.79.0&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">extended&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">hugo --minify&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-gh-pages@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy_key&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.ACTIONS_DEPLOY_KEY }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_dir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">./public&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="后记">后记&lt;/h2>
 &lt;p>有了前两次的经历，这次还是非常高效的，大部分时间都用在了挑选主题上了。我觉得以后应该不会再变了，Hugo 还是挺香的。&lt;/p></description></item><item><title>暑期2020活动心得</title><link>https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/</link><pubDate>Sat, 19 Dec 2020 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/</guid><description>&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>我是一个热爱编程、热爱技术的人，⼀直以来都向往着能参与到开源项⽬中锻炼⾃⼰，但当我面对庞大而复杂的项目代码时，却感到手足无措，不知该从何开始。⽽此次的&lt;a class="link" href="https://isrc.iscas.ac.cn/summer2020/#/index" target="_blank" rel="noopener"
 >“开源软件供应链点亮计划-暑期2020”&lt;/a>活动则正好提供了这样⼀个机会：清晰的任务要求、开源社区成员作为导师提供指导以及一笔丰厚的奖金，让我顺利地踏上了开源这条道路。&lt;/p>
@@ -264,7 +270,7 @@ IdentityFile /Users/hoshea/.ssh/id_rsa
 &lt;p>&lt;img src="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer.png"
 width="1250"
 height="1301"
-srcset="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer_hu07fa9e9323fa930153bc823db3e5cb9b_61225_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer_hu07fa9e9323fa930153bc823db3e5cb9b_61225_1024x0_resize_box_2.png 1024w"
+srcset="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer_hu07fa9e9323fa930153bc823db3e5cb9b_61225_480x0_resize_box_3.png 480w, https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer_hu07fa9e9323fa930153bc823db3e5cb9b_61225_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 class="gallery-image"
 data-flex-grow="96"
@@ -277,7 +283,7 @@ data-flex-basis="230px"
 &lt;p>&lt;img src="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone.png"
 width="500"
 height="672"
-srcset="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone_hu4f2080d71f10f975509688f3424d1b84_81441_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone_hu4f2080d71f10f975509688f3424d1b84_81441_1024x0_resize_box_2.png 1024w"
+srcset="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone_hu4f2080d71f10f975509688f3424d1b84_81441_480x0_resize_box_3.png 480w, https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone_hu4f2080d71f10f975509688f3424d1b84_81441_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 class="gallery-image"
 data-flex-grow="74"
@@ -599,28 +605,31 @@ loading="lazy"
 &lt;p>配置设置没有顺序，neo4j.conf文件中的每个设置都必须唯一指定。如果有多个配置设置具有相同的键但值不同，则可能导致不可预测的行为。&lt;/p>
 &lt;h3 id="常用配置">常用配置&lt;/h3>
 &lt;p>编辑neo4j.conf文件：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-fallback" data-lang="fallback">dbms.directories.import=&amp;lt;设置为要导入数据所在文件夹的绝对路径&amp;gt;
-# 初始堆和最大堆大小，建议设置为相同值
-dbms.memory.heap.initial_size=4g
-dbms.memory.heap.max_size=4g
-# 运行外网访问图数据库
-dbms.connector.default_listen_address=0.0.0.0
-# 允许从文件系统导入csv文件
-dbms.security.allow_csv_import_from_file_urls=true
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="插件的安装与配置">插件的安装与配置&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dbms.directories.import=&amp;lt;设置为要导入数据所在文件夹的绝对路径&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># 初始堆和最大堆大小，建议设置为相同值
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dbms.memory.heap.initial_size=4g
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dbms.memory.heap.max_size=4g
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># 运行外网访问图数据库
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dbms.connector.default_listen_address=0.0.0.0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># 允许从文件系统导入csv文件
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dbms.security.allow_csv_import_from_file_urls=true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="插件的安装与配置">插件的安装与配置&lt;/h3>
 &lt;ol>
 &lt;li>
 &lt;p>将下载的插件（jar文件）复制到‘$NEO4J_HOME/plugins’目录下。&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>编辑neo4j.conf文件，添加以下内容：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-fallback" data-lang="fallback">dbms.security.procedures.unrestricted=algo.*,apoc.*
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dbms.security.procedures.unrestricted=algo.*,apoc.*
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;li>
 &lt;p>验证安装，运行以下查询：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-fallback" data-lang="fallback">call algo.list()
-return apoc.version()
-&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">call algo.list()
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">return apoc.version()
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ol>
 &lt;h2 id="写在最后">写在最后&lt;/h2>
 &lt;p>今年2月底，去了导师那里实习，导师给我布置的任务就是研究开源图数据库。经过一番搜索，&lt;code>Neo4j&lt;/code>一词频频出现在我眼前，于是便选择了它作为主要研究对象。事实证明，我的选择并没有错，因为它是目前最流行的图数据库。&lt;/p>

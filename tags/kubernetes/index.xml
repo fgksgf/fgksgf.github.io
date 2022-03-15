@@ -62,34 +62,36 @@
 &lt;/ul>
 &lt;h2 id="主节点">主节点&lt;/h2>
 &lt;p>首先在主节点安装好所需的软件，然后再将该虚拟机复制到其他 PC 上，从而省去重复安装和配置的过程。&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="c1"># 设置 hostname，用于区分不同的虚拟机&lt;/span>
-sudo hostnamectl set-hostname master --static
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="软件安装">软件安装&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 设置 hostname，用于区分不同的虚拟机&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo hostnamectl set-hostname master --static
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="软件安装">软件安装&lt;/h3>
 &lt;p>使用阿里云的镜像仓库，避免因网络问题无法拉取镜像。&lt;/p>
 &lt;h4 id="docker">Docker&lt;/h4>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-shell" data-lang="shell">curl -fsSL https://get.docker.com &lt;span class="p">|&lt;/span> sudo sh -s -- --mirror Aliyun
-sudo usermod -aG docker &lt;span class="nv">$USER&lt;/span>
-sudo mkdir -p /etc/docker
-sudo tee /etc/docker/daemon.json &lt;span class="s">&amp;lt;&amp;lt;-&amp;#39;EOF&amp;#39;
-&lt;/span>&lt;span class="s">{
-&lt;/span>&lt;span class="s"> &amp;#34;exec-opts&amp;#34;: [&amp;#34;native.cgroupdriver=systemd&amp;#34;],
-&lt;/span>&lt;span class="s"> &amp;#34;log-driver&amp;#34;: &amp;#34;json-file&amp;#34;,
-&lt;/span>&lt;span class="s"> &amp;#34;log-opts&amp;#34;: {
-&lt;/span>&lt;span class="s"> &amp;#34;max-size&amp;#34;: &amp;#34;100m&amp;#34;
-&lt;/span>&lt;span class="s"> },
-&lt;/span>&lt;span class="s"> &amp;#34;storage-driver&amp;#34;: &amp;#34;overlay2&amp;#34;,
-&lt;/span>&lt;span class="s"> &amp;#34;registry-mirrors&amp;#34;: [&amp;#34;https://bdbdr6uo.mirror.aliyuncs.com&amp;#34;]
-&lt;/span>&lt;span class="s">}
-&lt;/span>&lt;span class="s">EOF&lt;/span>
-sudo systemctl daemon-reload
-sudo systemctl restart docker
-&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="k8s">K8s&lt;/h4>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># 添加并信任APT证书&lt;/span>
-curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg &lt;span class="p">|&lt;/span> sudo apt-key add -
-&lt;span class="c1"># 添加源地址&lt;/span>
-add-apt-repository &lt;span class="s2">&amp;#34;deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main&amp;#34;&lt;/span>
-sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> apt install -y kubelet kubeadm kubectl
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="复制虚拟机">复制虚拟机&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">curl -fsSL https://get.docker.com &lt;span class="p">|&lt;/span> sudo sh -s -- --mirror Aliyun
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo usermod -aG docker &lt;span class="nv">$USER&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo mkdir -p /etc/docker
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo tee /etc/docker/daemon.json &lt;span class="s">&amp;lt;&amp;lt;-&amp;#39;EOF&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s">{
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;exec-opts&amp;#34;: [&amp;#34;native.cgroupdriver=systemd&amp;#34;],
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;log-driver&amp;#34;: &amp;#34;json-file&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;log-opts&amp;#34;: {
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;max-size&amp;#34;: &amp;#34;100m&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> },
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;storage-driver&amp;#34;: &amp;#34;overlay2&amp;#34;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s"> &amp;#34;registry-mirrors&amp;#34;: [&amp;#34;https://bdbdr6uo.mirror.aliyuncs.com&amp;#34;]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s">}
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s">EOF&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo systemctl daemon-reload
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo systemctl restart docker
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="k8s">K8s&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 添加并信任APT证书&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg &lt;span class="p">|&lt;/span> sudo apt-key add -
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 添加源地址&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">add-apt-repository &lt;span class="s2">&amp;#34;deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> apt install -y kubelet kubeadm kubectl
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="复制虚拟机">复制虚拟机&lt;/h3>
 &lt;p>在 VitrualBox 界面将虚拟机关机后，右键复制，选择保存的路径，需要注意：&lt;/p>
 &lt;ul>
 &lt;li>
@@ -105,7 +107,7 @@ sudo apt update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> apt install -y k
 &lt;p>&lt;img src="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-1.png"
 width="581"
 height="496"
-srcset="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-1_hub3248eff56d3833c4cb41b8aebeba2e9_181540_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-1_hub3248eff56d3833c4cb41b8aebeba2e9_181540_1024x0_resize_box_2.png 1024w"
+srcset="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-1_hub3248eff56d3833c4cb41b8aebeba2e9_181540_480x0_resize_box_3.png 480w, https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-1_hub3248eff56d3833c4cb41b8aebeba2e9_181540_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 class="gallery-image"
 data-flex-grow="117"
@@ -114,7 +116,7 @@ data-flex-basis="281px"
 &lt;img src="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-2.png"
 width="579"
 height="396"
-srcset="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-2_hu3ff4c1d45e77a359f3d4dfa5274206dd_134521_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-2_hu3ff4c1d45e77a359f3d4dfa5274206dd_134521_1024x0_resize_box_2.png 1024w"
+srcset="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-2_hu3ff4c1d45e77a359f3d4dfa5274206dd_134521_480x0_resize_box_3.png 480w, https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-2_hu3ff4c1d45e77a359f3d4dfa5274206dd_134521_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 class="gallery-image"
 data-flex-grow="146"
@@ -124,7 +126,7 @@ data-flex-basis="350px"
 &lt;p>&lt;img src="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-3.png"
 width="1920"
 height="1112"
-srcset="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-3_hu549c367b379192130df9b1c0d4b0b6b5_604144_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-3_hu549c367b379192130df9b1c0d4b0b6b5_604144_1024x0_resize_box_2.png 1024w"
+srcset="https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-3_hu549c367b379192130df9b1c0d4b0b6b5_604144_480x0_resize_box_3.png 480w, https://fgksgf.github.io/p/%E4%BD%BF%E7%94%A8%E9%97%B2%E7%BD%AE%E7%9A%84-windows-pc-%E6%90%AD%E5%BB%BA-k8s-%E9%9B%86%E7%BE%A4/screenshot-3_hu549c367b379192130df9b1c0d4b0b6b5_604144_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 class="gallery-image"
 data-flex-grow="172"
@@ -133,63 +135,67 @@ data-flex-basis="414px"
 &lt;h2 id="网络配置">网络配置&lt;/h2>
 &lt;p>在虚拟机关机状态下，在虚拟机设置中将网络设置为&lt;strong>桥接网络&lt;/strong>，相当于在局域网中虚拟出一台新主机，然后启动虚拟机，&lt;strong>切换到 root 用户，接下来的操作都用 root 进行操作&lt;/strong>。&lt;/p>
 &lt;p>通过命令&lt;code>vim /etc/netplan/00-installer-config.yaml&lt;/code>配置静态 IP 地址：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">network&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">ethernets&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">enp0s3&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">dhcp4&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 关闭动态分配 IP&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">addresses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">192.168.2.81&lt;/span>&lt;span class="l">/24]&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 设置一个和宿主机同网段的 IP，并确保该 IP 未被占用&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">gateway4&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">192.168.2.1&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 与宿主机一致&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">nameservers&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">addresses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">8.8.8.8&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">8.8.4.4&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 与宿主机一致&lt;/span>&lt;span class="w">
-&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">2&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>修改完成后保存，执行：&lt;code>netplan apply&lt;/code>，然后测试虚拟机之间是否能够 ping 通以及访问外网。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">network&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">ethernets&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">enp0s3&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">dhcp4&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 关闭动态分配 IP&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">addresses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">192.168.2.81&lt;/span>&lt;span class="l">/24]&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 设置一个和宿主机同网段的 IP，并确保该 IP 未被占用&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">gateway4&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">192.168.2.1&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 与宿主机一致&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">nameservers&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">addresses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="m">8.8.8.8&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">8.8.4.4&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="c"># 与宿主机一致&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>修改完成后保存，执行：&lt;code>netplan apply&lt;/code>，然后测试虚拟机之间是否能够 ping 通以及访问外网。&lt;/p>
 &lt;h2 id="集群初始化">集群初始化&lt;/h2>
 &lt;p>在主节点上，以 root 用户执行：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">kubeadm init --image-repository&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;registry.cn-hangzhou.aliyuncs.com/google_containers&amp;#39;&lt;/span>
-&lt;span class="c1"># 安装网络插件&lt;/span>
-kubectl apply -f &lt;span class="s2">&amp;#34;https://cloud.weave.works/k8s/net?k8s-version=&lt;/span>&lt;span class="k">$(&lt;/span>kubectl version &lt;span class="p">|&lt;/span> base64 &lt;span class="p">|&lt;/span> tr -d &lt;span class="s1">&amp;#39;\n&amp;#39;&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>kubeadm init&lt;/code>成功后会显示类似信息，复制用于工作节点加入集群：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">kubeadm join 192.168.2.80:6443 --token szeip3.tm5ji5ajpa6xfk64 &lt;span class="se">\
-&lt;/span>&lt;span class="se">&lt;/span> --discovery-token-ca-cert-hash sha256:f256bb87bb7d80eca7e620562a1adcbadbdc0ecd799da659403d193cb3dc3037
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中的 token 24 小时后过期，过期后可通过&lt;code>kubeadm token create --print-join-command&lt;/code>再次获取上面的信息。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">kubeadm init --image-repository&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;registry.cn-hangzhou.aliyuncs.com/google_containers&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 安装网络插件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl apply -f &lt;span class="s2">&amp;#34;https://cloud.weave.works/k8s/net?k8s-version=&lt;/span>&lt;span class="k">$(&lt;/span>kubectl version &lt;span class="p">|&lt;/span> base64 &lt;span class="p">|&lt;/span> tr -d &lt;span class="s1">&amp;#39;\n&amp;#39;&lt;/span>&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>kubeadm init&lt;/code>成功后会显示类似信息，复制用于工作节点加入集群：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">kubeadm join 192.168.2.80:6443 --token szeip3.tm5ji5ajpa6xfk64 &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --discovery-token-ca-cert-hash sha256:f256bb87bb7d80eca7e620562a1adcbadbdc0ecd799da659403d193cb3dc3037
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>其中的 token 24 小时后过期，过期后可通过&lt;code>kubeadm token create --print-join-command&lt;/code>再次获取上面的信息。&lt;/p>
 &lt;p>在工作节点以 root 执行前面复制的 &lt;code>kubeadm join&lt;/code> 命令即可加入集群。&lt;/p>
 &lt;p>在主节点上查看节点：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="nb">export&lt;/span> &lt;span class="nv">KUBECONFIG&lt;/span>&lt;span class="o">=&lt;/span>/etc/kubernetes/admin.conf
-kubectl get nodes
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>应该可以看到三个节点，且都是&lt;code>Ready&lt;/code>状态，然后只有主节点有 role 字段，两个工作节点没有，可以通过以下命令来设置：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">kubectl label node &amp;lt;node name&amp;gt; node-role.kubernetes.io/worker&lt;span class="o">=&lt;/span>worker
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用&lt;code>kubectl get pod -n kube-system&lt;/code>查看核心组件的运行情况。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">KUBECONFIG&lt;/span>&lt;span class="o">=&lt;/span>/etc/kubernetes/admin.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl get nodes
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>应该可以看到三个节点，且都是&lt;code>Ready&lt;/code>状态，然后只有主节点有 role 字段，两个工作节点没有，可以通过以下命令来设置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">kubectl label node &amp;lt;node name&amp;gt; node-role.kubernetes.io/worker&lt;span class="o">=&lt;/span>worker
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>使用&lt;code>kubectl get pod -n kube-system&lt;/code>查看核心组件的运行情况。&lt;/p>
 &lt;h2 id="ssh-配置可选">SSH 配置（可选）&lt;/h2>
 &lt;p>为了便于 SSH 到各 k8s 节点上，可以进行以下配置：&lt;/p>
 &lt;h3 id="免密码登陆">免密码登陆&lt;/h3>
 &lt;p>在各虚拟机上通过&lt;code>sudo vim /etc/ssh/sshd_config&lt;/code>编辑 sshd 的配置文件，允许 root 登陆和使用公钥认证:&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-fallback" data-lang="fallback">PermitRootLogin yes
-PubkeyAuthentication yes
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>保存后重启 sshd 服务：&lt;code>service sshd restart&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">PermitRootLogin yes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">PubkeyAuthentication yes
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>保存后重启 sshd 服务：&lt;code>service sshd restart&lt;/code>&lt;/p>
 &lt;p>在个人 PC 上：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="c1"># 将公钥复制到虚拟机上&lt;/span>
-scp ~/.ssh/id_rsa.pub root@192.168.2.81:~/.ssh/
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>在虚拟机上：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-fallback" data-lang="fallback">cat ~/.ssh/id_rsa.pub &amp;gt;&amp;gt; authorized_keys
-&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="快捷连接">快捷连接&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 将公钥复制到虚拟机上&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">scp ~/.ssh/id_rsa.pub root@192.168.2.81:~/.ssh/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在虚拟机上：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">cat ~/.ssh/id_rsa.pub &amp;gt;&amp;gt; authorized_keys
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="快捷连接">快捷连接&lt;/h3>
 &lt;p>在个人 PC 上给 ssh 的虚拟机设置别名，从而实现执行&lt;code>ssh master&lt;/code>就能连接虚拟机，而无需记忆 IP 地址：&lt;/p>
-&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-fallback" data-lang="fallback">vim ~/.ssh/config
-Host master
-user root
-hostname 192.168.2.80
-port 22
-IdentityFile /Users/hoshea/.ssh/id_rsa
-Host worker1
-user root
-hostname 192.168.2.84
-port 22
-IdentityFile /Users/hoshea/.ssh/id_rsa
-Host worker2
-user root
-hostname 192.168.2.81
-port 22
-IdentityFile /Users/hoshea/.ssh/id_rsa
-&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考">参考&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">vim ~/.ssh/config
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Host master
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> user root
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> hostname 192.168.2.80
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> port 22
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IdentityFile /Users/hoshea/.ssh/id_rsa
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Host worker1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> user root
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> hostname 192.168.2.84
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> port 22
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IdentityFile /Users/hoshea/.ssh/id_rsa
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Host worker2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> user root
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> hostname 192.168.2.81
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> port 22
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> IdentityFile /Users/hoshea/.ssh/id_rsa
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考">参考&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a class="link" href="https://github.com/islishude/blog/issues/212" target="_blank" rel="noopener"
 >k8s 国内源安装备忘清单 · Issue #212 · islishude/blog · GitHub&lt;/a>&lt;/li>
