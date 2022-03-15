@@ -1,1 +1,57 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>hugo on Hoshea's Blog</title><link>https://fgksgf.github.io/tags/hugo/</link><description>Recent content in hugo on Hoshea's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello Hugo</title><link>https://fgksgf.github.io/p/hello-hugo/</link><pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/hello-hugo/</guid><description>前言 2017年，我在知乎受到启发，决定动手搭建一个自己的博客。一番搜索之后，得知 Github 的每一个用户都可以定制一个自己的 github page。当时正好看到了</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>hugo on Hoshea's Blog</title><link>https://fgksgf.github.io/tags/hugo/</link><description>Recent content in hugo on Hoshea's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello Hugo</title><link>https://fgksgf.github.io/p/hello-hugo/</link><pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/hello-hugo/</guid><description>&lt;img src="https://fgksgf.github.io/p/hello-hugo/helena-hertz-wWZzXlDpMog-unsplash.jpg" alt="Featured image of post Hello Hugo" />&lt;h2 id="前言">前言&lt;/h2>
+&lt;p>2017年，我在知乎受到启发，决定动手搭建一个自己的博客。一番搜索之后，得知 Github 的每一个用户都可以定制一个自己的 github page。当时正好看到了 &lt;a class="link" href="https://github.com/huxpro" target="_blank" rel="noopener"
+>黄玄&lt;/a> 大佬的简洁精致的博客，遂决定照猫画虎，照着他写的教程一步一步搭建环境，摸索修改各种参数，最后有了第一个博客。&lt;/p>
+&lt;p>然而最近我想要在博客上发表新的文章的时候，碰到了一个问题：如果我想要在发表前在本地预览效果，我必须重配环境，因为当时是在原来的电脑上搭建的，否则只能 push 到 GitHub 上预览，这样十分麻烦。&lt;/p>
+&lt;p>于是在2018年决定使用 Hexo 重新搭建一个博客，它只需要 Node.js 环境和 git，而之前的 Jekyll 需要安装 Ruby 环境。把 Hexo 官网上几乎所有主题都看了一遍以后，我最后选择了 &lt;a class="link" href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" target="_blank" rel="noopener"
+>raytaylorism&lt;/a> 主题。&lt;/p>
+&lt;p>现在是2020年12月，在我的2020年的 flag 中有这么一条：&lt;code>Perfect blog&lt;/code>，眼看2020年即将过去，于是决定抓住2020的尾巴，用 Hugo 重构一下博客。&lt;/p>
+&lt;h2 id="正文">正文&lt;/h2>
+&lt;p>实现这个博客大概分成以下几个步骤(以 MacOS 为例)：&lt;/p>
+&lt;h3 id="1安装-hugohttpgohugoio">1.安装 &lt;a class="link" href="http://gohugo.io/" target="_blank" rel="noopener"
+>Hugo&lt;/a>&lt;/h3>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">brew install hugo
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2建站">2.建站&lt;/h3>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">hugo new site Blog/ -f &lt;span class="s2">&amp;#34;yaml&amp;#34;&lt;/span>
+&lt;span class="nb">cd&lt;/span> Blog
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3下载主题并配置">3.下载主题并配置&lt;/h3>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">git clone https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4本地预览">4.本地预览&lt;/h3>
+&lt;p>经过以上步骤的折腾摸索，博客的框架已经搭好，接下来使用以下命令来启动服务器以预览博客:&lt;/p>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">hugo server
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5配置-github-actions-自动部署">5.配置 GitHub Actions 自动部署&lt;/h3>
+&lt;p>主要参考了&lt;a class="link" href="https://blog.humblepg.com/post/2020/02/log-hugo-github-actions.html" target="_blank" rel="noopener"
+>这篇文章&lt;/a>。&lt;/p>
+&lt;p>GitHub Actions 配置文件如下：&lt;/p>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">GitHub Pages Deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">master&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-18.04&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Checkout master&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">submodules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">fetch-depth&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup Hugo&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-hugo@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;0.79.0&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">extended&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">hugo --minify&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-gh-pages@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy_key&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.ACTIONS_DEPLOY_KEY }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_dir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">./public&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="后记">后记&lt;/h2>
+&lt;p>有了前两次的经历，这次还是非常高效的，大部分时间都用在了挑选主题上了。我觉得以后应该不会再变了，Hugo 还是挺香的。&lt;/p></description></item></channel></rss>

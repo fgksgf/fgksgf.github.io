@@ -1,1 +1,118 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Life on Hoshea's Blog</title><link>https://fgksgf.github.io/categories/life/</link><description>Recent content in Life on Hoshea's Blog</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/categories/life/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello Hugo</title><link>https://fgksgf.github.io/p/hello-hugo/</link><pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/hello-hugo/</guid><description>前言 2017年，我在知乎受到启发，决定动手搭建一个自己的博客。一番搜索之后，得知 Github 的每一个用户都可以定制一个自己的 github page。当时正好看到了</description></item><item><title>暑期2020活动心得</title><link>https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/</link><pubDate>Sat, 19 Dec 2020 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/</guid><description>背景 我是一个热爱编程、热爱技术的人，⼀直以来都向往着能参与到开源项⽬中锻炼⾃⼰，但当我面对庞大而复杂的项目代码时，却感到手足无措，不知该从何</description></item><item><title>浅谈个人信息保护</title><link>https://fgksgf.github.io/p/%E6%B5%85%E8%B0%88%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E4%BF%9D%E6%8A%A4/</link><pubDate>Wed, 20 Nov 2019 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/%E6%B5%85%E8%B0%88%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E4%BF%9D%E6%8A%A4/</guid><description>正文 前段时间发现住我对面寝室的“远房室友”是知乎大V，获得了几十万赞同的那种。进入他的知乎主页，他的昵称和微信名一样，他的本科学校、读研学校</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Life on Hoshea's Blog</title><link>https://fgksgf.github.io/categories/life/</link><description>Recent content in Life on Hoshea's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 28 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/categories/life/index.xml" rel="self" type="application/rss+xml"/><item><title>Hello Hugo</title><link>https://fgksgf.github.io/p/hello-hugo/</link><pubDate>Mon, 28 Dec 2020 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/hello-hugo/</guid><description>&lt;img src="https://fgksgf.github.io/p/hello-hugo/helena-hertz-wWZzXlDpMog-unsplash.jpg" alt="Featured image of post Hello Hugo" />&lt;h2 id="前言">前言&lt;/h2>
+&lt;p>2017年，我在知乎受到启发，决定动手搭建一个自己的博客。一番搜索之后，得知 Github 的每一个用户都可以定制一个自己的 github page。当时正好看到了 &lt;a class="link" href="https://github.com/huxpro" target="_blank" rel="noopener"
+>黄玄&lt;/a> 大佬的简洁精致的博客，遂决定照猫画虎，照着他写的教程一步一步搭建环境，摸索修改各种参数，最后有了第一个博客。&lt;/p>
+&lt;p>然而最近我想要在博客上发表新的文章的时候，碰到了一个问题：如果我想要在发表前在本地预览效果，我必须重配环境，因为当时是在原来的电脑上搭建的，否则只能 push 到 GitHub 上预览，这样十分麻烦。&lt;/p>
+&lt;p>于是在2018年决定使用 Hexo 重新搭建一个博客，它只需要 Node.js 环境和 git，而之前的 Jekyll 需要安装 Ruby 环境。把 Hexo 官网上几乎所有主题都看了一遍以后，我最后选择了 &lt;a class="link" href="https://github.com/raytaylorlin/hexo-theme-raytaylorism" target="_blank" rel="noopener"
+>raytaylorism&lt;/a> 主题。&lt;/p>
+&lt;p>现在是2020年12月，在我的2020年的 flag 中有这么一条：&lt;code>Perfect blog&lt;/code>，眼看2020年即将过去，于是决定抓住2020的尾巴，用 Hugo 重构一下博客。&lt;/p>
+&lt;h2 id="正文">正文&lt;/h2>
+&lt;p>实现这个博客大概分成以下几个步骤(以 MacOS 为例)：&lt;/p>
+&lt;h3 id="1安装-hugohttpgohugoio">1.安装 &lt;a class="link" href="http://gohugo.io/" target="_blank" rel="noopener"
+>Hugo&lt;/a>&lt;/h3>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">brew install hugo
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2建站">2.建站&lt;/h3>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">hugo new site Blog/ -f &lt;span class="s2">&amp;#34;yaml&amp;#34;&lt;/span>
+&lt;span class="nb">cd&lt;/span> Blog
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="3下载主题并配置">3.下载主题并配置&lt;/h3>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">git clone https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="4本地预览">4.本地预览&lt;/h3>
+&lt;p>经过以上步骤的折腾摸索，博客的框架已经搭好，接下来使用以下命令来启动服务器以预览博客:&lt;/p>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-bash" data-lang="bash">hugo server
+&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="5配置-github-actions-自动部署">5.配置 GitHub Actions 自动部署&lt;/h3>
+&lt;p>主要参考了&lt;a class="link" href="https://blog.humblepg.com/post/2020/02/log-hugo-github-actions.html" target="_blank" rel="noopener"
+>这篇文章&lt;/a>。&lt;/p>
+&lt;p>GitHub Actions 配置文件如下：&lt;/p>
+&lt;div class="highlight">&lt;pre class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">GitHub Pages Deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">push&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">branches&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="l">master&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">&lt;/span>&lt;span class="nt">jobs&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">runs-on&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ubuntu-18.04&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">steps&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Checkout master&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">actions/checkout@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">submodules&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">fetch-depth&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="m">0&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Setup Hugo&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-hugo@v2&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">hugo-version&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;0.79.0&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">extended&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Build&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">run&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">hugo --minify&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Deploy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">uses&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">peaceiris/actions-gh-pages@v3&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">with&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">deploy_key&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">${{ secrets.ACTIONS_DEPLOY_KEY }}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="nt">publish_dir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">./public&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="后记">后记&lt;/h2>
+&lt;p>有了前两次的经历，这次还是非常高效的，大部分时间都用在了挑选主题上了。我觉得以后应该不会再变了，Hugo 还是挺香的。&lt;/p></description></item><item><title>暑期2020活动心得</title><link>https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/</link><pubDate>Sat, 19 Dec 2020 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/</guid><description>&lt;h2 id="背景">背景&lt;/h2>
+&lt;p>我是一个热爱编程、热爱技术的人，⼀直以来都向往着能参与到开源项⽬中锻炼⾃⼰，但当我面对庞大而复杂的项目代码时，却感到手足无措，不知该从何开始。⽽此次的&lt;a class="link" href="https://isrc.iscas.ac.cn/summer2020/#/index" target="_blank" rel="noopener"
+>“开源软件供应链点亮计划-暑期2020”&lt;/a>活动则正好提供了这样⼀个机会：清晰的任务要求、开源社区成员作为导师提供指导以及一笔丰厚的奖金，让我顺利地踏上了开源这条道路。&lt;/p>
+&lt;h2 id="回顾">回顾&lt;/h2>
+&lt;p>在“暑期2020”活动的这两个多月里，我为 SkyWalking 的命令行工具实现了一个 dashboard，此外在阅读项目源码的过程中，还发现并修复了几个 bug。到活动结束时，我共提交了11个 PR，贡献了两千多行改动，对 SkyWalking CLI 项目的贡献数量排名第二，还获得了“最具潜力奖”。&lt;/p>
+&lt;p>我觉得之所以能够如此顺利地完成这个项⽬主要有两个原因。一方面，我选择的 SkyWalking CLI 项⽬当时最新的版本号为0.3.0，还处于起步阶段，代码量相对较少，⽽且项⽬结构非常清晰，文档也较为详细，这对于我理解整个项⽬⾮常有帮助，从⽽能够更快地上⼿。另一方面，我的项目导师非常认真负责，每次我遇到问题，导师都会及时地为我解答，然后我提交的 PR 也能够很快地被 review。⽽且导师不时会给予我肯定的评论与⿎励，这极⼤地提⾼了我的成就感，让我更加积极地投⼊到下⼀阶段的⼯作，形成⼀个正向的循环。&lt;/p>
+&lt;h2 id="收获">收获&lt;/h2>
+&lt;p>回顾整个参与过程，觉得自己收获颇多：&lt;/p>
+&lt;p>首先，我学习到了很多可能在学校里接触不到的新技术，了解了开源项目是如何进行协作，开源社区是如何运转治理的，以及开源文化、Apache way 等知识，仿佛进入了一个崭新而精彩的世界。&lt;/p>
+&lt;p>其次，我的编程能力得到了锻炼。因为开源项目对于代码的质量有较高的要求，因此我会在编程时有意识地遵守相关的规范，培养良好的编码习惯。然后在导师的 code review 中也学习到了一些编程技巧。&lt;/p>
+&lt;p>此外，参与开源为我的科研带来了不少灵感。因为我的研究方向是智能软件工程，旨在将人工智能技术应用在软件工程的各个环节中，这需要我在实践中发现实际问题。而开源则提供了这样一个窗口，让我足不出户即可参与到软件项目的设计、开发、测试和发布等环节。&lt;/p>
+&lt;p>最后也是本次活动最大的一个收获，我的贡献得到了社区的认可，被提名成为了 SkyWalking 社区的第一位学生 committer。&lt;/p>
+&lt;p>&lt;img src="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer.png"
+width="1250"
+height="1301"
+srcset="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer_hu07fa9e9323fa930153bc823db3e5cb9b_61225_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/committer_hu07fa9e9323fa930153bc823db3e5cb9b_61225_1024x0_resize_box_2.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="96"
+data-flex-basis="230px"
+>&lt;/p>
+&lt;h2 id="建议">建议&lt;/h2>
+&lt;p>最后，对于将来想要参加此类活动的同学，附上我的一些建议：&lt;/p>
+&lt;p>第一，选择活跃、知名的社区。社区对你的影响将是极其深远的，好的社区意味着成熟的协作流程、良好的氛围、严谨的代码规范，以及有更大几率遇到优秀的导师，这些对于你今后在开源方面的发展都是非常有帮助的。&lt;/p>
+&lt;p>第二，以兴趣为导向来选择项目，同时要敢于走出舒适区。我最初在选择项目时，初步确定了两个，一个是低难度的 Python 项目，另一个是中等难度的 Go 项目。当时我很纠结：因为我对 Python 语言比较熟悉，选择一个低难度的项目是比较稳妥的，但是项目的代码我看的并不是很懂，具体要怎么做我完全没有头绪；而 Go 项目是一个命令行工具，我对这个比较感兴趣，且有一个大致的思路，但是我对 Go 语言并不是很熟悉，实践经验为零。最后凭借清晰具体的 proposal 我成功申请到了 Go 项目并顺利地完成了，还在实践中快速掌握了一门新的编程语言。&lt;/p>
+&lt;p>&lt;img src="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone.png"
+width="500"
+height="672"
+srcset="https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone_hu4f2080d71f10f975509688f3424d1b84_81441_480x0_resize_box_2.png 480w, https://fgksgf.github.io/p/%E6%9A%91%E6%9C%9F2020%E6%B4%BB%E5%8A%A8%E5%BF%83%E5%BE%97/step_out_of_your_comfort_zone_hu4f2080d71f10f975509688f3424d1b84_81441_1024x0_resize_box_2.png 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="74"
+data-flex-basis="178px"
+>&lt;/p>
+&lt;p>这次的“暑期2020”活动虽已圆满结束，但我的开源之路才刚刚开始。&lt;/p>
+&lt;h2 id="补充资料">补充资料&lt;/h2>
+&lt;p>[1] 暑期2020申请报告、中期报告、结项报告：https://github.com/fgksgf/Summer-2020&lt;/p></description></item><item><title>浅谈个人信息保护</title><link>https://fgksgf.github.io/p/%E6%B5%85%E8%B0%88%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E4%BF%9D%E6%8A%A4/</link><pubDate>Wed, 20 Nov 2019 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/%E6%B5%85%E8%B0%88%E4%B8%AA%E4%BA%BA%E4%BF%A1%E6%81%AF%E4%BF%9D%E6%8A%A4/</guid><description>&lt;h2 id="正文">正文&lt;/h2>
+&lt;p>前段时间发现住我对面寝室的“远房室友”是知乎大V，获得了几十万赞同的那种。进入他的知乎主页，他的昵称和微信名一样，他的本科学校、读研学校和所学专业等信息一览无余……这让我不禁想到自己，与室友几乎是完全相反，&lt;strong>我向来不喜欢在网上公布自己真实信息，甚至总是尽可能的隐藏这些信息&lt;/strong>。&lt;/p>
+&lt;p>大概就像《疑犯追踪》里 Harold 所说，&lt;strong>我是一个非常注重隐私的人&lt;/strong>。我的这个习惯大概是从我看完一本讲&lt;code>社会工程&lt;/code>的书后开始养成的，那时我才知道，原来黑客不仅仅只是活跃在虚拟的网络世界里，现实世界也有，而且更加让人防不胜防。对于精通&lt;code>社会工程&lt;/code>的黑客来说，无论是渗透入侵多么复杂严密的系统，只要有人的存在，这个系统就不是安全的，因为人类就是这个系统最大的漏洞。&lt;/p>
+&lt;p>如果你是第一次听说&lt;code>社会工程&lt;/code>，可能会觉得我在胡说八道。但你肯定听说过&lt;code>人肉搜索&lt;/code>,它可以算是&lt;code>社会工程&lt;/code>的一种。&lt;/p>
+&lt;blockquote>
+&lt;p>社会工程是一种通过欺骗、假冒、伪造和心理学等手段操纵和控制人们，以使其执行特定动作或泄露敏感信息的行为，而不是通过侵入或使用计算机技术来实现的。&lt;/p>
+&lt;/blockquote>
+&lt;p>生活中最常见的例子可能就是电信诈骗了，冒充官方人员打电话给你说你的银行账户出现问题之类，或者告诉你你的亲人发生意外等……&lt;/p>
+&lt;p>我曾试着用搜索引擎人肉搜索自己，就从自己的手机号开始，在搜索结果里看到了自己的名字、本科学校、专业、班级等信息。再用名字，搜索看到了自己的初中、高中、大学和一些获奖信息……令人触目惊心。&lt;/p>
+&lt;p>在这个互联网高度发达的时代，想要在网络上保护和隐藏自己的信息变得格外困难，而社交网络的出现，又使其难度更上一层楼。要想不被社工和人肉，不仅自己要有防范意识，采取一些措施，还要让自己身边的人也做到这点，这不太现实。&lt;/p>
+&lt;p>到目前为止，我养成了以下这些习惯来保护自己的信息，仅供参考：&lt;/p>
+&lt;ul>
+&lt;li>尽可能在不同的社交媒体采用不同的昵称或用户名，昵称和用户名中不包含任何个人信息（生日、名字等）&lt;/li>
+&lt;li>&lt;strong>关闭所有类似“通过手机号找到我”这种功能&lt;/strong>（支付宝、微信）&lt;/li>
+&lt;li>社交媒体上的个人资料不要过于真实 :P&lt;/li>
+&lt;li>朋友圈、QQ空间等不对陌生人开放&lt;/li>
+&lt;li>将快递单上的个人信息部分“手动打码”或“手动碎纸”后再丢弃&lt;/li>
+&lt;li>网上购物时收货人名字不填真实名字&lt;/li>
+&lt;li>用专门的一个不常用的邮箱和手机号用于注册&lt;/li>
+&lt;li>&lt;strong>注册国外的一些网站需要填详细的个人信息时&lt;/strong>，可以用这个 &lt;a class="link" href="https://www.fakeaddressgenerator.com" target="_blank" rel="noopener"
+>在线工具&lt;/a> 生成虚假的信息（包含名字，住址，手机号等）&lt;/li>
+&lt;li>&lt;strong>不与可能暴露个人信息的实体互动&lt;/strong>，例如在百度贴吧中关注母校贴吧等行为&lt;/li>
+&lt;li>关闭照片附带地理信息功能&lt;/li>
+&lt;li>（以后想到再慢慢更新）……&lt;/li>
+&lt;/ul>
+&lt;p>还有一条我自己也很难做到：“&lt;strong>不在社交媒体中与熟人互动&lt;/strong>”。因为微博和b站的关注列表中一般会有自己的朋友和同学，而他们不经意间泄露的个人信息可能就会导致自身的信息被泄露……&lt;/p></description></item></channel></rss>
