@@ -33,6 +33,7 @@ Neo4j是一个高性能、高可靠性、可扩展、支持ACID事务的图数�
 ![](https://image-bed-1253366698.cos.ap-guangzhou.myqcloud.com/post/neo4j/2.jpg)
 
 Neo4j采用**属性图模型**对数据进行建模，能够以相同的速度遍历结点与边，其遍历速度与构成图形的数据量没有任何关系。属性图模型中包含四种构造元素：
+
 + 节点，即顶点，主要的数据元素
 + 关系，即边，具有方向和类型
 + 节点和关系上的属性，存储为键值对的形式
@@ -117,19 +118,20 @@ Neo4j的社区非常活跃，主要包括：
 + [Neo4j Blog](https://neo4j.com/blog/)：发布Neo4j的最新动态和发展趋势，是Neo4j前沿技术的首要发布平台。
 
 + [Neo4j Github](https://github.com/neo4j/neo4j)：Neo4j社区版、插件、各编程语言驱动、数据库内置工具、文档、docker镜像都托管在Github上，众多贡献者持续为Neo4j的代码仓库贡献着大量代码和知识。代码贡献者大部分都是Neo4j公司的员工。
+
 + [Neo4j 中文社区](http://neo4j.com.cn/)：国内最大的Neo4j中文社区，截止到2019年4月，问题总量达900条。
 
 ### 性能对比
 
 使用关系型数据库MySQL和图数据库Neo4j分别去遍历同一个具有100万个顶点和400万条边的数据集，结果如下表所示：
 
-| 遍历路径长度 | Neo4j     | MySQL          |
-| ------------ | --------- | -------------- |
-| 1            | 27 ms     | 124 ms         |
-| 2            | 474 ms    | 922 ms         |
-| 3            | 3366 ms   | 8851 ms        |
-| 4            | 49312 ms  | 112930 ms      |
-| 5            | 862399 ms | 两小时内未完成 |
+| 遍历路径长度 | Neo4j     | MySQL     |
+| ------ | --------- | --------- |
+| 1      | 27 ms     | 124 ms    |
+| 2      | 474 ms    | 922 ms    |
+| 3      | 3366 ms   | 8851 ms   |
+| 4      | 49312 ms  | 112930 ms |
+| 5      | 862399 ms | 两小时内未完成   |
 
 高度连接的数据非常适合使用属性图模型来进行建模。通常来讲图数据库比传统的关系型数据库更适合高度连接的数据的一些原因是：
 
@@ -155,15 +157,15 @@ Neo4j的社区非常活跃，主要包括：
 
 下面我们主要对目前较为流行的6个开源图数据库进行了横向分析和比较：
 
-| 图数据库   | 开源协议           | 主要开发语言 | 关注度 | 贡献者数 |
-| ---------- | ------------------ | ------------ | ------ | -------- |
-| Neo4j      | GPL v3             | Java         | 6310   | 170      |
-| OrientDB   | Apache License 2.0 | Java         | 3824   | 121      |
-| ArangoDB   | Apache License 2.0 | C++          | 7861   | 89       |
-| JanusGraph | Apache License 2.0 | Java         | 2290   | 100      |
-| Titan      | Apache License 2.0 | Java         | 4895   | 33       |
-| Dgraph     | Apache License 2.0 | Golang       | 9329   | 98       |
-| FlockDB    | Apache License 2.0 | Scala        | 3188   | 12       |
+| 图数据库       | 开源协议               | 主要开发语言 | 关注度  | 贡献者数 |
+| ---------- | ------------------ | ------ | ---- | ---- |
+| Neo4j      | GPL v3             | Java   | 6310 | 170  |
+| OrientDB   | Apache License 2.0 | Java   | 3824 | 121  |
+| ArangoDB   | Apache License 2.0 | C++    | 7861 | 89   |
+| JanusGraph | Apache License 2.0 | Java   | 2290 | 100  |
+| Titan      | Apache License 2.0 | Java   | 4895 | 33   |
+| Dgraph     | Apache License 2.0 | Golang | 9329 | 98   |
+| FlockDB    | Apache License 2.0 | Scala  | 3188 | 12   |
 
 综合比较来看，相比于其他图数据库，Neo4j的优势是：
 
@@ -276,15 +278,17 @@ dbms.security.allow_csv_import_from_file_urls=true
 1. 将下载的插件（jar文件）复制到‘$NEO4J_HOME/plugins’目录下。
 
 2. 编辑neo4j.conf文件，添加以下内容：
-```
-dbms.security.procedures.unrestricted=algo.*,apoc.*
-```
+   
+   ```
+   dbms.security.procedures.unrestricted=algo.*,apoc.*
+   ```
 
 3. 验证安装，运行以下查询：
-``` cypher
-call algo.list()
-return apoc.version()
-```
+   
+   ```cypher
+   call algo.list()
+   return apoc.version()
+   ```
 
 ## 写在最后
 

@@ -1,8 +1,14 @@
 baseurl: https://fgksgf.github.io
-languageCode: zh-cn
+languageCode: en-us
 theme: hugo-theme-stack
 paginate: 5
 title: Hoshea's Blog
+
+languages:
+    en:
+        languageName: English
+        title: Hoshea's Blog
+        weight: 1
 
 # Change it to your Disqus shortname before using
 disqusShortname: hugo-theme-stack
@@ -12,7 +18,7 @@ googleAnalytics: UA-118341733-1
 
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn
-DefaultContentLanguage: zh-cn
+DefaultContentLanguage: en
 
 hasCJKLanguage: true
 
@@ -61,10 +67,19 @@ params:
             theme: preferred-color-scheme
 
     widgets:
-        enabled:
-            - search
-            - archives
-            - tag-cloud
+        homepage:
+            - type: search
+            - type: archives
+              params:
+                  limit: 5
+            - type: categories
+              params:
+                  limit: 10
+            - type: tag-cloud
+              params:
+                  limit: 10
+        page:
+            - type: toc
 
         archives:
             limit: 5
@@ -106,25 +121,36 @@ menu:
           name: Home
           url: /
           weight: -100
-          pre: home
+          params:
+            icon: home
 
         - identifier: about
           name: About
           url: about
           weight: -90
-          pre: user
+          params: 
+            icon: user
 
         - identifier: archives
           name: Archives
           url: archives
-          weight: -70
-          pre: archives
+          weight: -90
+          params:
+            icon: archives
 
         - identifier: search
           name: Search
           url: search
-          weight: -60
-          pre: search
+          weight: -90
+          params:
+            icon: search
+
+    # social:
+    #     - identifier: github
+    #       name: GitHub
+    #       url: https://github.com/fgksgf
+    #       params:
+    #           icon: brand-github
 
 related:
     includeNewer: true
@@ -148,3 +174,11 @@ markup:
         startLevel: 2
     highlight:
         noClasses: false
+        highlight:
+        noClasses: false
+        codeFences: true
+        guessSyntax: true
+        lineNoStart: 1
+        lineNos: false
+        lineNumbersInTable: true
+        tabWidth: 4
