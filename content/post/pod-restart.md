@@ -1,6 +1,6 @@
 ---
 title: Kubernetes 故障排查实录：Pod 连环重启
-date: 2024-05-01
+date: 2024-05-02
 description: "How I Cracked the Kubernetes Pod Restart Conundrum"
 categories:
     - Kubernetes
@@ -20,11 +20,11 @@ categories:
 
 由于 Pod B 属于 DaemonSet，我注意到了这两个 Pod 都运行在 Node C 上。回顾之前的告警，发现受影响的 Pod 也都是跑在 Node C 上。而之前的 `kubectl delete pod` 操作恰好使得告警的 Pod 被重建后调度到了其他 Node 上，从而恢复了正常，这表明问题根源在 Node C。
 
-于是我立即使用`kubectl cordon`将 Node C 标记为不可调度，在接下来的几天果然没有再出现类似的告警，但根本原因还没有定位出来。
+于是我立即使用`kubectl cordon`将 Node 标记为不可调度，在接下来的几天果然没有再出现类似的告警，但根本原因还没有定位出来。
 
 我查看了 Node 的 metrics 和 events，资源使用情况正常，未发现明显瓶颈。最后在 Node 的 `/var/log/messages` 中发现了关键的日志信息："nf_conntrack: nf_conntrack: table full, dropping packet"。
 
-nf_conntrack 是 Linux 系统中 Netfilter 的一个关键组件，用于跟踪所有网络连接。上述日志表明连接跟踪表（conntrack table）已满，操作系统无法为新的网络连接创建条目。conntrack table 满的原因可能是 Node C 上的某个异常 Pod 占用了大量连接。该 Pod 可能建立了大量连接，但未及时释放，导致 conntrack table 无法回收连接。当 node C 上的其他 Pod 尝试建立新连接时，由于 conntrack table 已满，连接失败，或是无法访问 coredns 解析 IP 地址或是 kubelet 无法探活成功，进而导致 Pod 重启。
+nf_conntrack 是 Linux 系统中 Netfilter 的一个关键组件，用于跟踪所有网络连接。上述日志表明连接跟踪表（conntrack table）已满，操作系统无法为新的网络连接创建条目。conntrack table 满的原因可能是 Node 上的某个异常 Pod 占用了大量连接。该 Pod 可能建立了大量连接，但未及时释放，导致 conntrack table 无法回收连接。当 Node 上的其他 Pod 尝试建立新连接时，由于 conntrack table 已满，连接失败，或是无法访问 coredns 解析 IP 地址或是 kubelet 无法探活成功，进而导致 Pod 重启。
 
 ## 拨开迷雾，找到元凶
 
