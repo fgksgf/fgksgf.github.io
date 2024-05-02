@@ -1,4 +1,80 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hoshea's Blog</title><link>https://fgksgf.github.io/</link><description>Recent content on Hoshea's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 15 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>监控 Kubernetes 集群</title><link>https://fgksgf.github.io/p/%E7%9B%91%E6%8E%A7-kubernetes-%E9%9B%86%E7%BE%A4/</link><pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/%E7%9B%91%E6%8E%A7-kubernetes-%E9%9B%86%E7%BE%A4/</guid><description>&lt;h2 id="背景">背景&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hoshea's Blog</title><link>https://fgksgf.github.io/</link><description>Recent content on Hoshea's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 01 May 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Kubernetes 故障排查实录：Pod 连环重启</title><link>https://fgksgf.github.io/p/kubernetes-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95pod-%E8%BF%9E%E7%8E%AF%E9%87%8D%E5%90%AF/</link><pubDate>Wed, 01 May 2024 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/kubernetes-%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5%E5%AE%9E%E5%BD%95pod-%E8%BF%9E%E7%8E%AF%E9%87%8D%E5%90%AF/</guid><description>&lt;h2 id="诡异的-pod-重启现象">诡异的 Pod 重启现象&lt;/h2>
+&lt;p>几个月前，我遇到了一个令人困惑的 Kubernetes 故障：在一周的时间里，我几乎每天都会收到不同 Pod 出现 &lt;code>CrashLoopBackOff&lt;/code> 状态的告警。通过 &lt;code>kubectl describe pod&lt;/code> 查看重启的原因均是容器异常退出。奇怪的是，虽然这些 Pod 在同一个 K8s 集群，但属于不同的 Deployment 和 Namespace，表面上无直接的关联。然而只要我执行 &lt;code>kubectl delete pod&lt;/code> 命令删除故障 Pod，让其所属的 Deployment 重新创建，Pod 便会恢复正常。&lt;/p>
+&lt;p>起初，我通过简单地删除 Pod 来应对告警，但问题并没有收敛，反而持续发生，这暗示着可能存在更深层次的系统性问题。为了彻底解决问题，标本兼治，我决定深入调查，找出根本原因。&lt;/p>
+&lt;h2 id="抽丝剥茧循序渐进">抽丝剥茧，循序渐进&lt;/h2>
+&lt;p>首先，通过查看日志和 K8s events，发现均是因为网络问题导致 Pod 重启，例如：&lt;/p>
+&lt;ul>
+&lt;li>Pod A 日志显示：&lt;code>dial tcp: lookup kube-apiserver on 172.20.0.10:53: no such host&lt;/code>。该应用依赖 K8s apiserver 才能正常工作，但日志表明容器无法解析 IP 地址（尽管集群内的 coredns 组件运行正常），因此异常退出进而不断重启&lt;/li>
+&lt;li>Pod B 的日志为 &lt;code>timeout: failed to connect service &amp;quot;:50051&amp;quot; within 5s&lt;/code>，其中 &lt;code>50051&lt;/code> 是容器的 liveness probe 端口，由于 kubelet 一直探测失败所以不断重启容器&lt;/li>
+&lt;/ul>
+&lt;p>由于 Pod B 属于 DaemonSet，我注意到了这两个 Pod 都运行在 Node C 上。回顾之前的告警，发现受影响的 Pod 也都是跑在 Node C 上。而之前的 &lt;code>kubectl delete pod&lt;/code> 操作恰好使得告警的 Pod 被重建后调度到了其他 Node 上，从而恢复了正常，这表明问题根源在 Node C。&lt;/p>
+&lt;p>于是我立即使用&lt;code>kubectl cordon&lt;/code>将 Node C 标记为不可调度，在接下来的几天果然没有再出现类似的告警，但根本原因还没有定位出来。&lt;/p>
+&lt;p>我查看了 Node 的 metrics 和 events，资源使用情况正常，未发现明显瓶颈。最后在 Node 的 &lt;code>/var/log/messages&lt;/code> 中发现了关键的日志信息：&amp;ldquo;nf_conntrack: nf_conntrack: table full, dropping packet&amp;rdquo;。&lt;/p>
+&lt;p>nf_conntrack 是 Linux 系统中 Netfilter 的一个关键组件，用于跟踪所有网络连接。上述日志表明连接跟踪表（conntrack table）已满，操作系统无法为新的网络连接创建条目。conntrack table 满的原因可能是 Node C 上的某个异常 Pod 占用了大量连接。该 Pod 可能建立了大量连接，但未及时释放，导致 conntrack table 无法回收连接。当 node C 上的其他 Pod 尝试建立新连接时，由于 conntrack table 已满，连接失败，或是无法访问 coredns 解析 IP 地址或是 kubelet 无法探活成功，进而导致 Pod 重启。&lt;/p>
+&lt;h2 id="拨开迷雾找到元凶">拨开迷雾，找到元凶&lt;/h2>
+&lt;p>定位到了问题，接下来就是找出 Node 上的异常 Pod。&lt;/p>
+&lt;p>由于 Kubernetes 使用了网络命名空间来确保 Pod 之间的网络隔离，因此直接在 Node 查看连接状态可能无法准确反映单个 Pod 的网络活动，我们需要进入到 Pod 的网络命名空间去查看连接情况。故基本思路为：逐个检查 Pod 的网络命名空间，查看当前建立的连接数量。&lt;/p>
+&lt;p>首先通过&lt;code>kubectl describe node&lt;/code>拿到 Node 上所有的 Pod 信息，再使用以下命令拿到容器 ID：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 由于 Pod 中所有容器共享同一命名空间，只需查询一个容器即可&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">kubectl get pod &amp;lt;POD-NAME&amp;gt; -n &amp;lt;NAMESPACE&amp;gt; -o &lt;span class="nv">jsonpath&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;{.status.containerStatuses[0].containerID}&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后在 Node 上执行以下命令：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 获取容器的 PID：&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">crictl inspect --template &lt;span class="s2">&amp;#34;{{ .info.pid }}&amp;#34;&lt;/span> -o go-template &amp;lt;ContainerID&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 统计该 Pod 网络命名空间中所有打开的网络连接数&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">nsenter -t &amp;lt;pid&amp;gt; -n netstat -anp &lt;span class="p">|&lt;/span> wc -l
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最终发现，有一个 Pod 建立了异常多的连接，明显高于该 Node 上其他 Pod。&lt;/p>
+&lt;p>查看对应的代码，该应用是一个 K8s Operator，它在每一次 reconcile 的时候都会创建一个 &lt;code>http.Client&lt;/code> 并发起若干次请求。由于没有进行额外的设置，下面这些配置均会使用默认值，这意味着每次 reconcile 都可能导致连接泄漏：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-go" data-lang="go">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// MaxIdleConns controls the maximum number of idle (keep-alive)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// connections across all hosts. Zero means no limit.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">MaxIdleConns&lt;/span> &lt;span class="kt">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// IdleConnTimeout is the maximum amount of time an idle
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// (keep-alive) connection will remain idle before closing
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// itself.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Zero means no limit.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">IdleConnTimeout&lt;/span> &lt;span class="nx">time&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">Duration&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// DisableKeepAlives, if true, disables HTTP keep-alives and
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// will only use the connection to the server for a single
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// HTTP request.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// This is unrelated to the similarly named TCP keep-alives.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">DisableKeepAlives&lt;/span> &lt;span class="kt">bool&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="亡羊补牢永绝后患">亡羊补牢，永绝后患&lt;/h2>
+&lt;p>为了避免类似问题再次发生，我采取了以下措施：&lt;/p>
+&lt;ul>
+&lt;li>修改代码，对闲置连接的相关配置项进行合理设置而非使用默认值&lt;/li>
+&lt;li>增加了对 Node conntrack table 使用情况的监控面板，并添加了相应的告警规则 (node-exporter 暴露了 conntrack 相关的 metrics):&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">- &lt;span class="nt">alert&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">NodeHighNumberConntrackEntriesUsed&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">annotations&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">description&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;{{ $value }} of conntrack entries are used.&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">runbook_url&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://runbooks.prometheus-operator.dev/runbooks/node/nodehighnumberconntrackentriesused/&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">summary&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Number of conntrack are getting close to the limit.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">expr&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">node_nf_conntrack_entries / node_nf_conntrack_entries_limit &amp;gt; 0.7&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">for&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">10m&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>（可选）根据节点的内存调整 conntrack table 大小：&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">vim /etc/sysctl.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">net.netfilter.nf_conntrack_max &lt;span class="o">=&lt;/span> &amp;lt;value&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sysctl -p /etc/sysctl.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="总结与反思">总结与反思&lt;/h2>
+&lt;p>在本次故障排查的过程中，有两个关键行动点：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>识别模式&lt;/strong>：通过观察多个故障案例，找出了共同点，有效缩小了问题排查的范围&lt;/li>
+&lt;li>&lt;strong>多角度排查&lt;/strong>：在问题排查过程中，除了分析 Node 的 metrics、events 和 kubelet 日志外，还检查了 Node 的系统日志，这提供了额外的视角和信息&lt;/li>
+&lt;/ul>
+&lt;p>整个过程凸显了 Kubernetes 生态的复杂性。为了成功地发现和解决问题，我们不仅需要深入理解 K8s 各组件的工作原理，还需要具备深入的操作系统级别知识。这些知识帮助我们穿透表象，直击问题核心。&lt;/p>
+&lt;p>总的来说，尽管问题的出现带来了不小的挑战，但解决过程本身也是一次宝贵的学习经历。&lt;/p>
+&lt;h2 id="references">References&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://thenewstack.io/hackers-guide-kubernetes-networking/" target="_blank" rel="noopener"
+>https://thenewstack.io/hackers-guide-kubernetes-networking/&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>监控 Kubernetes 集群</title><link>https://fgksgf.github.io/p/%E7%9B%91%E6%8E%A7-kubernetes-%E9%9B%86%E7%BE%A4/</link><pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/%E7%9B%91%E6%8E%A7-kubernetes-%E9%9B%86%E7%BE%A4/</guid><description>&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>在上一篇博客里搭建了一个具有三个节点的 k8s 集群，可以用来跑一些应用了，但是对于各个节点的健康状况、资源利用率这些信息目前还需要手动 ssh 到虚拟机上去查看，非常低效，这非常不云原生，因此这篇博客记录一下安装各种工具来以可视化的方式监控 k8s 集群。&lt;/p>
 &lt;h2 id="k8s-dashboard">K8s Dashboard&lt;/h2>
 &lt;p>首先想到的是 k8s dashboard，它是 k8s 官方提供的 Web UI，可以用来查看集群的概览信息和各个资源对象的运行情况。部署很简单，只需要执行一条命令，执行完后会默认部署在 kubernetes-dashboard 命名空间下：&lt;/p>
