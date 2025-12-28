@@ -1,4 +1,180 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>kubernetes on Hoshea's Blog</title><link>https://fgksgf.github.io/tags/kubernetes/</link><description>Recent content in kubernetes on Hoshea's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 15 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>监控 Kubernetes 集群</title><link>https://fgksgf.github.io/p/%E7%9B%91%E6%8E%A7-kubernetes-%E9%9B%86%E7%BE%A4/</link><pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/%E7%9B%91%E6%8E%A7-kubernetes-%E9%9B%86%E7%BE%A4/</guid><description>&lt;h2 id="背景">背景&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>kubernetes on Hoshea's Blog</title><link>https://fgksgf.github.io/tags/kubernetes/</link><description>Recent content in kubernetes on Hoshea's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 20 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>mirrord 实战指南: 如何大幅提升云原生开发效率？</title><link>https://fgksgf.github.io/p/mirrord-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87%E4%BA%91%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/</link><pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/mirrord-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87%E4%BA%91%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/</guid><description>&lt;h2 id="前言">前言&lt;/h2>
+&lt;p>最近在开发测试时，频繁使用到 &lt;a class="link" href="https://mirrord.dev/" target="_blank" rel="noopener"
+>mirrord&lt;/a> 这个工具，从最初的惊喜到遇到各种坑，再到逐渐掌握，深感这是一个能够显著提升开发效率的神器。因此写下这篇文章分享一下自己的使用经验，希望能对做云原生开发的朋友有所帮助。&lt;/p>
+&lt;h3 id="云原生开发的痛点">云原生开发的痛点&lt;/h3>
+&lt;p>在云原生开发中，存在着以下痛点：&lt;/p>
+&lt;ol>
+&lt;li>本地开发环境难以完整模拟云环境（比如调用其他服务，使用云环境的权限等），导致实际上线后出问题。&lt;/li>
+&lt;li>反馈链路长，调试困难。每次修改代码后，需要经历 &lt;strong>构建镜像 -&amp;gt; 推送仓库 -&amp;gt; 部署对应 K8s 资源 -&amp;gt; 等待 Pod 启动 -&amp;gt; 查看日志&lt;/strong> 的漫长过程。如果发现了问题，需要重复这个过程，开发效率低下。&lt;/li>
+&lt;/ol>
+&lt;p>而 mirrord 正是为解决这些问题而生的，它的核心能力是：&lt;strong>在本地运行代码，但在云环境的上下文中执行&lt;/strong>。&lt;/p>
+&lt;h2 id="mirrord-简介">Mirrord 简介&lt;/h2>
+&lt;p>Mirrord 是一个开源项目，它通过&lt;strong>进程级注入&lt;/strong>，让本地进程仿佛直接“寄生”在 K8s 的 Pod 中，共享其网络、文件系统和环境变量。借助 mirrord，可以做到:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>本地运行代码,云端测试效果&lt;/strong>：无需部署即可在真实的云环境中测试代码&lt;/li>
+&lt;li>&lt;strong>秒级反馈&lt;/strong>：修改代码后直接本地运行,立即看到效果，告别漫长的 CI/CD 等待&lt;/li>
+&lt;li>&lt;strong>使用本地调试工具&lt;/strong>：在 IDE 中打断点、单步调试，就像调试本地应用一样简单&lt;/li>
+&lt;li>&lt;strong>真实的依赖访问&lt;/strong>：本地进程可以直接访问远程集群中的其他微服务，以及使用云环境的权限&lt;/li>
+&lt;/ol>
+&lt;h3 id="技术原理">技术原理&lt;/h3>
+&lt;p>&lt;img src="https://fgksgf.github.io/how_it_works.svg"
+loading="lazy"
+alt="mirrord-arch"
+>&lt;/p>
+&lt;p>mirrord 主要包含以下两个核心组件：&lt;/p>
+&lt;ol>
+&lt;li>运行在开发者本地机器上的 &lt;code>mirrord-layer&lt;/code>&lt;/li>
+&lt;li>临时部署在远程 Kubernetes 集群中的 &lt;code>mirrord-agent&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h4 id="mirrord-layer">mirrord-layer&lt;/h4>
+&lt;p>&lt;code>mirrord-layer&lt;/code> 是一个动态链接库，它利用了 Unix/Linux 系统加载器的预加载特性，通过设置一个特殊的环境变量，将 &lt;code>mirrord-layer&lt;/code> 注入到本地进程，从而 hook 一系列关键的系统调用函数，包括：网络 I/O、文件系统操作和环境变量读取。&lt;/p>
+&lt;h4 id="mirrord-agent">mirrord-agent&lt;/h4>
+&lt;p>&lt;code>mirrord-agent&lt;/code> 是一个用 Rust 编写的高性能代理，运行在 K8s 集群中的目标 Pod（即要“寄生”的 Pod）所在节点上，并与目标 Pod 运行在同一个 Linux 命名空间中。这使得 &lt;code>mirrord-agent&lt;/code> 既可以镜像（Mirror）目标 Pod 的流量（即复制一份给本地，不影响线上业务），也可以拦截（Steal）流量（即完全接管流量，适合调试特定请求）。同时，它还能代理文件系统的读写操作。&lt;/p>
+&lt;p>值得注意的是，&lt;code>mirrord-agent&lt;/code> 是随着本地调试进程的启动而临时创建的，当本地进程结束后，Agent Pod 会自动销毁，不会在集群中留下残留垃圾。&lt;/p>
+&lt;h3 id="工作流程">工作流程&lt;/h3>
+&lt;p>本地的 &lt;code>mirrord-layer&lt;/code> 和远程的 &lt;code>mirrord-agent&lt;/code> 搭建起一条双向的数据通道，使得本地进程仿佛直接运行在目标 Pod 中，所见所得都与在 Pod 中运行无异。这种设计的妙处在于：&lt;strong>对应用代码完全透明,无需任何修改&lt;/strong>。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">本地进程 &amp;lt;==&amp;gt; mirrord-layer &amp;lt;==&amp;gt; mirrord-agent &amp;lt;==&amp;gt; 目标 Pod
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="快速上手">快速上手&lt;/h2>
+&lt;h3 id="安装">安装&lt;/h3>
+&lt;p>mirrord 提供了命令行工具和 IDE 插件两种方式，IDE 目前支持 VSCode、IntelliJ 等。这里以 CLI 为例。MacOS 用户可以使用 Homebrew 安装：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">brew install mirrord
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Linux/其他用户可以使用安装脚本：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">curl -fsSL https://raw.githubusercontent.com/metalbear-co/mirrord/main/scripts/install.sh &lt;span class="p">|&lt;/span> bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="配置与运行">配置与运行&lt;/h3>
+&lt;p>mirrord 的核心在于配置文件，通过配置文件来指定哪些操作需要被代理到远程 Pod，哪些操作是在本地。配置文件通常位于 &lt;code>.mirrord/mirrord.json&lt;/code>，例如：&lt;/p>
+&lt;blockquote>
+&lt;p>注意：为了方便阅读，下文的 JSON 配置中加入了注释，实际使用时请移除这些注释。&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;kubeconfig&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;/path/to/kubeconfig&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 指定 kubeconfig 文件路径
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nt">&amp;#34;kube_context&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;context_name&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 指定 kube context
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nt">&amp;#34;target&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;path&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;pod/pod_name/container/container_name&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 指定目标 Pod 和容器
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nt">&amp;#34;namespace&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;namespace_name&amp;#34;&lt;/span> &lt;span class="c1">// 指定目标 Pod 所在的 namespace
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;feature&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;env&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 从远程读取环境变量
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nt">&amp;#34;network&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;incoming&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;mode&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;mirror&amp;#34;&lt;/span> &lt;span class="c1">// 镜像流量，也可以设置为 steal（拦截流量）或 off（不作任何处理）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;fs&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;mode&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;read&amp;#34;&lt;/span> &lt;span class="c1">// 从远程读取
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>可以看到主要分成这么几块配置：&lt;/p>
+&lt;ul>
+&lt;li>K8s 环境相关，用来指定要连接的 K8s 集群以及目标 Pod&lt;/li>
+&lt;li>环境变量相关，用来指定从远程读取环境变量或者排除某些环境变量&lt;/li>
+&lt;li>网络相关，用来指定入站和出站流量的处理方式。&lt;/li>
+&lt;li>文件系统相关，用来指定从远程/本地读取文件或者排除某些文件&lt;/li>
+&lt;/ul>
+&lt;p>需要注意的是，如果当前没有目标 Pod，需要手动创建一个，并配置好相应的 RBAC。我一般是创建一个使用 busybox 镜像的 Pod，然后在其中运行一个 &lt;code>sleep infinity&lt;/code> 命令。&lt;/p>
+&lt;h2 id="案例分享">案例分享&lt;/h2>
+&lt;p>最近在开发一个审计日志收集的应用，它以 sidecar 容器的方式运行在业务 Pod 中，负责业务容器审计日志的轮转、收集、发送到 AWS S3 进行存储。由于需要使用 Node 的 IAM Role 来访问 S3，本地无法模拟这种场景，因此使用 mirrord 来测试就非常适合。&lt;/p>
+&lt;p>首先，需要创建一个目标 Pod，包含两个容器 app 和 dummy，用来模拟这个场景。app 负责模拟业务，定时产生日志文件，dummy 用来被 mirrord “夺舍”：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">apiVersion&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">v1&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">kind&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">Pod&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">metadata&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">test&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">namespace&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">test&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="nt">spec&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">volumes&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">logs&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">emptyDir&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>{}&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">containers&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">app&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">image&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">busybox&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">command&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="l">sh&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- -&lt;span class="l">c&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="p">|&lt;/span>&lt;span class="sd">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> echo &amp;#34;Starting log generator...&amp;#34;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> mkdir -p /var/audit-logs
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> seq=0
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> while true; do
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> seq=$((seq + 1))
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> timestamp=$(date -u +&amp;#34;%Y-%m-%dT%H:%M:%S.000Z&amp;#34;)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> echo &amp;#34;{\&amp;#34;time\&amp;#34;:\&amp;#34;$timestamp\&amp;#34;,\&amp;#34;level\&amp;#34;:\&amp;#34;info\&amp;#34;,\&amp;#34;seq\&amp;#34;:$seq,\&amp;#34;msg\&amp;#34;:\&amp;#34;test\&amp;#34;}&amp;#34; &amp;gt;&amp;gt; /var/audit-logs/audit.log
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> sleep 15
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="sd"> done&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">volumeMounts&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">logs&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">mountPath&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">/var/audit-logs&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">dummy&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">image&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">busybox&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">command&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;sh&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;-c&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s2">&amp;#34;sleep infinity&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">volumeMounts&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">name&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">logs&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">mountPath&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">/var/audit-logs&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>接着，配置 &lt;code>mirrord.json&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// ...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nt">&amp;#34;target&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;path&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;pod/test/container/dummy&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;namespace&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;test&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;feature&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;env&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;network&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;outgoing&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;tcp&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;udp&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;filter&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;remote&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;169.254.169.254&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="c1">// (1)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;fs&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;mode&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;write&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">// 从远程读写
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nt">&amp;#34;read_write&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;/var/audit-logs/audit.log&amp;#34;&lt;/span> &lt;span class="c1">// (2)
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里有几个特别的地方：&lt;/p>
+&lt;ol>
+&lt;li>使用 Node Role 需要访问 EC2 Instance Metadata Service (IMDS) 获取凭证，如果不通过 mirrord 代理到远程 Pod，本地进程会尝试直连该 IP，导致无法获取正确的 IAM Role 凭证。&lt;/li>
+&lt;li>虽然已经设置了 &lt;code>fs.mode&lt;/code> 为 &lt;code>write&lt;/code>，但还是需要将程序要访问的审计日志文件的路径设置为&lt;code>read_write&lt;/code>（即从远程读写）。这是因为在默认情况下，无论选择何种文件系统模式，&lt;strong>mirrord 都会从本地读取某些路径&lt;/strong>，比如：&lt;code>/var&lt;/code> 和 &lt;code>/etc&lt;/code> 等，具体列表可以查看&lt;a class="link" href="https://github.com/metalbear-co/mirrord/blob/9dbb354615d34e42e6408642cff82cdda1471e8f/mirrord/layer-lib/src/file/unix/read_local_by_default.rs#L9" target="_blank" rel="noopener"
+>这里&lt;/a>。&lt;/li>
+&lt;/ol>
+&lt;p>最后通过命令行工具运行（或 IDE 插件）：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">mirrord &lt;span class="nb">exec&lt;/span> -f .mirrord/mirrord.json -- go run main.go
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="tips">Tips&lt;/h2>
+&lt;ol>
+&lt;li>如果你的 K8s 节点使用的是 Bottlerocket OS，&lt;code>mirrord agent&lt;/code> 可能因为权限不足而无法执行文件操作，因此需要在配置文件中开启特权模式：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;agent&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;privileged&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>
+&lt;p>&lt;code>mirrord-agent&lt;/code> Pod 必须和目标 Pod 在同一个节点。如果目标 Pod 所在的 Node 恰好达到了 Pod 的数量上限，将会导致 mirrord 运行本地程序时创建的 &lt;code>mirrord-agent&lt;/code> Pod 无法调度。因此你可能需要通过 nodeSelector 等方式让目标 Pod 调度到有充足资源的 Node 上。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>如上文案例所述，mirrord 对某些路径有默认的读取行为（默认从本地读取，或从远程读取）。如果遇到文件读写不符合预期，请先检查是否命中了默认规则，必要时需在配置中显式指定 &lt;code>fs.local&lt;/code> 或 &lt;code>fs.remote&lt;/code>。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>如果遇到了奇怪的问题（例如无法访问一个存在的文件等），可以设置环境变量 &lt;code>RUST_LOG=debug&lt;/code> 来让本地程序运行时输出更多 debug 日志：&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-sh" data-lang="sh">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">RUST_LOG&lt;/span>&lt;span class="o">=&lt;/span>debug mirrord &lt;span class="nb">exec&lt;/span> -f .mirrord/mirrord.json -- go run main.go
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>总的来说，我遇到的问题主要是配置不正确，导致文件读写或者网络访问不是发生在预期的本地或远程导致。&lt;/p>
+&lt;h2 id="总结">总结&lt;/h2>
+&lt;p>mirrord 真正做到了让云原生开发&amp;quot;本地化&amp;quot;，它消除了本地开发和云端测试之间的鸿沟，虽然初期在配置上有一定门槛，但一旦配置好，便能大幅提升开发效率和体验。如果你厌倦了构建、推送、部署的漫长等待，不妨试试这款“黑科技”。&lt;/p>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://metalbear.com/mirrord/docs" target="_blank" rel="noopener"
+>mirrord 官方文档&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/metalbear-co/mirrord" target="_blank" rel="noopener"
+>GitHub: metalbear-co/mirrord&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>监控 Kubernetes 集群</title><link>https://fgksgf.github.io/p/%E7%9B%91%E6%8E%A7-kubernetes-%E9%9B%86%E7%BE%A4/</link><pubDate>Tue, 15 Mar 2022 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/%E7%9B%91%E6%8E%A7-kubernetes-%E9%9B%86%E7%BE%A4/</guid><description>&lt;h2 id="背景">背景&lt;/h2>
 &lt;p>在上一篇博客里搭建了一个具有三个节点的 k8s 集群，可以用来跑一些应用了，但是对于各个节点的健康状况、资源利用率这些信息目前还需要手动 ssh 到虚拟机上去查看，非常低效，这非常不云原生，因此这篇博客记录一下安装各种工具来以可视化的方式监控 k8s 集群。&lt;/p>
 &lt;h2 id="k8s-dashboard">K8s Dashboard&lt;/h2>
 &lt;p>首先想到的是 k8s dashboard，它是 k8s 官方提供的 Web UI，可以用来查看集群的概览信息和各个资源对象的运行情况。部署很简单，只需要执行一条命令，执行完后会默认部署在 kubernetes-dashboard 命名空间下：&lt;/p>
