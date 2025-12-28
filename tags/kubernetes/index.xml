@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>kubernetes on Hoshea's Blog</title><link>https://fgksgf.github.io/tags/kubernetes/</link><description>Recent content in kubernetes on Hoshea's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 20 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>mirrord 实战指南: 如何大幅提升云原生开发效率？</title><link>https://fgksgf.github.io/p/mirrord-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87%E4%BA%91%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/</link><pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/mirrord-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87%E4%BA%91%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/</guid><description>&lt;h2 id="前言">前言&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>kubernetes on Hoshea's Blog</title><link>https://fgksgf.github.io/tags/kubernetes/</link><description>Recent content in kubernetes on Hoshea's Blog</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 28 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://fgksgf.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>mirrord 实战指南: 如何大幅提升云原生开发效率？</title><link>https://fgksgf.github.io/p/mirrord-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87%E4%BA%91%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/</link><pubDate>Sun, 28 Dec 2025 00:00:00 +0000</pubDate><guid>https://fgksgf.github.io/p/mirrord-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87%E4%BA%91%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/</guid><description>&lt;h2 id="前言">前言&lt;/h2>
 &lt;p>最近在开发测试时，频繁使用到 &lt;a class="link" href="https://mirrord.dev/" target="_blank" rel="noopener"
 >mirrord&lt;/a> 这个工具，从最初的惊喜到遇到各种坑，再到逐渐掌握，深感这是一个能够显著提升开发效率的神器。因此写下这篇文章分享一下自己的使用经验，希望能对做云原生开发的朋友有所帮助。&lt;/p>
 &lt;h3 id="云原生开发的痛点">云原生开发的痛点&lt;/h3>
@@ -17,9 +17,15 @@
 &lt;li>&lt;strong>真实的依赖访问&lt;/strong>：本地进程可以直接访问远程集群中的其他微服务，以及使用云环境的权限&lt;/li>
 &lt;/ol>
 &lt;h3 id="技术原理">技术原理&lt;/h3>
-&lt;p>&lt;img src="https://fgksgf.github.io/how_it_works.svg"
+&lt;p>&lt;img src="https://fgksgf.github.io/p/mirrord-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87%E4%BA%91%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/how_it_works.png"
+width="1421"
+height="634"
+srcset="https://fgksgf.github.io/p/mirrord-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87%E4%BA%91%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/how_it_works_huefc84a9c6f5d9704134eeec09112430c_67627_480x0_resize_box_3.png 480w, https://fgksgf.github.io/p/mirrord-%E5%AE%9E%E6%88%98%E6%8C%87%E5%8D%97-%E5%A6%82%E4%BD%95%E5%A4%A7%E5%B9%85%E6%8F%90%E5%8D%87%E4%BA%91%E5%8E%9F%E7%94%9F%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/how_it_works_huefc84a9c6f5d9704134eeec09112430c_67627_1024x0_resize_box_3.png 1024w"
 loading="lazy"
 alt="mirrord-arch"
+class="gallery-image"
+data-flex-grow="224"
+data-flex-basis="537px"
 >&lt;/p>
 &lt;p>mirrord 主要包含以下两个核心组件：&lt;/p>
 &lt;ol>
