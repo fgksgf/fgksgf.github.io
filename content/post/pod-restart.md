@@ -3,7 +3,9 @@ title: Kubernetes 故障排查实录：Pod 连环重启
 date: 2024-05-02
 description: "How I Cracked the Kubernetes Pod Restart Conundrum"
 categories:
-    - Kubernetes
+    - Tech
+tags:
+    - kubernetes
 ---
 
 ## 诡异的 Pod 重启现象
@@ -104,7 +106,7 @@ sysctl -p /etc/sysctl.conf
 
 整个过程凸显了 Kubernetes 生态的复杂性。为了成功地发现和解决问题，我们不仅需要深入理解 K8s 各组件的工作原理，还需要具备深入的操作系统级别知识。这些知识帮助我们穿透表象，直击问题核心。
 
-总的来说，尽管问题的出现带来了不小的挑战，但解决过程本身也是一次宝贵的学习经历。
+总的来说，尽管问题的出现带来了不小的挑战，但解决过程本身也是一次宝贵的学习经历，希望你也能有所收获！
 
 ## References
 
