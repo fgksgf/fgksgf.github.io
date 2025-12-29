@@ -1,7 +1,8 @@
 baseurl: https://fgksgf.github.io
 languageCode: en-us
 theme: hugo-theme-stack
-paginate: 5
+pagination:
+    pagerSize: 5
 title: Hoshea's Blog
 
 languages:
@@ -14,7 +15,7 @@ languages:
 disqusShortname: hugo-theme-stack
 
 # GA Tracking ID
-googleAnalytics: UA-118341733-1
+googleAnalytics: G-57JLZRD5PD
 
 # Theme i18n support
 # Available values: en, fr, id, ja, ko, pt-br, zh-cn
@@ -34,7 +35,7 @@ params:
         - post
     featuredImageField: image
     rssFullContent: true
-    favicon: img/favicon.ico
+    favicon: favicon.ico
 
     footer:
         since: 2020
@@ -131,13 +132,6 @@ menu:
           params: 
             icon: user
 
-        - identifier: archives
-          name: Archives
-          url: archives
-          weight: -90
-          params:
-            icon: archives
-
         - identifier: search
           name: Search
           url: search
@@ -173,8 +167,6 @@ markup:
         ordered: true
         startLevel: 2
     highlight:
-        noClasses: false
-        highlight:
         noClasses: false
         codeFences: true
         guessSyntax: true
