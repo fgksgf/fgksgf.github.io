@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fgksgf.github.io/sitemap.xml
